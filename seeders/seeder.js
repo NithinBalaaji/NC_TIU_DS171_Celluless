@@ -189,7 +189,7 @@ exports.seedDB = async (req,res) => {
             name: "Student 1",
             email: "abc@abc.com",
             mobile: "999999999",
-            isAdmin: true,
+            isAdmin: false,
             pubKey: "insertpubhere"
         }),"12345");
 
@@ -198,7 +198,7 @@ exports.seedDB = async (req,res) => {
             name: "Student 2",
             email: "abc@abc.com",
             mobile: "999999999",
-            isAdmin: true,
+            isAdmin: false,
             pubKey: "insertpubhere"
         }),"12345");
 
