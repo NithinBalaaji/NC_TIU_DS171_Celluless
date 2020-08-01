@@ -10,12 +10,12 @@
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Tags: html, themplate, Ela Admin
 --------------------------------------------------------- */
-/* 
+/*
 
 
 Googel Fonts  */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-/* Googel Fonts End  
+/* Googel Fonts End
 
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
@@ -133,11 +133,11 @@ Googel Fonts  */
 .mb-15 {
   margin-bottom: 15px; }
 
-/* 
+/*
 
 
 Googel Fonts  */
-/* Googel Fonts End  
+/* Googel Fonts End
 
 */
 .bg-flat-color-1 {
@@ -356,7 +356,7 @@ p {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   line-height: 24px;
-  color: #878787; }
+  color: #333333; }
 
 p:focus {
   border: none;
@@ -365,7 +365,7 @@ p:focus {
 a, button {
   text-decoration: none;
   outline: none !important;
-  color: #878787;
+  color: #333333;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease; }
 
@@ -1561,7 +1561,7 @@ header .form-inline {
   float: right; }
   .card .card-header .card-actions [class*="btn"] {
     border-left: 1px solid rgba(120, 130, 140, 0.4);
-    color: #878787;
+    color: #333333;
     display: inline-block;
     font-size: 16px;
     float: left;
@@ -1739,12 +1739,12 @@ header .form-inline {
   border-radius: 2px; }
 
 .login-form h4 {
-  color: #878787;
+  color: #333333;
   text-align: center;
   margin-bottom: 50px; }
 
 .login-form .checkbox {
-  color: #878787; }
+  color: #333333; }
 
 .login-form .checkbox label {
   text-transform: none; }
@@ -1757,7 +1757,7 @@ header .form-inline {
   border: 0px; }
 
 .login-form label {
-  color: #878787;
+  color: #333333;
   text-transform: uppercase; }
 
 .login-form label a {
@@ -2502,5 +2502,11 @@ footer.site-footer {
   #cellPaiChart #pieLabel0 {
     left: inherit !important;
     right: 20px !important; }
+
+    #btnNewForm,
+    #btnEditWorkflow{
+      display: inline-block;
+      margin: 10px;
+    }
 
 /*# sourceMappingURL=style.css.map */
