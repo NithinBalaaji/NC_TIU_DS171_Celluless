@@ -3,106 +3,62 @@
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span>
 <div class="animated fadeIn">
     <!-- Widgets  -->
-    <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-1">
-                            <i class="pe-7s-cash"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="text-left dib">
-                                <div class="stat-text">₹<span class="count"></span></div>
-                                <div class="stat-heading">Funds transfered</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-2">
-                            <i class="pe-7s-note2"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="text-left dib">
-                                <div class="stat-text"><span class="count"></span></div>
-                                <div class="stat-heading">Projects</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-3">
-                            <i class="pe-7s-browser"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="text-left dib">
-                                <div class="stat-text"><span class="count"></span></div>
-                                <div class="stat-heading">Problems</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-4">
-                            <i class="pe-7s-users"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="text-left dib">
-                                <div class="stat-text"><span class="count"></span></div>
-                                <div class="stat-heading">Users</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- /Widgets -->
     <!--  Traffic  -->
     <div class="row text-center">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card ">
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-3">Problem statements </h4>
-                            <canvas id="pieChart"></canvas>
+                            <h4 class="mb-3">Approver Request Details</h4>
+                            
+                        <span>
+                            //Render the html file from web 3 here.
+                            <br>
+                            <br>
+                        </span>
+                        <br>
+                        <br>
+                <form class="form-approval" method="POST" action="/home">
+                            
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Modal1">
+                           Approve
+                          </button>                                <button type="button" class="btn btn-secondary">Decline</button>
+
+                        </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card ">
-                <div class="card-body">
-                  <div class="btn-group">
-                    <button id="btnNewForm" class="btn btn-info btn-block btn-md" href="/projects">Create a New Form</button>
-                    <br>
-                    <br>
-                    <button id="btnEditWorkflow" class="btn btn-info btn-block btn-md" href="/problems">Edit an existing workflow</button>
+        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="ModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                     
+                      <h3 class="modal-title" id="ModalLabel1">Success</h3>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Congrats! Your approval has been made. We shall notify the concerned.
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="myButton" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-        </div>
+       
     </div>
 </div>
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "http://localhost:8080/home";
+    };
+</script>
 <%include partials/footer%>
