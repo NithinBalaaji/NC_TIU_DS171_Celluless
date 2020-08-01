@@ -38,11 +38,13 @@ exports.renderCreateWorkflow = async (req, res) => {
 
 exports.createWorkflow = async (req, res) => {
     try {
+        console.log('hdd');
         let workflow = new Workflow();
         workflow.name = req.body.name;
         workflow.fields = req.body.fields;
         approvers = req.body.approvers;
-        workflow.path = req.file.fileName;
+        //workflow.path = req.file.fileName;
+        workflow.path = ';;';
         
         for (let i = 0; i < approvers.length; i++) {
             let grp = await Group.findById(approvers[i].grp).exec();
@@ -57,7 +59,7 @@ exports.createWorkflow = async (req, res) => {
                 approvers.push(approver);
             }
         }
-        
+        console.log('helllllllll')
         await workflow.save();
         return res.json({ success: true });
     } catch (error) {

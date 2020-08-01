@@ -172,19 +172,20 @@
         }
         console.log(certName, approversArray, fields);
 
-        $.post("/workflow/create", {
+        let url = (window.location.protocol+"//"+window.location.host+"/workflow/create");
+        $.post(url, {
             name: certName,
             approvers: approversArray,
             fields: fields
         }, function(data, status){
-            if(true){
+            if(data.success){
                 let url = (window.location.protocol+"//"+window.location.host+"/workflow/list");
                 window.location = url;
             }
             console.log(data,status);
         });
     }
-    
+
     function remindClickHandler() {
         console.log("remind Clicked!")
         // this formID should send a reminder to its next approver. Priority 1
