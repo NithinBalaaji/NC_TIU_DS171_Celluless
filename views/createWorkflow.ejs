@@ -1,0 +1,37 @@
+<%include partials/adminHeader%>
+<!-- <span style="display: none;" id="hidden-pieValueCompleted">></span>
+<span style="display: none;" id="hidden-pieValueNotCompleted"></span> -->
+<div class="animated fadeIn">
+    <!-- Widgets  -->
+    <center>
+        <h2>Create a new Workflow</h2>
+        <br />
+        <button class="glow-on-hover" type="button"><span class="glyphicon glyphicon-plus">+</span></button>
+    </center>
+
+</div>
+<!-- /Widgets -->
+<!--  Traffic  -->
+
+</div>
+
+<script>
+    function remindClickHandler() {
+        console.log("remind Clicked!")
+        // this formID should send a reminder to its next approver. Priority 1
+    }
+    function withdrawClickHandler() {
+        console.log("withdraw Clicked!")
+        // delete this formID from all tables. Priority 3
+    }
+    function downloadFormClickHandler() {
+        console.log("download form clicked!")
+        // download this formID with its blanks filled in. Priority 4
+    }
+    function viewRejectionClickHandler() {
+        console.log("View Rejection CLicked!")
+        // View rejection string of this formID and also get who wrote this rejection. Priority 2
+    }
+</script>
+
+<%include partials/footer%>

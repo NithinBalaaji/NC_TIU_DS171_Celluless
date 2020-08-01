@@ -12,5 +12,8 @@ const {isLoggedIn} = require('../middlewares/auth');
 router.use('/auth', authRouter);
 router.use('/workflow', workflowRouter);
 router.use('/request', requestRouter);
-router.get('/home',isLoggedIn,(req,res) => {res.render("studentHome")})
+router.get('/home',isLoggedIn,(req,res) => {res.render("home")})
+
+router.get('/student/home',isLoggedIn,(req,res) => {res.render("studentHome")});
+
 module.exports = router;

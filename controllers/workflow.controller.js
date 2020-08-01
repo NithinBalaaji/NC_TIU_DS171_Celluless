@@ -15,6 +15,14 @@ exports.listWorkflow = async (req, res) => {
     }
 }
 
+exports.renderCreateWorkflow = async (req, res) => {
+    try{
+        return res.render('createWorkflow');
+    } catch(error){
+        console.log(error.toString());
+    }
+}
+
 exports.createWorkflow = async (req, res) => {
     try{
         let workflow = new Workflow();
