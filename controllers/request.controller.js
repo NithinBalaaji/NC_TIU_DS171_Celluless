@@ -1,4 +1,3 @@
-
 // Importing config/env variables
 
 // Importing models
@@ -6,8 +5,9 @@ const User = require("../models/user");
 const Request = require('../models/request');
 
 //Importing utils
+const blockchainUtil = require("../utils/blockchain");
 
-getNextApprover = async (request) => {
+const getNextApprover = async (request) => {
     let lvl = 0;
     for(let i=0; i<request.approvedBy.length; i++){
         lvl=Math.max(request.approvedBy[i].level, lvl);
@@ -52,8 +52,7 @@ exports.createRequest = async (req, res) => {
             });
         });
 
-        // TODO: Write web3 call functions
-        let blockchainId = 'lalalala';
+        let blockchainId = await blockchainUtil.createRequest(user.pubKey, approver[0].approverId, fields);
 
         let request = new Request({
             blockchainId: blockchainId,
@@ -82,8 +81,12 @@ exports.viewRequest = async (req, res) => {
             return res.json({success: false});
         }
 
+        let certificate = await blockchainUtil.getCertificate(request.blockchainId);
+        console.log(certificate);
+
+
         console.log('View request');
-        return res.json({success: true, request: request});
+        return res.json({success: true, certificate: certificate});
     } catch(error){
         console.log(error.toString());
     }
@@ -104,6 +107,8 @@ exports.approveRequest = async (req, res) => {
         }
 
         // TODO: web3 approve
+        let nextApprover = await getNextApprover(request);
+        await blockchainUtil.approveCertificate(request.blockchainId, nextApprover);
         
         console.log('Approve request');
         return res.json({success: true });
@@ -127,6 +132,7 @@ exports.rejectRequest = async (req, res) => {
         }
 
         // TODO: web3 reject request
+        await blockchainUtil.rejectCertificate(request.blockchainId);
         
         console.log('Reject request');
         return res.json({success: true });
@@ -149,7 +155,13 @@ exports.viewRequestCertificate = async (req, res) => {
             return res.json({success: false});
         }
 
-        // TODO: web3 get certificate data, generate pdf and render
+        let certificate = await blockchainUtil.getCertificate(request.blockchainId);
+        console.log(certificate);
+
+        // TODO: generate pdf and render
+
+        console.log('View request');
+        return res.json({success: true, certificate: certificate});
         
         console.log('View certificate request');
         return res.json({success: true });
