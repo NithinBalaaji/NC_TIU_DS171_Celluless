@@ -16,7 +16,7 @@ exports.listWorkflow = async (req, res) => {
                 path: 'members'
             }
         }).exec();
-        workflow.forEach(async workflow => {
+        workflows.forEach(async workflow => {
             const templateEjs = await fs.readFileSync(path.join('../uploads', workflow.path), 'utf8');
             workflow.templateEjs = templateEjs;
         });
