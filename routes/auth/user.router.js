@@ -10,11 +10,15 @@ const userController = require('../../controllers/auth/user.controller');
 
 
 router.post('/register', userController.registerUser);
-router.post('/login', userController.loginUser);
+router.post('/login',passport.authenticate("local",
+                        {
+                            successRedirect:"/",
+                            failureRedirect:"/login"
+                        }),(req,res)=>{}
+);
+
 router.post('/logout', userController.logoutUser);
 
 router.get('/login', userController.renderLoginUser);
-router.get('/register', userController.renderRegisterUser);
-router.get('/logout', userController.renderLogoutUser);
 
 module.exports = router;

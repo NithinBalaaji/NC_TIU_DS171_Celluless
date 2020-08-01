@@ -2,31 +2,26 @@
 // Importing config/env variables
 
 // Importing models
-
+const Request = require("../../models/request")
 //Importing utils
 
 
 exports.registerUser = async (req, res) => {
     try{
-        res.render('home')
-    } catch(error){
-        console.log(error.toString());
-    }
-}
+        await User.register(new User({
+            username: req.body.username,
+            name: req.body.name,
+            email: req.body.email,
+            mobile: req.body.mobile,
+            idFaculty: req.body.isFaculty,
+            isAdmin: req.body.isAdmin,
+            pubKey: req.body.pubKey
+        }),req.body.password);
 
-exports.renderRegisterUser = async (req, res) => {
-    try{
-        res.render('register');
+        res.json({success: true});
     } catch(error){
         console.log(error.toString());
-    }
-}
-
-exports.loginUser = async (req, res) => {
-    try{
-        res.render('home')
-    } catch(error){
-        console.log(error.toString());
+        res.json({success: false, error})
     }
 }
 
@@ -35,21 +30,34 @@ exports.renderLoginUser = async (req, res) => {
         res.render('login');
     } catch(error){
         console.log(error.toString());
+        res.json({success: false, error})
     }
 }
 
 exports.logoutUser = async (req, res) => {
     try{
-        res.render('home')
+        req.logout();
+        res.redirect("/login");
     } catch(error){
         console.log(error.toString());
+        res.json({success: false, error})
     }
 }
 
-exports.renderLogoutUser = async (req, res) => {
+exports.renderHome = async(req, res) => {
     try{
-        res.render('login')
+        let user = req.user;
+
+        if(user.isAdmin){
+            //TODO get all requests to be approved by admin and return it
+            approvalRequests=[]
+            return res.json({success: true, approvalRequests})
+        }else{
+            let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").exec();
+
+            return res.json({success: true, requests: requests});
+        }
     } catch(error){
-        console.log(error.toString());
+        return res.json({success: false});
     }
 }

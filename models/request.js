@@ -11,7 +11,8 @@ var requestSchema = new Schema({
     approvedBy:[{
         approverId: {type:Schema.Types.ObjectId, ref: "User"},
         level: Number
-    }]
+    }],
+    ownerId: {type: Schema.Types.ObjectId, ref: "User"}
 })
 
 module.exports= mongoose.model("Request", requestSchema);
