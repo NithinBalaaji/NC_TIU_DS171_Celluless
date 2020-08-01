@@ -1,17 +1,15 @@
-const indexRouter = require('express').Router();
-const authRouter = require("./auth");
-const projectRouter = require("./project");
-const problemRouter = require("./problem");
-const userRouter = require("./users");
-const homeRouter = require("./home");
+const router = require('express').Router();
 
-const { isLoggedIn } = require('../middlewares/auth');
+// Importing middlewares
 
+// Importing routers
+const authRouter = require('./auth/index.router');
+const workflowRouter = require('./workflow.router');
+const requestRouter = require('./request.router');
 
-indexRouter.use('/', authRouter);
-indexRouter.use('/', homeRouter);
-indexRouter.use('/projects',isLoggedIn, projectRouter);
-indexRouter.use('/problems',isLoggedIn, problemRouter);
-indexRouter.use('/users',isLoggedIn, userRouter);
+// Defining routes
+router.use('/auth', authRouter);
+router.use('/workflow', workflowRouter);
+router.use('/request', requestRouter);
 
-module.exports = indexRouter;
+module.exports = router;
