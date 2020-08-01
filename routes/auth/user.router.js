@@ -13,7 +13,7 @@ const userController = require('../../controllers/auth/user.controller');
 router.post('/register', userController.registerUser);
 router.post('/login',passport.authenticate("local",
                         {
-                            successRedirect:"/home",
+                            successRedirect:"/user/home",
                             failureRedirect:"/auth/user/login"
                         }),(req,res)=>{}
 );
