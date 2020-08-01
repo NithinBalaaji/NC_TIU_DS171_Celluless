@@ -1,4 +1,5 @@
 pragma solidity ^0.5.0;
+pragma experimental ABIEncoderV2;
 
 contract CertificateFactory {
     struct Certificate {
@@ -8,24 +9,26 @@ contract CertificateFactory {
         string[] fields;
         uint256 level;
         bool isVerified;
-        string verificationKey;
+        uint256 verificationKey;
+        bool isRejected;
     }
 
     Certificate[] public certificates;
     mapping(address => uint256) pendingApprovalCount;
 
-    function createCertificate(address _nextVerification, string[] fields)
+    function createCertificate(address _nextVerification, string[] memory fields)
         public
-        returns (uint256 newCertificateId)
+        returns (uint newCertificateId)
     {
-        uint256 id = ceritificates.push(
+        uint id = certificates.push(
             Certificate(
                 msg.sender,
                 _nextVerification,
                 fields,
                 0,
                 false,
-                uint256(keccak256(now))
+                uint256(keccak256(abi.encodePacked(now))),
+                false
             )
         );
         return id;
@@ -34,10 +37,10 @@ contract CertificateFactory {
     // function getCertificates() public view returns (Certificate[]) {
     //     return certificates;
     // }
-    function getCertificateById(uint256 _id, string _verificationKey)
+    function getCertificateById(uint256 _id, uint256 _verificationKey)
         public
         view
-        returns (Certificate)
+        returns (Certificate memory)
     {
         require(
             msg.sender == certificates[_id].student ||
@@ -46,21 +49,22 @@ contract CertificateFactory {
         return certificates[_id];
     }
 
-    function verifyCertificateByKey(string _verificationKey)
+    function verifyCertificateByKey(uint256 _verificationKey)
         public
         view
-        returns (Certificate)
+        returns (Certificate memory)
     {
-        Certificate certificate;
+        Certificate memory certificate;
         for (uint256 i = 0; i < certificates.length; i++) {
             if (certificates[i].verificationKey == _verificationKey) {
                 certificate = certificates[i];
             }
         }
         return certificate;
+
     }
 
-    function getPendingApprovals() public view returns (Certificates[]) {
+    function getPendingApprovals() public view returns (Certificate[] memory) {
         Certificate[] memory result = new Certificate[](
             pendingApprovalCount[msg.sender]
         );
@@ -79,23 +83,21 @@ contract CertificateFactory {
         public
     {
         require(msg.sender == certificates[_certificateId].nextVerification);
-        ceritificates[_certificateId].level++;
-        pendingApprovalCount[ceritificates[_certificateId].nextVerification]--;
-        ceritificates[_certificateId].nextVerification = _newNextVerification;
+        certificates[_certificateId].level++;
+        pendingApprovalCount[certificates[_certificateId].nextVerification]--;
+        certificates[_certificateId].nextVerification = _newNextVerification;
         pendingApprovalCount[_newNextVerification]++;
         if (_newNextVerification == address(0)) {
-            ceritificates[_certificateId].isVerified = true;
+            certificates[_certificateId].isVerified = true;
         }
     }
 
-    function getRequestsOfStudent() public view returns (Certificates[]) {
-        Certificate results[];
-        for (uint256 i = 0; i < certificates.length; i++) {
-            if (certificates[i].student == msg.sender) {
-                results.push(certificates[i]);
-            }
-        }
-        return results;
+    function reject(uint256 _certificateId)
+        public
+    {
+        require(msg.sender == certificates[_certificateId].nextVerification);
+        pendingApprovalCount[certificates[_certificateId].nextVerification]--;
+        certificates[_certificateId].isRejected = true;
     }
 
 }
