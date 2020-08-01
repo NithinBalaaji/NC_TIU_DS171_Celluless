@@ -1,12 +1,14 @@
 const User = require("../models/user");
 const Group = require("../models/group");
 const Workflow = require("../models/workflow");
+const Request = require("../models/request");
 
 exports.seedDB = async (req,res) => {
     try{
         await User.deleteMany();
         await Group.deleteMany();
         await Workflow.deleteMany();
+        await Request.deleteMany();
         let csehod = await User.register(new User({
             username: "csehod",
             name: "CSE HOD",
@@ -207,6 +209,52 @@ exports.seedDB = async (req,res) => {
 
         await student1.save();
         await student2.save();
+
+        let request1 = new Request();
+        request1.blockchainId= "bck1";
+        request1.workflowId=workflow1;
+        request1.approvers=[];
+        request1.approvers.push({
+            approverId: faDelta,
+            level: 0
+        })
+        request1.approvers.push({
+            approverId: csehod,
+            level: 1
+        })
+        request1.approvedBy.push({
+            approverId: faDelta,
+            level: 0
+        });
+        request1.level=1;
+        request1.verificationKey="dfjdsfgdg";
+        request1.ownerId= student1;
+        request1.fields.push("a value");
+        request1.fields.push("b value");
+        await request1.save();
+
+
+
+        let request2 = new Request();
+        request2.blockchainId= "bck2";
+        request2.workflowId=workflow2;
+        request2.approvers=[];
+        request2.approvers.push({
+            approverId: cahod,
+            level: 0
+        })
+        request2.approvers.push({
+            approverId: deanFW,
+            level: 1
+        })
+        request2.approvedBy=[]
+        request2.level=0;
+        request2.verificationKey="dfjdfsfssfgdg";
+        request2.ownerId= student2;
+        request2.fields.push("2a value");
+        request2.fields.push("2b value");
+        await request2.save();
+
         res.json({sucess: true});
 
 
