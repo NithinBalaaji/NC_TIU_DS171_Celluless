@@ -44,10 +44,10 @@ exports.createWorkflow = async (req, res) => {
         let approvers = req.body.approvers;
         //workflow.path = req.file.fileName;
         workflow.path = ';;';
-        
+
         for (let i = 0; i < approvers.length; i++) {
             let grp = await Group.findById(approvers[i].grp).exec();
-            
+
             if (!grp) {
                 return res.json({ success: false });
             }
