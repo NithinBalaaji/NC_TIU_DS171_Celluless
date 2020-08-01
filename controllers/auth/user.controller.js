@@ -53,7 +53,7 @@ exports.renderHome = async(req, res) => {
             approvalRequests=[]
             return res.json({success: true, approvalRequests})
         }else{
-            let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").exec();
+            let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflowId").exec();
 
             return res.json({success: true, requests: requests});
         }

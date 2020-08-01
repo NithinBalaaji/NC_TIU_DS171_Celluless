@@ -1,8 +1,9 @@
 // Importing config/env variables
 
 // Importing models
-const User = require("../models/user");
 const Request = require('../models/request');
+const Workflow = require('../models/workflow');
+const User = require("../models/user");
 
 //Importing utils
 const blockchainUtil = require("../utils/blockchain");
@@ -38,6 +39,12 @@ exports.createRequest = async (req, res) => {
             return res.json({success: false})
         }
         let workflowId = req.body.workflowId;
+        let workflow = await Workflow.findById(workflowId).populate('approvers.grp').exec();
+        if(!workflow){
+            console.log('Workflow doesnt exists!');
+            return;
+        }
+
         let approvers = [];
 
         req.body.approvers.forEach( async (approver) => {
@@ -56,7 +63,7 @@ exports.createRequest = async (req, res) => {
 
         let request = new Request({
             blockchainId: blockchainId,
-            workflowId: workflowId,
+            workflowId: workflow,
             approvers: approvers,
             approvedBy: []
         });
@@ -75,7 +82,7 @@ exports.viewRequest = async (req, res) => {
         }
 
         let requestId = req.body.requestId;
-        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflow_id').exec();
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
 
         if(!request){
             return res.json({success: false});
@@ -100,13 +107,12 @@ exports.approveRequest = async (req, res) => {
         
         let requestId = req.body.requestId;
 
-        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflow_id').exec();
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
 
         if(!request){
             return res.json({success: false});
         }
 
-        // TODO: web3 approve
         let nextApprover = await getNextApprover(request);
         await blockchainUtil.approveCertificate(request.blockchainId, nextApprover);
         
@@ -125,13 +131,12 @@ exports.rejectRequest = async (req, res) => {
         
         let requestId = req.body.requestId;
 
-        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflow_id').exec();
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
 
         if(!request){
             return res.json({success: false});
         }
 
-        // TODO: web3 reject request
         await blockchainUtil.rejectCertificate(request.blockchainId);
         
         console.log('Reject request');
@@ -149,7 +154,7 @@ exports.viewRequestCertificate = async (req, res) => {
         
         let requestId = req.body.requestId;
 
-        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflow_id').exec();
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
 
         if(!request){
             return res.json({success: false});
@@ -158,13 +163,12 @@ exports.viewRequestCertificate = async (req, res) => {
         let certificate = await blockchainUtil.getCertificate(request.blockchainId);
         console.log(certificate);
 
-        // TODO: generate pdf and render
-
-        console.log('View request');
-        return res.json({success: true, certificate: certificate});
+        let ejsPath = request.workflowId.path;
+        let compiledEJS = await ejs.compile(fs.readFileSync(ejsPath, 'utf8'),{ async: true });
+        let html = await compiledEJS(certificate.fields);
         
         console.log('View certificate request');
-        return res.json({success: true });
+        return res.json({success: true, html: html});
     } catch(error){
         console.log(error.toString());
     }

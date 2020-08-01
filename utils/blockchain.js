@@ -17,7 +17,7 @@ const getCertificateContract = async () => {
     }
 }
 
-const createRequest = async (fromAddress, nextApprover, fields) => {
+exports.createRequest = async (fromAddress, nextApprover, fields) => {
     try {
         let certificateContract = await getCertificateContract();
         let blockchainId = await certificateContract.methods.createCertificate(nextApprover,fields).send({from: fromAddress});
@@ -29,7 +29,7 @@ const createRequest = async (fromAddress, nextApprover, fields) => {
     }
 };
 
-const approveRequest = async (blockchainId, nextApprover) => {
+exports.approveRequest = async (blockchainId, nextApprover) => {
     try {
         let certificateContract = await getCertificateContract();
         let response = await certificateContract.methods.approve(blockchainId, nextApprover).send({from: fromAddress});
@@ -41,7 +41,7 @@ const approveRequest = async (blockchainId, nextApprover) => {
     }
 };
 
-const rejectRequest = async (blockchainId, nextApprover) => {
+exports.rejectRequest = async (blockchainId, nextApprover) => {
     try {
         let certificateContract = await getCertificateContract();
         let response = await certificateContract.methods.reject(blockchainId, nextApprover).send({from: fromAddress});
@@ -53,7 +53,7 @@ const rejectRequest = async (blockchainId, nextApprover) => {
     }
 };
 
-const getCertificate = async (blockchainId) => {
+exports.getCertificate = async (blockchainId) => {
     try {
         let certificateContract = await getCertificateContract();
         let certificate = await certificateContract.methods.getCertificateById(blockchainId).send({from: fromAddress});
@@ -65,7 +65,7 @@ const getCertificate = async (blockchainId) => {
     }
 };
 
-const getCertificateByQR = async () => {
+exports.getCertificateByQR = async () => {
     try {
         let certificateContract = await getCertificateContract();
         let certificate = await certificateContract.methods.getPendingApprovals().send({from: fromAddress});
@@ -77,7 +77,7 @@ const getCertificateByQR = async () => {
     }
 };
 
-const getPendingApprovals = async () => {
+exports.getPendingApprovals = async () => {
     try {
         let certificateContract = await getCertificateContract();
         let pendingApprovals = await certificateContract.methods.getPendingApprovals().send({from: fromAddress});
@@ -87,13 +87,4 @@ const getPendingApprovals = async () => {
     } catch (err) {
         console.log(err.toString());
     }
-};
-
-export { 
-    createRequest,
-    approveRequest,
-    rejectRequest,
-    getCertificate,
-    getCertificateByQR,
-    getPendingApprovals
 };
