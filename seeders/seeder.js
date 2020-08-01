@@ -4,6 +4,9 @@ const Workflow = require("../models/workflow");
 
 exports.seedDB = async (req,res) => {
     try{
+        await User.deleteMany();
+        await Group.deleteMany();
+        await Workflow.deleteMany();
         let csehod = await User.register(new User({
             username: "csehod",
             name: "CSE HOD",

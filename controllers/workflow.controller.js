@@ -28,9 +28,10 @@ exports.listWorkflow = async (req, res) => {
 
 exports.renderCreateWorkflow = async (req, res) => {
     try {
-        return res.render('createWorkflow');
+        let groups = await Group.find({});
+        return res.render('createWorkflow', {groups});
     } catch (error) {
-        console.log(error.toString());
+        throw error;
     }
 }
 

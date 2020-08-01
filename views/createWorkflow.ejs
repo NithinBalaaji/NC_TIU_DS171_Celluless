@@ -37,18 +37,12 @@
                     Administrators
                 </div>
                 <div class="box-container card-body" style="min-height: 100px; min-width: 100px;">
-                        <div class="box">
-                            <li class="admin list-group-item"><div class="box-item">Dean</div>
-                            </li>
-                        </div>
-                        <div class="box">
-                            <li class="admin list-group-item"><div class="box-item">HOD</div>
-                            </li>
-                        </div>
-                        <div class="box">
-                            <li class="admin list-group-item"><div class="box-item">Warden</div>
-                            </li>
-                        </div>
+                        <% for(let i=0; i<groups.length; i++) {%>
+                            <div class="box">
+                                <li class="admin list-group-item"><div class="box-item"><%= groups[i].name %></div>
+                                </li>
+                            </div>
+                        <% } %>
                 </div>
             </div>
         </div>
