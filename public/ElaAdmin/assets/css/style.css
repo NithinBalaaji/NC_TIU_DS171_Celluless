@@ -2171,7 +2171,7 @@ footer.site-footer {
     margin-left: 15px; }
 
   .card-body {
-    padding: 15px; 
+    padding: 15px;
     font-family: poppins,sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -2582,9 +2582,9 @@ footer.site-footer {
   padding-left: 10px;
 }
 
-.approver{
+/*.approver{
   /* background-color: #dc3545; */
-  max-height: 18px;
+/*  max-height: 18px;
   text-align: right;
 }
 

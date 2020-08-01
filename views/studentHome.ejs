@@ -102,12 +102,12 @@ svg {
     <h3>Ongoing Transactions</h3> <br />
 </br>
 <br>
-<div class="row">
+<div class="row text-center">
         <div class="col-lg-12 col-md-12">
             <div class="card ongoing-card">
                   <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4">
+                    <div class="row text-center">
+                        <div class="col-lg-4 ">
                             <div class="card">
                                 <div class="card-header">
                                     <div style="display: flex; justify-content: space-between;">
@@ -115,15 +115,15 @@ svg {
                                             <h3>Form title</h3>
                                         </b>
                                         <div class="circle">712</div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row text-center">
                                         <div class="col-lg-8">
-                                            Approved by:
+                                             Approved by:
                                         </div>
-                                        <div class="col-lg-4 approver">
+                                        <div class="col-lg-3 approver">
                                             <span class="badge badge-primary" style="background-color: #24bb2b;">
                                                 HOD
                                             </span>
@@ -142,44 +142,46 @@ svg {
                                         </div>
                                     </div>
                                     <br />
-                                    <div class="row">
-                                        <div class="col-lg-8">Approved On:</div>
-                                        <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-8">Applied On:</div>
-                                        <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                        </div>
+                                    <div class="row text-center">
+                                      <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                      <div class="row text-center">
+                                        <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                      </ul>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row text-center">
                                         <div class="col-lg-2"></div>
-                                        <div class="col-lg-4"><button class="btn remind" id="remind"
+                                        <div class="col-lg-4"><button class="btn remind btn-success" id="remind"
                                                 onclick="remindClickHandler()">Remind</button></div>
-                                        <div class="col-lg-4"><button class="btn withdraw" id="withdraw"
+                                        <div class="col-lg-4"><button class="btn withdraw btn-secondary" id="withdraw"
                                                 onclick="withdrawClickHandler()">Withdraw</button></div>
                                         <div class="col-lg-2"></div>
-                                                                    </div>
-                                <div style="height: 12px"></div>
+                                      </div>
+                                      <div style="height: 12px"></div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-4">
+                        <div class="col-lg-4 col-md-4">
                                 <div class="card">
                                     <div class="card-header">
                                         <div style="display: flex; justify-content: space-between;">
                                             <b class="top-pad">
                                                 <h3>Form title 2</h3>
                                             </b>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="row">
+                                        <div class="row text-center">
                                             <div class="col-lg-8">
-                                                Approved by:
+                                              Approved by:
                                             </div>
                                             <div class="col-lg-4 approver">
                                                 <span class="badge badge-primary" style="background-color: #24bb2b;">
@@ -200,31 +202,33 @@ svg {
                                             </div>
                                         </div>
                                         <br />
-                                        <div class="row">
-                                            <div class="col-lg-8">Approved On:</div>
-                                            <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                    style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-8">Applied On:</div>
-                                            <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                    style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                            </div>
+                                        <div class="row text-center">
+                                          <ul class="list-group list-group-flush">
+                                              <li class="list-group-item">
+                                                  <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                          <div class="row text-center">
+                                            <ul class="list-group list-group-flush">
+                                              <li class="list-group-item">
+                                                  <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                              </li>
+                                          </ul>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row text-center">
                                             <div class="col-lg-2"></div>
-                                            <div class="col-lg-4"><button class="btn remind" id="remind"
+                                            <div class="col-lg-4"><button class="btn remind btn-success" id="remind"
                                                     onclick="remindClickHandler()">Remind</button></div>
-                                            <div class="col-lg-4"><button class="btn withdraw" id="withdraw"
+                                            <div class="col-lg-4"><button class="btn withdraw btn-secondary" id="withdraw"
                                                     onclick="withdrawClickHandler()">Withdraw</button></div>
                                             <div class="col-lg-2"></div>
                                                                         </div>
                                     <div style="height: 12px"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4">
+                            <div class="col-lg-4 col-md-4">
                                     <div class="card">
                                         <div class="card-header">
                                             <div style="display: flex; justify-content: space-between;">
@@ -233,13 +237,13 @@ svg {
                                                 </b>
                                                 <div class="circle">712</div>
 
-                                                
+
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="row">
+                                            <div class="row text-center">
                                                 <div class="col-lg-8">
-                                                    Approved by:
+                                                     Approved by:
                                                 </div>
                                                 <div class="col-lg-4 approver">
                                                     <span class="badge badge-primary" style="background-color: #24bb2b;">
@@ -260,47 +264,75 @@ svg {
                                                 </div>
                                             </div>
                                             <br />
-                                            <div class="row">
-                                                <div class="col-lg-8">Approved On:</div>
-                                                <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                        style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                                </div>
+                                            <div class="row text-center">
+                                              <ul class="list-group list-group-flush">
+                                                  <li class="list-group-item">
+                                                      <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                                  </li>
+                                                </ul>
+                                              </div>
+                                              <div class="row text-center">
+                                                <ul class="list-group list-group-flush">
+                                                  <li class="list-group-item">
+                                                      <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                                  </li>
+                                              </ul>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-8">Applied On:</div>
-                                                <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                        style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                                </div>
-                                            </div>
+
                                         </div>
-                                        <div class="row">
+                                        <div class="row text-center">
                                                 <div class="col-lg-2"></div>
-                                                <div class="col-lg-4"><button class="btn remind" id="remind"
+                                                <div class="col-lg-4"><button class="btn remind btn-success" id="remind"
                                                         onclick="remindClickHandler()">Remind</button></div>
-                                                <div class="col-lg-4"><button class="btn withdraw" id="withdraw"
+                                                <div class="col-lg-4"><button class="btn withdraw btn-secondary" id="withdraw"
                                                         onclick="withdrawClickHandler()">Withdraw</button></div>
                                                 <div class="col-lg-2"></div>
                                                                             </div>
                                         <div style="height: 12px"></div>
                                     </div>
                                 </div>
+                                <!--<div class="col-md-4">
+                                    <aside class="profile-nav alt">
+                                        <section class="card">
+                                            <div class="card-header user-header alt bg-dark">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <h2 class="text-light display-6">Form Title</h2>
+                                                    </div>
+                                                    <div class="circle">712</div>
+                                                </div>
+                                            </div>
+
+
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <a href="#"><i class="fa fa-user"></i>  Approved By : <span class="badge badge-info pull-center r-activity"> Subash </a>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="#"> <i class="fa fa-calendar"></i>  Due Date :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                                </li>
+                                            </ul>
+
+                                        </section>
+                                    </aside>
+                                </div>-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-                                    
+
 <br>
 <br>
 <h3>Completed Transactions</h3> <br />
         </br>
-    <div class="row">
+    <div class="row text-center">
         <div class="col-lg-12 col-md-12">
             <div class="card completed-card">
                   <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4">
+                    <div class="row text-center">
+                        <div class="col-lg-4 col-md-4">
                             <div class="card">
                                 <div class="card-header">
                                     <div style="display: flex; justify-content: space-between;">
@@ -312,9 +344,9 @@ svg {
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row text-center">
                                         <div class="col-lg-8">
-                                            Approved by:
+                                              Approved by:
                                         </div>
                                         <div class="col-lg-4 approver">
                                             <span class="badge badge-primary" style="background-color: #24bb2b;">
@@ -335,23 +367,23 @@ svg {
                                         </div>
                                     </div>
                                     <br />
-                                    <div class="row">
-                                        <div class="col-lg-8">Approved On:</div>
-                                        <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-8">Applied On:</div>
-                                        <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                        </div>
+                                    <div class="row text-center">
+                                      <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                      <div class="row text-center">
+                                        <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                      </ul>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-6"><button class="btn" onclick="downloadFormClickHandler()">Download form with details</button></div>
-                                    <div class="col-lg-2"></div>
+                                <div class="row text-center">
+                                    <div class="col-lg-6"><button class="btn" style="margin: 30px" onclick="downloadFormClickHandler()">Download form with details</button></div>
                                 </div>
                                 <div style="height: 12px"></div>
                             </div>
@@ -363,12 +395,12 @@ svg {
     </div>
 
     <h3>Rejected Transactions</h3> <br />
-    <div class="row">
+    <div class="row text-center">
         <div class="col-lg-12 col-md-12">
             <div class="card rejected-card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4">
+                    <div class="row text-center">
+                        <div class="col-lg-4 col-md-4">
                             <div class="card">
                                 <div class="card-header">
                                     <div style="display: flex; justify-content: space-between;">
@@ -379,30 +411,32 @@ svg {
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            Rejected by:
+                                    <div class="row text-left">
+                                        <div class="col-lg-6">
+                                           Rejected by:
                                         </div>
-                                        <div class="col-lg-4 approver">
+                                        <div class="col-lg-3 approver">
                                             <span class="badge badge-primary" style="background-color: #f53a0b;">
                                                 HOD
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-8">Rejected On:</div>
-                                        <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-8">Applied On:</div>
-                                        <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                style="background-color: #07ff28; color: black;">DD/MM/YYYY</span>
-                                        </div>
+                                    <div class="row text-center">
+                                      <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <a href="#"> <i class="fa fa-calendar"></i>  Rejected On :  <span class="badge badge-danger pull-center r-activity">24/02/2020</span></a>
+                                        </li>
+                                    </ul>
+                                  </div>
+                                      <div class="row text-center">
+                                        <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                      </ul>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row text-center">
                                     <div class="col-lg-3"></div>
                                     <div class="col-lg-6"><button type="button" class="btn btn-secondary"
                                             data-toggle="modal" data-target="#myModal" onclick="viewRejectionClickHandler()">View rejection</button></div>
@@ -418,7 +452,7 @@ svg {
                                                 <h4 class="modal-title">Reason for rejection</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <p>COZ YOU SUCK LMAO</p>
+                                                <p>Insiufficient attendance</p>
                                                 <br />
                                                 <p>- HOD</p>
                                             </div>
