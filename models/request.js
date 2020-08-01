@@ -12,7 +12,7 @@ var requestSchema = new Schema({
         approverId: {type:Schema.Types.ObjectId, ref: "User"},
         level: Number
     }],
-    fields: String,
+    fields: [String],
     level: Number,
     isVerified: {
         type:Boolean, default:false

@@ -140,7 +140,7 @@ exports.approveRequest = async (req, res) => {
         await request.save();
         
         console.log('Approve request');
-        return res.redirect('/'));
+        return res.redirect('/');
     } catch(error){
         console.log(error);
     }
