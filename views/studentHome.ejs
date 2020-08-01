@@ -1,13 +1,108 @@
 <%include partials/studentHeader%>
 <!-- <span style="display: none;" id="hidden-pieValueCompleted">></span>
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span> -->
+<!-- <style>
+.row1 {
+  background-color: #e6e6e9;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container1 {
+  position: absolute;
+  height: 300px;
+  width: 1200px;
+  top: 60px;
+  left: calc(80% - 900px);
+  display: flex;
+}
+
+.card {
+  display: flex;
+  height: 280px;
+  width: 350px;
+  background-color: #17141d;
+  border-radius: 10px;
+  box-shadow: -1rem 0 3rem #000;
+/*   margin-left: -50px; */
+  transition: 0.4s ease-out;
+  position: relative;
+  left: 0px;
+}
+
+.card:not(:first-child) {
+    margin-left: -400px;
+}
+
+.card:hover {
+  transform: translateY(-42px);
+  transition: 0.4s ease-out;
+}
+
+.card:hover ~ .card {
+  position: relative;
+  left: 50px;
+  transition: 0.4s ease-out;
+}
+
+.title {
+  color: white;
+  font-weight: 300;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+.bar {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  height: 5px;
+  width: 150px;
+}
+
+
+.filledbar {
+  position: absolute;
+  top: 0px;
+  z-index: 8;
+  width: 0px;
+  height: 100%;
+  background: rgb(0,154,217);
+  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
+  transition: 0.6s ease-out;
+}
+
+.card:hover .filledbar {
+  width: 120px;
+  transition: 0.4s ease-out;
+}
+
+
+.stroke {
+  stroke: white;
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
+  transition: 0.6s ease-out;
+}
+
+svg {
+  fill: #17141d;
+  stroke-width: 2px;
+}
+
+.card:hover .stroke {
+  stroke-dashoffset: 100;
+  transition: 0.6s ease-out;
+}</style> -->
 <div class="animated fadeIn">
     <!-- Widgets  -->
     <h3>Ongoing Transactions</h3> <br />
-    <div class="row">
+</br>
+<br>
+<div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="card ongoing-card">
-                <div class="card-body">
+                  <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3 col-md-4">
                             <div class="card">
@@ -17,42 +112,190 @@
                                             <h3>Form title</h3>
                                         </b>
                                         <div class="circle">712</div>
+                                        
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-8">Need next approval by:</div>
-                                        <div class="col-lg-4 approver"><span class="badge badge-primary"
-                                                style="background-color: #dc3545;">HOD</span></div>
+                                        <div class="col-lg-8">
+                                            Approved by:
+                                        </div>
+                                        <div class="col-lg-4 approver">
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                HOD
+                                            </span>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                FA
+                                            </span>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                Dean
+                                            </span>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                HOD
+                                            </span>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                HOD
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-lg-8">Approved On:</div>
+                                        <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-8">Applied Date:</div>
+                                        <div class="col-lg-8">Applied On:</div>
                                         <div class="col-lg-4 date"><span class="badge badge-primary"
-                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span></div>
+                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-4"><button class="btn remind" id="remind"
-                                            onclick="remindClickHandler()">Remind</button></div>
-                                    <div class="col-lg-4"><button class="btn withdraw" id="withdraw"
-                                            onclick="withdrawClickHandler()">Withdraw</button></div>
-                                    <div class="col-lg-2"></div>
-                                </div>
+                                        <div class="col-lg-2"></div>
+                                        <div class="col-lg-4"><button class="btn remind" id="remind"
+                                                onclick="remindClickHandler()">Remind</button></div>
+                                        <div class="col-lg-4"><button class="btn withdraw" id="withdraw"
+                                                onclick="withdrawClickHandler()">Withdraw</button></div>
+                                        <div class="col-lg-2"></div>
+                                                                    </div>
                                 <div style="height: 12px"></div>
                             </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <b class="top-pad">
+                                                <h3>Form title 2</h3>
+                                            </b>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                Approved by:
+                                            </div>
+                                            <div class="col-lg-4 approver">
+                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                    HOD
+                                                </span>
+                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                    FA
+                                                </span>
+                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                    Dean
+                                                </span>
+                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                    HOD
+                                                </span>
+                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                    HOD
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-lg-8">Approved On:</div>
+                                            <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                    style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8">Applied On:</div>
+                                            <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                    style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-lg-2"></div>
+                                            <div class="col-lg-4"><button class="btn remind" id="remind"
+                                                    onclick="remindClickHandler()">Remind</button></div>
+                                            <div class="col-lg-4"><button class="btn withdraw" id="withdraw"
+                                                    onclick="withdrawClickHandler()">Withdraw</button></div>
+                                            <div class="col-lg-2"></div>
+                                                                        </div>
+                                    <div style="height: 12px"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <b class="top-pad">
+                                                    <h3>Form title 2</h3>
+                                                </b>
+                                                <div class="circle">712</div>
+
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    Approved by:
+                                                </div>
+                                                <div class="col-lg-4 approver">
+                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                        HOD
+                                                    </span>
+                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                        FA
+                                                    </span>
+                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                        Dean
+                                                    </span>
+                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                        HOD
+                                                    </span>
+                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                        HOD
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-lg-8">Approved On:</div>
+                                                <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                        style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-8">Applied On:</div>
+                                                <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                        style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-lg-2"></div>
+                                                <div class="col-lg-4"><button class="btn remind" id="remind"
+                                                        onclick="remindClickHandler()">Remind</button></div>
+                                                <div class="col-lg-4"><button class="btn withdraw" id="withdraw"
+                                                        onclick="withdrawClickHandler()">Withdraw</button></div>
+                                                <div class="col-lg-2"></div>
+                                                                            </div>
+                                        <div style="height: 12px"></div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <h3>Completed Transactions</h3> <br />
+                                    
+<br>
+<br>
+<h3>Completed Transactions</h3> <br />
+        </br>
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="card completed-card">
-                <div class="card-body">
+                  <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3 col-md-4">
                             <div class="card">
@@ -62,6 +305,7 @@
                                             <h3>Form title</h3>
                                         </b>
                                         <div class="circle">712</div>
+
                                     </div>
                                 </div>
                                 <div class="card-body">
