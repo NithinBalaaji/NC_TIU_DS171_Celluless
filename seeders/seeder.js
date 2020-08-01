@@ -184,6 +184,26 @@ exports.seedDB = async (req,res) => {
 
         await workflow2.save();
         
+        let student1 = await User.register(new User({
+            username: "student1",
+            name: "Student 1",
+            email: "abc@abc.com",
+            mobile: "999999999",
+            isAdmin: true,
+            pubKey: "insertpubhere"
+        }),"12345");
+
+        let student2 = await User.register(new User({
+            username: "student2",
+            name: "Student 2",
+            email: "abc@abc.com",
+            mobile: "999999999",
+            isAdmin: true,
+            pubKey: "insertpubhere"
+        }),"12345");
+
+        await student1.save();
+        await student2.save();
         res.json({sucess: true});
 
 
