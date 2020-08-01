@@ -40,5 +40,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
+config/index.js
+
 
 build/
