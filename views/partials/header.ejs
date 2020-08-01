@@ -1,0 +1,150 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CommuNITTy</title>
+    <meta name="description" content="CommuNITTy">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+    <!-- <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png"> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+   <style>
+    #weatherWidget .currentDesc {
+        color: #ffffff!important;
+    }
+        .traffic-chart {
+            min-height: 335px;
+        }
+        #flotPie1  {
+            height: 150px;
+        }
+        #flotPie1 td {
+            padding:3px;
+        }
+        #flotPie1 table {
+            top: 20px!important;
+            right: -10px!important;
+        }
+        .chart-container {
+            display: table;
+            min-width: 270px ;
+            text-align: left;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        #flotLine5  {
+            height: 105px;
+        }
+
+        #flotBarChart {
+            height: 150px;
+        }
+        #cellPaiChart{
+            height: 160px;
+        }
+        body.open ul.nav li.user-info{
+            display: none !important;
+        }
+        body:not(.open) ul.nav li a{
+            font-size: 1.2rem !important;
+        }
+        .right-panel{
+            height: 100%;
+        }
+        /* .card{
+            background-color: #a9d5f5;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel navbar-light" style="background-color: #97eb9b">
+        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #97eb9b">
+            <div id="main-menu" class="main-menu collapse navbar-collapse navbar-light" style="background-color: #97eb9b">
+                <ul class="nav navbar-nav pt-5 navbar-light" style="background-color: #97eb9b">
+                    <li>
+                        <a href="/"><i class="menu-icon ti-home"></i>Home </a>
+                    </li>
+                    <li>
+                        <a href="/projects"> <i class="menu-icon ti-files"></i>Projects </a>
+                    </li>
+                    <li>
+                        <a href="/problems"> <i class="menu-icon ti-notepad"></i>Problems </a>
+                    </li>
+                    <li>
+                        <a href="/users/<%=currentUser._id%>"> <i class="menu-icon ti-user"></i>Profile </a>
+                    </li>
+
+                    <li class="text-center mt-2 user-info"><a href="#">Name : <%=currentUser.username.toUpperCase()%></a></li>
+                    <li class="text-center mt-2 user-info"><a href="#"><%=currentUser.isStudent?"Student":"Industrialist"%></a></li>
+                    
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+    <!-- /#left-panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel ">
+        <!-- Header-->
+        <header id="header" class="header navbar-light" style="background-color: #97eb9b">
+        <!-- <header id="header" class="header navbar-light" style="background-color: #a9d5f5;""> -->
+                <div class="top-left">
+                <div class="navbar-header navbar-light" style="background-color: #97eb9b">
+                    <a class="navbar-brand" href="/"><img src="/images/conclogo-transparent.png" alt="CommuNITTy"></a>
+                    <a class="navbar-brand hidden" href="/"><img src="/images/conclogo-transparent.png" alt="CommuNITTy"></a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+            <div class="top-right">
+                <div class="header-menu">
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="form-inline">
+                            <form class="search-form">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- <img class="user-avatar rounded-circle" src="/images/admin.jpg" alt="User Avatar"> -->
+                            <i class="fa fa-user"></i>
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link text-center" href="#"><strong>Hello, <%=currentUser.username%></strong></a>
+                            <a class="nav-link" href="/users/<%=currentUser._id%>"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        <!-- /#header -->
+        <!-- Content -->
+        <div class="content">

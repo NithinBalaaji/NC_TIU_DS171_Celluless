@@ -1,0 +1,69 @@
+<%include ../partials/header%>
+<div class="card text-center">
+    <h1 class="display-4 p-3">Problem Statements</h1>
+    <a href="/problems/new" class="btn btn-success btn-lg p-3">Add Problem</a>
+</div>
+
+<div class="card text-center">
+    <h2 class="display-5 p-3">Unsolved</h2>
+</div>
+<div class="row">    
+    <%uncompleted.forEach(problem=>{%>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header user-header alt bg-dark">
+                    <div class="media">
+                        <div class="media-body">
+                            <h2 class="text-light display-6 text-center"><%=problem.name.charAt(0).toUpperCase() + problem.name.slice(1)%></h2>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="ti-user"></span> Created by : <%=problem.owner.username%>
+                    </li>
+                    <li class="list-group-item">
+                    <i class="fa fa-money"></i> Compensation : <%=problem.amount%> (in INR)
+                    </li>
+                    
+                    <li class="list-group-item text-center">
+                        <a href="/problems/<%=problem._id%>" class="btn btn-primary">View more</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <%})%>
+</div>
+
+<div class="card text-center">
+        <h2 class="display-5 p-3">Completed</h2>
+</div>
+
+<div class="row">
+    <%completed.forEach(problem=>{%>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header user-header alt bg-dark">
+                    <div class="media">
+                        <div class="media-body">
+                            <h2 class="text-light display-6 text-center"><%=problem.name.charAt(0).toUpperCase() + problem.name.slice(1)%></h2>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="ti-user"></span> Created by : <%=problem.owner.username%>
+                    </li>
+                    <li class="list-group-item">
+                    <i class="fa fa-money"></i> Compensation : <%=problem.amount%> (in INR)
+                    </li>
+                    
+                    <li class="list-group-item text-center">
+                        <a href="/problems/<%=problem._id%>" class="btn btn-primary">View more</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <%})%>
+</div>
+<%include ../partials/footer%>

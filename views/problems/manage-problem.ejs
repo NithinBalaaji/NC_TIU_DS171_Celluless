@@ -1,0 +1,34 @@
+<%include ../partials/header%>
+<div class="card">
+    <!-- <div class="text-center card-header">
+    </div> -->
+    <div class="card-body">
+        <h1 class="display-4 text-center"><%=problem.name.charAt(0).toUpperCase()+problem.name.slice(1)%></h1>
+        <h2 class="text-center p-4">Admin Panel</h2>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="text-center p-3">Proposals</h2>
+        <%if(problem.proposal.length){%>
+            <%problem.proposal.forEach(proposal=>{%>
+                <div class="jumbotron mt-3 mb-3 alt bg-dark" style="padding: 2rem 1rem; color: white;">
+                    <div>
+                        <a href="/user/<%proposal.owner._id%>" ><strong><%=proposal.owner.username%> </strong></a>
+                    </div>
+                    <div><%=proposal.desc%></div>
+                    <div class="text-center ">
+                        <form action="/problems/<%=problem._id%>/acceptpropose/<%=proposal.owner._id%>" method="POST">
+                            <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Accept proposal</button>
+                        </form>
+                    </div>
+                </div>
+            <%})%>
+        <%}else{%>
+            <p class="m-4 text-center">No proposals for this problem statement</p>
+        <%}%>
+    </div>
+</div>
+
+<%include ../partials/footer%>

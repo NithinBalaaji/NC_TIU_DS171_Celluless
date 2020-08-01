@@ -1,0 +1,70 @@
+<%include ../partials/header%>
+<div class="card">
+    <!-- <div class="text-center card-header">
+    </div> -->
+    <div class="card-body">
+        <h1 class="display-4 text-center"><%=project.name.charAt(0).toUpperCase()+project.name.slice(1)%></h1>
+        <h2 class="text-center p-4">Admin Panel</h2>
+    </div>
+</div>
+<div class="card" style="width: 40%;margin: auto;margin-bottom: 20px;">
+    <div class="card-body">
+        <section>
+            <h3 class="text-center pb-4">Member requests</h3>
+            <%if(project.requests.length){%>
+                <table class="table" style="table-layout:fixed;">
+                    <tbody>
+                        <col width="70%" />
+                        <col width="15%" />
+                        <col width="15%" />
+                        <%project.requests.forEach(request=>{%>
+                        <tr>
+                            <td style="overflow: hidden;" class="text-center"><a href="/users/<%=request._id%>">
+                                    <%=request.username%>
+                                </a></td>
+                            <td style="overflow: hidden;">
+                                <form action="/projects/<%=project._id%>/accept/<%=request._id%>" method="POST">
+                                    <button style="all: unset; cursor: pointer;"><i class="ti-check"></i></button>
+                                </form>
+                            </td>
+                            <td style="overflow: hidden;">
+                                <form action="/projects/<%=project._id%>/reject/<%=request._id%>" method="POST">
+                                    <button style="all: unset; cursor: pointer;"><i class="ti-close"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%})%>
+                    </tbody>
+                </table>
+            <%}else{%>
+                <p class="m-4 text-center">No requests</p>
+            <%}%>
+        </section>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h2 class="text-center p-3">Funding Proposals</h2>
+        <%if(project.fundProp.length){%>
+            <%project.fundProp.forEach(proposal=>{%>
+                <div class="jumbotron mt-3 mb-3" style="padding: 2rem 1rem;">
+                    <div>
+                        <strong><%=proposal.owner.username%></strong>: <%=proposal.desc%>
+                    </div>
+                    <div>
+                        <strong>Amount</strong>: <%=proposal.amount%>
+                    </div>
+                    <div class="text-center">
+                        <form action="/projects/<%=project._id%>/acceptProp/<%=proposal.owner._id%>" method="POST">
+                            <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Accept funding</button>
+                        </form>
+                    </div>
+                </div>
+            <%})%>
+        <%}else{%>
+            <p class="m-4 text-center">No funding proposals</p>
+        <%}%>
+    </div>
+</div>
+
+<%include ../partials/footer%>

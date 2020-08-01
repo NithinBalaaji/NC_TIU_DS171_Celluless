@@ -1,0 +1,48 @@
+<%include ../partials/header%>
+
+<div class="card text-center">
+    <h1 class="display-4 p-3">Projects</h1>
+    <a href="/projects/new" class="btn btn-success btn-lg p-3">Add Project</a>
+</div>
+
+
+<div class="row">
+    <%projects.forEach(project=>{%>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header user-header alt bg-dark">
+                <div class="media">
+                    <div class="media-body">
+                        <h2 class="text-light display-6 text-center"><%=project.name.charAt(0).toUpperCase()+project.name.slice(1)%></h2>
+                    </div>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <a href="/users/<%=project.owner._id%>" class="text-dark">
+                    <li class="list-group-item">
+                        <span class="ti-user"></span> Created by : <%=project.owner.username%>
+                    </li>
+                </a>
+                <li class="list-group-item">
+                    <i class="fa fa-users"></i> Collaborators count : <%=project.members.length%>
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-money"></i> Funds received : <span class="count"><%=project.fundRecv%></span> (in
+                    INR)
+                </li>
+                <li class="list-group-item">
+                    <%if(project.isPublic){%>
+                    <i class="fa fa-volume-up"></i>&nbsp; Public discussion
+                    <%}else{%>
+                    <i class="fa fa-volume-off"></i>&nbsp; Private discussion
+                    <%}%>
+                    </li>
+                    <li class="list-group-item text-center">
+                        <a href="/projects/<%=project._id%>" class="btn btn-primary">View more</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <%})%>
+</div>
+<%include ../partials/footer%>

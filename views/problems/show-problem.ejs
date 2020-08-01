@@ -1,0 +1,118 @@
+<%include ../partials/header%>
+<div class="card">
+    <!-- <div class="text-center card-header">
+    </div> -->
+    <div class="card-body">
+            <% if(problem.allotedTo) { %>
+                <div style="width: 100%;" class="text-center"><span class="badge badge-success"><i class="fa fa-check"></i> Solved</span></div>
+            <% } %>
+                <h1 class="display-4 text-center"><%=problem.name.toUpperCase()%></h1>
+            <%if(currentUser._id.toString()==problem.owner._id.toString()&&!problem.allotedTo){%>
+                <div style="width: 100%" class="text-center p-4"><a href="/problems/<%=problem._id%>/manage" class="text-light btn btn-primary"><i class="fa fa-cogs pr-2"></i>Proposals</a></div>
+            <%}%>
+        <div>
+            <h2 class="display-5 pb-4">Description</h2>
+            <p><%=problem.desc.charAt(0).toUpperCase()+problem.desc.slice(1)%></p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-1">
+                        <i class="pe-7s-cash"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text">₹<span class="count"><%=problem.amount%></span></div>
+                            <div class="stat-heading">Compensation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-2">
+                        <i class="pe-7s-cart"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text"><span class="count">3435</span></div>
+                            <div class="stat-heading">Sales</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-3">
+                        <i class="ti-user text-muted"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text"><span class="couant"><a href="/users/<%=problem.owner._id%>"><%=problem.owner.username%></a></span></div>
+                            <div class="stat-heading">Owner</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-4">
+                        <i class="pe-7s-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text"><span class="couant"><%- problem.allotedTo?`<a href="/users/${problem.allotedTo._id}">${problem.allotedTo.username}</a>`:"NA" %></span></div>
+                            <div class="stat-heading">Assignee</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <%= showForm %> -->
+<% if(showForm){ %>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Submit Proposal</strong>
+            </div>
+            <div class="card-body card-block">
+                <form action="/problems/<%=problem._id%>/propose" method="post" class="form-horizontal">
+                    <div class="row form-group">
+                        <div class="col-12"><textarea name="desc" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                    </div>
+                    <div class="text-center">
+                        <button id="submit" type="submit" class="btn btn-lg btn-success">
+                            <i class="fa fa-location-arrow fa-lg"></i>&nbsp; Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<% } else { %>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+<% } %>
+<%include ../partials/footer%>

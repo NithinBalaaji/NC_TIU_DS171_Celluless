@@ -1,0 +1,48 @@
+<%include ../partials/header%>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="typo-headers text-center card-header ">
+            <h1 class="p-3 display-4 text-center">
+                Create a new Problem Statement
+            </h1>
+        </div>
+        <div class="card-body card-block pt-5 pr-5 pl-5">
+            <form action="/problems/create" method="post" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="name" class=" form-control-label">Name of the Problem Statement</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="text" id="name" name="name" placeholder="Name"
+                            class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="desc" class=" form-control-label">Problem Statement</label></div>
+                    <div class="col-12 col-md-9"><textarea name="desc" id="desc"
+                            placeholder="Description of the project..." class="form-control" rows="5"></textarea></div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="amount" class=" form-control-label">Funding</label>
+                    </div>
+                    <div class="col-12 col-md-9"><input type="number" id="amount" name="amount" placeholder=0
+                            class="form-control"></div>
+                </div>
+
+                <div class="text-center">
+                    <button id="submit" type="submit" class="btn btn-lg btn-info">
+                        <i class="fa fa-plus fa-lg"></i>&nbsp; Create
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Submit
+            </button>
+            <button type="reset" class="btn btn-danger btn-sm">
+                <i class="fa fa-ban"></i> Reset
+            </button>
+        </div> -->
+    </div>
+</div>
+<%include ../partials/footer%>

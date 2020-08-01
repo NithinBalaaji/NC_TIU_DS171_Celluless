@@ -1,0 +1,186 @@
+<%include ../partials/header%>
+<div class="card">
+    <!-- <div class="text-center card-header">
+    </div> -->
+    <div class="card-body">
+        <h1 class="display-4 text-center"><%=project.name.toUpperCase()%></h1>
+        <%if(currentUser._id.toString()==project.owner._id.toString()){%>
+        <div style="width: 100%" class="text-center p-4"><a href="/projects/<%=project._id%>/manage"
+                class="text-light btn btn-primary"><i class="fa fa-cogs pr-2"></i>Manage</a></div>
+        <%}%>
+        <div>
+            <h2 class="display-5 pb-4">Description</h2>
+            <p><%=project.desc.charAt(0).toUpperCase()+project.desc.slice(1)%></p>
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-1">
+                        <i class="pe-7s-cash"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text">₹<span class="count"><%=project.fundRecv%></span></div>
+                            <div class="stat-heading">Fund Raised</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-3">
+                        <i class="ti-user text-muted" style="font-size: 44px;"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text"><a href="/users/<%=project.owner._id%>"><span class="couant"><%=project.owner.username%></span></a></div>
+            <div class="stat-heading">Owner</div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="stat-widget-five">
+                <div class="stat-icon dib flat-color-4">
+                    <i class="pe-7s-users"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="text-left dib">
+                        <div class="stat-text"><span class="count"><%=project.members.length%></span></div>
+                        <div class="stat-heading">Members</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body d-flex">
+                <%if(project.members.some(member=>member._id.toString()==currentUser._id.toString())){%>
+                <p class="text-muted">already a member</p>
+                <%}else if(project.requests.some(request=>request._id.toString()==currentUser._id.toString())){%>
+                <p class="text-muted">waiting for confirmation</p>
+                <%}else{%>
+                <form action="/projects/<%=project._id%>/request" method="POST">
+                    <button class="btn btn-success m-2" style="align-items: center;height:100%">
+                        <i class="fa fa-plus pr-3"></i>Join as member</button>
+                </form>
+                <%}%>
+                    <!-- <div class="stat-icon dib flat-color-2">
+                        <i class="pe-7s-cart"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+
+                        </div>
+                    </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 p-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Members</h2>
+                <ul class="list-group list-group-flush">
+                    <%project.members.forEach(member=>{%>
+                    <a class="list-group-item text-center" href="/users/<%=member._id%>">
+                        <%=member.username%>
+                    </a>
+                    <%})%>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Funders</h2>
+                <ul class="list-group list-group-flush">
+                    <%if(project.funders.length){%>
+                    <%project.funders.forEach(funder=>{%>
+                    <a class="list-group-item text-center" href="/users/<%=funder._id%>">
+                        <%=funder.username%>
+                    </a>
+                    <%})%>
+                    <%}else{%>
+                    <li class="list-group-item text-muted text-center pt-3">There are no funders yet</li>
+                    <%}%>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <%= showFund %> -->
+<!-- <%= currentUser._id %> -->
+<% if(showFund){ %>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Submit Funding Proposal</strong>
+            </div>
+            <div class="card-body card-block">
+                <form action="/projects/<%=project._id%>/fund" method="post" class="form-horizontal">
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="amount" class=" form-control-label">Funding</label>
+                        </div>
+                        <div class="col-12 col-md-9"><input type="number" id="amount" name="amount" placeholder=0
+                                class="form-control"></div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col-12"><textarea name="desc" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                    </div>
+
+                    <div class="text-center">
+                        <button id="submit" type="submit" class="btn btn-lg btn-success">
+                            <i class="fa fa-location-arrow fa-lg"></i>&nbsp; Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<div class="row card">
+    <div class="card-body">
+        <h2 class="text-center pb-4">Discussion</h2>
+        <%if(project.isPublic||project.members.some(member=>member._id.toString()===currentUser._id.toString())){%>
+                    <form action="/projects/<%=project._id%>/comment" method="post" class="form-horizontal">
+                        <div class="row form-group">
+                            <div class="col-12"><textarea required name="message" id="message"
+                                    placeholder="Enter your comment..." class="form-control"></textarea></div>
+                        </div>
+                        <button id="submit" type="submit" class="btn btn-primary"><i class="fa fa-commment"></i>Add
+                            comment</button>
+                    </form>
+                    <%project.thread.forEach(comment=>{%>
+                    <div class="jumbotron mt-3 mb-3 alt bg-dark" style="padding: 2rem 1rem; color: white;">
+                        <strong><%=comment.owner.username%></strong>: <%=comment.message%>
+                    </div>
+                    <%})%>
+                    <%}else{%>
+                    <div class="alert alert-danger text-center" role="alert">
+                        This is a private project. Only members can view the discussion.
+                    </div>
+                    <%}%>
+    </div>
+</div>
+<%include ../partials/footer%>
