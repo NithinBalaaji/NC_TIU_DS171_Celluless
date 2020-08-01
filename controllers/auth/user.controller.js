@@ -38,9 +38,9 @@ exports.renderLoginUser = async (req, res) => {
 exports.logoutUser = async (req, res) => {
     try{
         req.logout();
-        res.redirect("/login");
+        res.redirect("auth/user/login");
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
         res.json({success: false, error})
     }
 }
@@ -58,7 +58,7 @@ exports.renderHome = async(req, res) => {
             let completedRequests=requests.filter(request=>request.isVerified);
             let rejecetedRequests=requests.filter(request=>request.isRejected);
             let activeRequests=requests.filter(request=>(!(request.isVerified||request.isRejected)));
-            res.render('studentHome', {activeRequests,completedRequests, rejecetedRequests})
+            res.render('studentHome', {data:{activeRequests,completedRequests, rejecetedRequests}})
         }
     } catch(error){
         console.log(error);
