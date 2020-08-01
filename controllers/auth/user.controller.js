@@ -3,6 +3,7 @@
 
 // Importing models
 const Request = require("../../models/request")
+const User= require("../../models/user")
 //Importing utils
 
 
@@ -13,7 +14,7 @@ exports.registerUser = async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             mobile: req.body.mobile,
-            idFaculty: req.body.isFaculty,
+            isFaculty: req.body.isFaculty,
             isAdmin: req.body.isAdmin,
             pubKey: req.body.pubKey
         }),req.body.password);
