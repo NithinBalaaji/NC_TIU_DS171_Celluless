@@ -33,6 +33,14 @@ const getNextApprover = async (request) => {
     return pubKeys;
 }
 
+exports.renderCreateRequest = async (req, res) => {
+    try{
+        return res.render('createRequest');
+    } catch(error){
+        console.log(error.toString());
+    }
+}
+
 exports.createRequest = async (req, res) => {
     try{
         if(!req.body.workflowId || !req.body.approvers){

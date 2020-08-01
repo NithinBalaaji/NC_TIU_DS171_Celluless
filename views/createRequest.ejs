@@ -1,0 +1,50 @@
+<%include partials/header%>
+<span style="display: none;" id="hidden-pieValueCompleted">></span>
+<span style="display: none;" id="hidden-pieValueNotCompleted"></span>
+<div class="animated fadeIn">
+    <!-- /Widgets -->
+    <!--  Traffic  -->
+
+    <div class="row text-center">
+        <div class="col-lg-6">
+            <iframe width="100%" srcdoc="
+                <html>
+                <body>
+                Hello, <b>world</b>.
+                Hello, <b>world</b>.
+                Put html here
+                </body></html>">
+            </iframe>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                Put title here
+            </div>
+            <div class="card-body card-block">
+                <div class="">
+                    <div class="form-group">
+                        <label class=" form-control-label">Date</label>
+                        <input type="date" name="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="nf-email" class=" form-control-label">Email</label>
+                        <input type="email" id="nf-email" name="nf-email" placeholder="Enter Email" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-dot-circle-o"></i> Submit
+                </button>
+                <button type="reset" class="btn btn-danger btn-sm">
+                    <i class="fa fa-ban"></i> Reset
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+</script>
+<%include partials/footer%>

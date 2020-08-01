@@ -10,7 +10,6 @@ const Group = require("../models/group");
 exports.listWorkflow = async (req, res) => {
     try{
         return res.render('listWorkflow');
-        console.log('Request created');
     } catch(error){
         console.log(error.toString());
     }
