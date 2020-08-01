@@ -57,9 +57,9 @@ exports.renderHome = async(req, res) => {
         }else{
             let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").exec();
             console.log(":)")
-            let completedRequests=[];
-            let activeRequests=[];
-            let rejecetedRequests=[];
+            let completedRequests=[];//to be mapped from blockchain
+            let activeRequests=[];//to be mapped from blockchain
+            let rejecetedRequests=[];//to be mapped from blockchain
             let data={};
             data.activeRequests=activeRequests;
             data.completedRequests=completedRequests;
