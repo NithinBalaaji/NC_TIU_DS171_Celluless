@@ -53,11 +53,18 @@ exports.renderHome = async(req, res) => {
             //TODO get all requests to be approved by admin and return it
             approvalRequests=[]
             console.log(":(")
-            return res.json({success: true, approvalRequests})
+            return res.render("home");
         }else{
             let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").exec();
             console.log(":)")
-            res.render('studentHome', {requests})
+            let completedRequests=[];
+            let activeRequests=[];
+            let rejecetedRequests=[];
+            let data={};
+            data.activeRequests=activeRequests;
+            data.completedRequests=completedRequests;
+            data.rejecetedRequests=rejecetedRequests;
+            res.render('studentHome', {data})
         }
     } catch(error){
         console.log("WQ")
