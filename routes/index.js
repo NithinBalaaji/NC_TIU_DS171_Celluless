@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const User = require('../models/user')
 
 // Importing middlewares
 
@@ -16,5 +17,27 @@ router.use('/request', requestRouter);
 router.use('/user', userRouter);
 router.get('/',(req,res) => {res.redirect("/user/home")});
 router.get('/login',(req,res) => {res.redirect("/auth/user/login")});
+
+
+
+router.get('/setPublicKey/:userId/:pubKey', (req, res) => {
+    
+    try{
+        let userId = req.params.userId;
+        let pubKey = req.params.pubKey;
+
+        let user = await User.findById(userId);
+        if(user){
+            user.pubKey= pubKey;
+            await user.save();
+        }
+        return res.json({success: false});
+    }catch(err){
+        console.log(err);
+        return res.json({success: true});
+    }
+
+    
+})
 
 module.exports = router;
