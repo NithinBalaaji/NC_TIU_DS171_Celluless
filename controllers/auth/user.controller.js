@@ -61,3 +61,13 @@ exports.renderHome = async(req, res) => {
         return res.json({success: false});
     }
 }
+
+exports.renderApproval = async (req, res) => {
+    try{
+        res.render('approval');
+    } catch(error){
+        console.log(error.toString());
+        res.json({success: false, error})
+    }
+}
+

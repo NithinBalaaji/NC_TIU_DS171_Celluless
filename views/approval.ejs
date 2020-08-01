@@ -1,0 +1,108 @@
+<%include partials/header%>
+<span style="display: none;" id="hidden-pieValueCompleted">></span>
+<span style="display: none;" id="hidden-pieValueNotCompleted"></span>
+<div class="animated fadeIn">
+    <!-- Widgets  -->
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-1">
+                            <i class="pe-7s-cash"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text">₹<span class="count"></span></div>
+                                <div class="stat-heading">Funds transfered</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-2">
+                            <i class="pe-7s-note2"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count"></span></div>
+                                <div class="stat-heading">Projects</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-3">
+                            <i class="pe-7s-browser"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count"></span></div>
+                                <div class="stat-heading">Problems</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="pe-7s-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count"></span></div>
+                                <div class="stat-heading">Users</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Widgets -->
+    <!--  Traffic  -->
+    <div class="row text-center">
+        <div class="col-md-6">
+            <div class="card ">
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Problem statements </h4>
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card ">
+                <div class="card-body">
+                  <div class="btn-group">
+                    <button id="btnNewForm" class="btn btn-info btn-block btn-md" href="/projects">Create a New Form</button>
+                    <br>
+                    <br>
+                    <button id="btnEditWorkflow" class="btn btn-info btn-block btn-md" href="/problems">Edit an existing workflow</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%include partials/footer%>
