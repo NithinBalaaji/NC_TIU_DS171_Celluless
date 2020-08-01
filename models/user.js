@@ -10,7 +10,8 @@ var userSchema = new Schema({
     mobile: String,
     password: String,
     idFaculty: Boolean,
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    pubKey: String
 })
 
 userSchema.plugin(passportLocalMongoose);
