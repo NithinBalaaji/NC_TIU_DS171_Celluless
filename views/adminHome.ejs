@@ -34,10 +34,10 @@
                               </ul>
                               <div class="row text-center">
                                       <div class="col-lg-2"></div>
-                                      <div class="col-lg-4"><button class="btn remind btn-success m-1" id="remind"
-                                              onclick="remindClickHandler()">Approve</button></div>
-                                      <div class="col-lg-4"><button class="btn withdraw btn-danger m-1" id="withdraw"
-                                              onclick="withdrawClickHandler()">Reject</button></div>
+                                      <div class="col-lg-4"><a class="btn remind btn-success m-1" id="remind"
+                                              href="/approve:<%=request._id%>">Approve</a></div>
+                                      <div class="col-lg-4"><a class="btn withdraw btn-danger m-1" id="withdraw"
+                                              href="/reject:<%=reject._id%>">Reject</a></div>
                                       <div class="col-lg-2"></div>
                                     </div>
                           </section>
@@ -66,7 +66,7 @@
                               <div class="row text-center">
                                       <div class="col-lg-2"></div>
                                       <div class="col-lg-4"><button class="btn remind btn-success m-1" id="remind"
-                                              onclick="remindClickHandler()">Approve</button></div>
+                                              onclick="approveClickHandler()">Approve</button></div>
                                       <div class="col-lg-4"><button class="btn withdraw btn-danger m-1" id="withdraw"
                                               onclick="withdrawClickHandler()">Reject</button></div>
                                       <div class="col-lg-2"></div>
@@ -92,4 +92,14 @@
         </div>
     </div>
 </div>
+<script>
+    function approveClickHandler() {
+        console.log("remind Clicked!")
+        // this formID should send a reminder to its next approver. Priority 1
+    }
+    function rejectClickHandler() {
+        console.log("withdraw Clicked!")
+        // delete this formID from all tables. Priority 3
+    }
+</script>
 <%include partials/footer%>

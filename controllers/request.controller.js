@@ -72,7 +72,7 @@ exports.createRequest = async (req, res) => {
             approvers.push({
                 approverId: user,
                 level: approver.level
-            });            
+            });
         }
 
 
@@ -103,7 +103,7 @@ exports.viewRequest = async (req, res) => {
         }
 
         let requestId = req.body.requestId;
-        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
 
         if(!request){
             return res.json({success: false});
@@ -125,7 +125,7 @@ exports.approveRequest = async (req, res) => {
         if(!req.params.requestId){
             return res.json({success: false})
         }
-        
+
         let requestId = req.params.requestId;
 
         let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
@@ -138,7 +138,7 @@ exports.approveRequest = async (req, res) => {
         await blockchainUtil.approveRequest(requestId);
         request.approvedBy.push(req.user);
         await request.save();
-        
+
         console.log('Approve request');
         return res.redirect('/');
     } catch(error){
@@ -151,7 +151,7 @@ exports.rejectRequest = async (req, res) => {
         if(!req.params.requestId){
             return res.json({success: false})
         }
-        
+
         let requestId = req.params.requestId;
 
         let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
@@ -161,7 +161,7 @@ exports.rejectRequest = async (req, res) => {
         }
 
         await blockchainUtil.rejectCertificate(requestId);
-        
+
         console.log('Reject request');
         return res.redirect('/');
     } catch(error){
@@ -174,7 +174,7 @@ exports.viewRequestCertificate = async (req, res) => {
         if(!req.body.requestId){
             return res.json({success: false})
         }
-        
+
         let requestId = req.body.requestId;
 
         let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
@@ -188,7 +188,7 @@ exports.viewRequestCertificate = async (req, res) => {
         let ejsPath = path.resolve('../uploads/',request.workflowId.path);
         let compiledEJS = await ejs.compile(fs.readFileSync(ejsPath, 'utf8'),{ async: true });
         let html = await compiledEJS(request.fields);
-        
+
         console.log('View certificate request');
         return res.json({success: true, html: html});
     } catch(error){
