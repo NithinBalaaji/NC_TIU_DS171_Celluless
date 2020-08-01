@@ -78,4 +78,3 @@ exports.renderApproval = async (req, res) => {
         res.json({success: false, error})
     }
 }
-

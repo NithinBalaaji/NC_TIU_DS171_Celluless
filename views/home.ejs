@@ -12,13 +12,14 @@
                 <div class="card-body">
                   <h2 class="mb-3">Pending Requests</h2>
                   <div class="row">
+                    <%approvalRequests.forEach(request =>{%>
                   <div class="col-md-4">
                       <aside class="profile-nav alt">
                           <section class="card">
                               <div class="card-header user-header alt bg-dark">
                                   <div class="media">
                                       <div class="media-body">
-                                          <h2 class="text-light display-6">Bonafide Certificate</h2>
+                                          <h2 class="text-light display-6"><%=request.workflow.name%></h2>
                                       </div>
                                   </div>
                               </div>
@@ -36,6 +37,7 @@
                           </section>
                       </aside>
                   </div>
+                  <%})%>
                   <div class="col-md-4">
                       <aside class="profile-nav alt">
                           <section class="card">
@@ -50,7 +52,7 @@
 
                               <ul class="list-group list-group-flush">
                                   <li class="list-group-item">
-                                      <a href="#"><i class="fa fa-user"></i>  Applied By : <span class="badge badge-info pull-center r-activity"> Subash </a>
+                                      <a href="#"><i class="fa fa-user"></i>  Applied By : <span class="badge badge-info pull-center r-activity"><%=request.owner.username%> </a>
                                   </li>
                                   <li class="list-group-item">
                                       <a href="#"> <i class="fa fa-calendar"></i>  Due Date :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
