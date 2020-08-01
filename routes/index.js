@@ -6,14 +6,14 @@ const router = require('express').Router();
 const authRouter = require('./auth/index.router');
 const workflowRouter = require('./workflow.router');
 const requestRouter = require('./request.router');
+const userRouter = require('./user.router');
 const {isLoggedIn} = require('../middlewares/auth');
 
 // Defining routes
 router.use('/auth', authRouter);
 router.use('/workflow', workflowRouter);
 router.use('/request', requestRouter);
-router.get('/home',isLoggedIn,(req,res) => {res.render("home")})
-
-router.get('/student/home',isLoggedIn,(req,res) => {res.render("studentHome")});
+router.use('/user', userRouter);
+// router.get('/home',isLoggedIn,(req,res) => {res.render("home")})
 
 module.exports = router;
