@@ -51,13 +51,15 @@ exports.renderHome = async(req, res) => {
         if(user.isAdmin){
             //TODO get all requests to be approved by admin and return it
             approvalRequests=[]
+            console.log(":(")
             return res.json({success: true, approvalRequests})
         }else{
-            let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflowId").exec();
-
-            return res.json({success: true, requests: requests});
+            let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").exec();
+            console.log(":)")
+            res.render('studentHome', {requests})
         }
     } catch(error){
+        console.log("WQ")
         return res.json({success: false});
     }
 }

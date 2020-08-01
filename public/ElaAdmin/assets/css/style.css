@@ -2171,7 +2171,14 @@ footer.site-footer {
     margin-left: 15px; }
 
   .card-body {
-    padding: 15px; }
+    padding: 15px; 
+    font-family: poppins,sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.625;
+    color: #666;
+    -webkit-font-smoothing: antialiased;
+  }
 
   .badges button {
     margin: 2px 0; }
@@ -2510,3 +2517,79 @@ footer.site-footer {
     }
 
 /*# sourceMappingURL=style.css.map */
+
+.ongoing-card{
+  background-image: -webkit-linear-gradient(90deg,#3f5efb 0%,#fc466b 100%);
+  color: black;
+  font-family: poppins,sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.completed-card{
+  /* background-image: -webkit-linear-gradient(90deg,#11998e 0%,#38ef7d 100%); */
+  background-image: -webkit-linear-gradient(90deg,#45b649 0%,#dce35b 100%);
+  font-family: poppins,sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.625;
+    color: #666;
+    -webkit-font-smoothing: antialiased;
+}
+
+.rejected-card{
+  background-image: -webkit-linear-gradient(90deg,#ee0979 0%,#ff6a00 100%);
+  font-family: poppins,sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.625;
+    color: #666;
+    -webkit-font-smoothing: antialiased;
+}
+
+.card-header:first-child {
+  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+.card-header {
+  /* padding: .75rem 1.25rem; */
+  /* margin-bottom: 0; */
+  background-color: rgba(0,0,0,.03);
+  /* border-bottom: 1px solid rgba(0,0,0,.125); */
+}
+
+.right-align{
+  text-align: right;
+}
+
+.circle{
+  border-radius: 9px;
+  background-color: #3f5efb;
+  color: white;
+  width: 35px;
+  height: 30px;
+  text-align: center;
+  padding-top: 4px;
+}
+
+.top-pad{
+  padding-top: 7px;
+}
+
+.left-pad{
+  padding-left: 10px;
+}
+
+.approver{
+  /* background-color: #dc3545; */
+  max-height: 18px;
+  text-align: right;
+}
+
+.right-pad{
+  padding-right: 10px;
+}
+
+.date{
+  text-align: right;
+}

@@ -1,0 +1,219 @@
+<%include partials/studentHeader%>
+<!-- <span style="display: none;" id="hidden-pieValueCompleted">></span>
+<span style="display: none;" id="hidden-pieValueNotCompleted"></span> -->
+<div class="animated fadeIn">
+    <!-- Widgets  -->
+    <h3>Ongoing Transactions</h3> <br />
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card ongoing-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <b class="top-pad">
+                                            <h3>Form title</h3>
+                                        </b>
+                                        <div class="circle">712</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">Need next approval by:</div>
+                                        <div class="col-lg-4 approver"><span class="badge badge-primary"
+                                                style="background-color: #dc3545;">HOD</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8">Applied Date:</div>
+                                        <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-4"><button class="btn remind" id="remind"
+                                            onclick="remindClickHandler()">Remind</button></div>
+                                    <div class="col-lg-4"><button class="btn withdraw" id="withdraw"
+                                            onclick="withdrawClickHandler()">Withdraw</button></div>
+                                    <div class="col-lg-2"></div>
+                                </div>
+                                <div style="height: 12px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Completed Transactions</h3> <br />
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card completed-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <b class="top-pad">
+                                            <h3>Form title</h3>
+                                        </b>
+                                        <div class="circle">712</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            Approved by:
+                                        </div>
+                                        <div class="col-lg-4 approver">
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                HOD
+                                            </span>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                FA
+                                            </span>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                Dean
+                                            </span>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                HOD
+                                            </span>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                HOD
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-lg-8">Approved On:</div>
+                                        <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8">Applied On:</div>
+                                        <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-6"><button class="btn" onclick="downloadFormClickHandler()">Download form with details</button></div>
+                                    <div class="col-lg-2"></div>
+                                </div>
+                                <div style="height: 12px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Rejected Transactions</h3> <br />
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card rejected-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <b class="top-pad">
+                                            <h3>Form title</h3>
+                                        </b>
+                                        <div class="circle">712</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            Rejected by:
+                                        </div>
+                                        <div class="col-lg-4 approver">
+                                            <span class="badge badge-primary" style="background-color: #f53a0b;">
+                                                HOD
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8">Rejected On:</div>
+                                        <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                style="background-color: #ffc107; color: black;">DD/MM/YYYY</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8">Applied On:</div>
+                                        <div class="col-lg-4 date"><span class="badge badge-primary"
+                                                style="background-color: #07ff28; color: black;">DD/MM/YYYY</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-6"><button type="button" class="btn btn-secondary"
+                                            data-toggle="modal" data-target="#myModal" onclick="viewRejectionClickHandler()">View rejection</button></div>
+                                    <div class="col-lg-3"></div>
+                                </div>
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close"
+                                                    data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Reason for rejection</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>COZ YOU SUCK LMAO</p>
+                                                <br />
+                                                <p>- HOD</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="height: 12px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /Widgets -->
+<!--  Traffic  -->
+
+</div>
+
+<script>
+    function remindClickHandler() {
+        console.log("remind Clicked!")
+        // this formID should send a reminder to its next approver. Priority 1
+    }
+    function withdrawClickHandler() {
+        console.log("withdraw Clicked!")
+        // delete this formID from all tables. Priority 3
+    }
+    function downloadFormClickHandler() {
+        console.log("download form clicked!")
+        // download this formID with its blanks filled in. Priority 4
+    }
+    function viewRejectionClickHandler() {
+        console.log("View Rejection CLicked!")
+        // View rejection string of this formID and also get who wrote this rejection. Priority 2
+    }
+</script>
+
+<%include partials/footer%>

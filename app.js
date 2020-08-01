@@ -11,7 +11,7 @@ var express = require("express"),
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-mongoose.connect(`mongodb://root:adwaith123@ds251435.mlab.com:51435/tranfinitt_nitt`);
+mongoose.connect(config.DB_URI);
 
 app.use(require("express-session")({
     secret: config.SESSION_SECRET,
@@ -28,7 +28,6 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
 })
-
 
 app.use(routes);
 
