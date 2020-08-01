@@ -51,7 +51,7 @@ exports.rejectRequest = async (blockchainId, nextApprover) => {
         console.log(response);
         return response;
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };
 
@@ -63,7 +63,7 @@ exports.getCertificate = async (blockchainId) => {
 
         return certificate;
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };
 
@@ -75,7 +75,7 @@ exports.getCertificateByQR = async () => {
 
         return certificate;
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };
 
@@ -87,6 +87,6 @@ exports.getPendingApprovals = async () => {
 
         return pendingApprovals;
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };

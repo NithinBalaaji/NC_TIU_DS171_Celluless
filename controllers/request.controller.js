@@ -43,7 +43,7 @@ exports.renderCreateRequest = async (req, res) => {
         }).exec();
         return res.render('createRequest',{workflow});
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
     }
 }
 
@@ -116,7 +116,7 @@ exports.viewRequest = async (req, res) => {
         console.log('View request');
         return res.json({success: true, certificate: request});
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
     }
 }
 

@@ -37,7 +37,7 @@ exports.rejectCertificate = async (id) => {
         return Request.findByIdAndUpdate(id,{isRejected:true}).exec();
         
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };
 
@@ -45,7 +45,7 @@ exports.getCertificate = async (blockchainId) => {
     try {
         return "hi";
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };
 
@@ -57,17 +57,18 @@ exports.getCertificateByQR = async () => {
 
         return certificate;
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };
 
-const {getNextApproverId} = require('../controllers/request.controller');
-
-exports.getPendingApprovals = async (adminUserId) => {
+exports.getPendingApprovals = async () => {
     try {
-        let requests = await Request.find({}).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
-        return requests.filter(request=>((getNextApproverId(request)[0])==adminUserId));
+        // let certificateContract = await getCertificateContract();
+        // let pendingApprovals = await certificateContract.methods.getPendingApprovals().send({from: fromAddress});
+        // console.log(pendingApprovals);
+
+        return 1;
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };

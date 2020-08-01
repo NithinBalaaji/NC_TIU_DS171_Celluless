@@ -38,7 +38,7 @@ exports.renderCreateWorkflow = async (req, res) => {
 
 exports.createWorkflow = async (req, res) => {
     try {
-        console.log('hdd');
+        console.log("dffdf")
         let workflow = new Workflow();
         workflow.name = req.body.name;
         workflow.fields = req.body.fields;
@@ -75,8 +75,8 @@ exports.viewWorkflow = async (req, res) => {
                 path: 'members'
             }
         }).exec();
-        const templateEjs = await fs.readFileSync(path.join('../uploads', workflow.path), 'utf8');
-        workflow.templateEjs = templateEjs;
+        // const templateEjs = await fs.readFileSync(path.join('../uploads', workflow.path), 'utf8');
+        // workflow.templateEjs = templateEjs;
         if (!workflow) {
             return res.json({ success: false });
         }
@@ -84,7 +84,7 @@ exports.viewWorkflow = async (req, res) => {
             return res.json({ success: true, workflow: workflow });
         }
     } catch (error) {
-        console.log(error.toString());
+        console.log(error);
     }
 }
 

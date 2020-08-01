@@ -21,7 +21,7 @@ exports.registerUser = async (req, res) => {
 
         res.json({success: true});
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
         res.json({success: false, error})
     }
 }
@@ -30,7 +30,7 @@ exports.renderLoginUser = async (req, res) => {
     try{
         res.render('login');
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
         res.json({success: false, error})
     }
 }
@@ -70,7 +70,7 @@ exports.renderApproval = async (req, res) => {
     try{
         res.render('approval');
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
         res.json({success: false, error})
     }
 }

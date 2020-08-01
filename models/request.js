@@ -13,7 +13,7 @@ var requestSchema = new Schema({
         level: Number
     }],
     fields: [String],
-    level: Number,
+    level: {type: Number, default: 0},
     isVerified: {
         type:Boolean, default:false
     },
