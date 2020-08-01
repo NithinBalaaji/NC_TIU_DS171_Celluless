@@ -20,7 +20,7 @@ router.get('/login',(req,res) => {res.redirect("/auth/user/login")});
 
 
 
-router.get('/setPublicKey/:userId/:pubKey', (req, res) => {
+router.get('/setPublicKey/:userId/:pubKey', async (req, res) => {
     
     try{
         let userId = req.params.userId;
