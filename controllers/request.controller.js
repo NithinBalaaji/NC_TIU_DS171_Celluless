@@ -129,6 +129,8 @@ exports.approveRequest = async (req, res) => {
 
         let nextApprover = await getNextApprover(request);
         await blockchainUtil.approveCertificate(request.blockchainId, nextApprover);
+        request.approvedBy.push(req.user);
+        await request.save();
         
         console.log('Approve request');
         return res.json({success: true });
