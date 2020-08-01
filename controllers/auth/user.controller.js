@@ -56,9 +56,9 @@ exports.renderHome = async(req, res) => {
         }else{
             let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").populate('ownerId').exec();
             let completedRequests=requests.filter(request=>request.isVerified);
-            let rejecetedRequests=requests.filter(request=>request.isRejected);
+            let rejectedRequests=requests.filter(request=>request.isRejected);
             let activeRequests=requests.filter(request=>(!(request.isVerified||request.isRejected)));
-            res.render('studentHome', {data:{activeRequests,completedRequests, rejecetedRequests}})
+            res.render('studentHome', {data:{activeRequests,completedRequests, rejectedRequests}})
         }
     } catch(error){
         console.log(error);

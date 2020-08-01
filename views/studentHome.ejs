@@ -105,14 +105,15 @@ svg {
             <div class="card ongoing-card">
                   <div class="card-body">
                     <div class="row text-center">
+                      <%for(int i=0;i<data.activeRequests.length;i++){%>
                         <div class="col-lg-4 ">
                             <div class="card">
                                 <div class="card-header">
                                     <div style="display: flex; justify-content: space-between;">
                                         <b class="top-pad">
-                                            <h3>Form title</h3>
+                                            <h3><%=data.activeRequests[i].workflowId.name%></h3>
                                         </b>
-                                        <div class="circle">712</div>
+                                        <!--<div class="circle">712</div>-->
 
                                     </div>
                                 </div>
@@ -122,21 +123,10 @@ svg {
                                              Approved by:
                                         </div>
                                         <div class="col-lg-3 approver">
+                                          <%=for(int j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
                                             <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                HOD
-                                            </span>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                FA
-                                            </span>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                Dean
-                                            </span>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                HOD
-                                            </span>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                HOD
-                                            </span>
+                                               <%=data.activeRequests[i].approvedBy[j]%>
+                                            </span><%}>
                                         </div>
                                     </div>
                                     <br />
@@ -166,75 +156,31 @@ svg {
                                       <div style="height: 12px"></div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div style="display: flex; justify-content: space-between;">
-                                            <b class="top-pad">
-                                                <h3>Form title 2</h3>
-                                            </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row text-center">
-                                            <div class="col-lg-8">
-                                              Approved by:
-                                            </div>
-                                            <div class="col-lg-4 approver">
-                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                    HOD
-                                                </span>
-                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                    FA
-                                                </span>
-                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                    Dean
-                                                </span>
-                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                    HOD
-                                                </span>
-                                                <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                    HOD
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <br />
-                                        <div class="row text-center">
-                                          <ul class="list-group list-group-flush">
-                                              <li class="list-group-item">
-                                                  <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                          <div class="row text-center">
-                                            <ul class="list-group list-group-flush">
-                                              <li class="list-group-item">
-                                                  <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
-                                              </li>
-                                          </ul>
-                                        </div>
-                                    </div>
-                                    <div class="row text-center">
-                                            <div class="col-lg-2"></div>
-                                            <div class="col-lg-4"><button class="btn remind btn-success" id="remind"
-                                                    onclick="remindClickHandler()">Remind</button></div>
-                                            <div class="col-lg-4"><button class="btn withdraw btn-secondary" id="withdraw"
-                                                    onclick="withdrawClickHandler()">Withdraw</button></div>
-                                            <div class="col-lg-2"></div>
-                                                                        </div>
-                                    <div style="height: 12px"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
+<br>
+<br>
+<h3>Completed Transactions</h3> <br />
+        </br>
+        <br>
+        <div class="row text-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card ongoing-card">
+                          <div class="card-body">
+                            <div class="row text-center">
+                              <%for(int i=0;i<data.rejectedRequests.length;i++){%>
+                                <div class="col-lg-4 ">
                                     <div class="card">
                                         <div class="card-header">
                                             <div style="display: flex; justify-content: space-between;">
                                                 <b class="top-pad">
-                                                    <h3>Form title 2</h3>
+                                                    <h3><%=data.rejectedRequests[i].workflowId.name%></h3>
                                                 </b>
-                                                <div class="circle">712</div>
-
+                                                <!--<div class="circle">712</div>-->
 
                                             </div>
                                         </div>
@@ -243,22 +189,11 @@ svg {
                                                 <div class="col-lg-8">
                                                      Approved by:
                                                 </div>
-                                                <div class="col-lg-4 approver">
+                                                <div class="col-lg-3 approver">
+                                                  <%=for(int j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
                                                     <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                        HOD
-                                                    </span>
-                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                        FA
-                                                    </span>
-                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                        Dean
-                                                    </span>
-                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                        HOD
-                                                    </span>
-                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                        HOD
-                                                    </span>
+                                                       <%=data.rejectedRequests[i].approvedBy[j]%>
+                                                    </span><%}>
                                                 </div>
                                             </div>
                                             <br />
@@ -276,7 +211,6 @@ svg {
                                                   </li>
                                               </ul>
                                             </div>
-
                                         </div>
                                         <div class="row text-center">
                                                 <div class="col-lg-2"></div>
@@ -285,190 +219,16 @@ svg {
                                                 <div class="col-lg-4"><button class="btn withdraw btn-secondary" id="withdraw"
                                                         onclick="withdrawClickHandler()">Withdraw</button></div>
                                                 <div class="col-lg-2"></div>
-                                                                            </div>
-                                        <div style="height: 12px"></div>
+                                              </div>
+                                              <div style="height: 12px"></div>
                                     </div>
                                 </div>
-                                <!--<div class="col-md-4">
-                                    <aside class="profile-nav alt">
-                                        <section class="card">
-                                            <div class="card-header user-header alt bg-dark">
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <h2 class="text-light display-6">Form Title</h2>
-                                                    </div>
-                                                    <div class="circle">712</div>
-                                                </div>
-                                            </div>
-
-
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">
-                                                    <a href="#"><i class="fa fa-user"></i>  Approved By : <span class="badge badge-info pull-center r-activity"> Subash </a>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <a href="#"> <i class="fa fa-calendar"></i>  Due Date :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
-                                                </li>
-                                            </ul>
-
-                                        </section>
-                                    </aside>
-                                </div>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<br>
-<br>
-<h3>Completed Transactions</h3> <br />
-        </br>
-    <div class="row text-center">
-        <div class="col-lg-12 col-md-12">
-            <div class="card completed-card">
-                  <div class="card-body">
-                    <div class="row text-center">
-                        <div class="col-lg-4 col-md-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <b class="top-pad">
-                                            <h3>Form title</h3>
-                                        </b>
-                                        <div class="circle">712</div>
-
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row text-center">
-                                        <div class="col-lg-8">
-                                              Approved by:
-                                        </div>
-                                        <div class="col-lg-4 approver">
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                HOD
-                                            </span>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                FA
-                                            </span>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                Dean
-                                            </span>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                HOD
-                                            </span>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                HOD
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row text-center">
-                                      <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div class="row text-center">
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
-                                          </li>
-                                      </ul>
-                                    </div>
-                                </div>
-                                <div class="row text-center">
-                                    <div class="col-lg-6"><button class="btn" style="margin: 30px" onclick="downloadFormClickHandler()">Download form with details</button></div>
-                                </div>
-                                <div style="height: 12px"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <h3>Rejected Transactions</h3> <br />
-    <div class="row text-center">
-        <div class="col-lg-12 col-md-12">
-            <div class="card rejected-card">
-                <div class="card-body">
-                    <div class="row text-center">
-                        <div class="col-lg-4 col-md-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <b class="top-pad">
-                                            <h3>Form title</h3>
-                                        </b>
-                                        <div class="circle">712</div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row text-left">
-                                        <div class="col-lg-6">
-                                           Rejected by:
-                                        </div>
-                                        <div class="col-lg-3 approver">
-                                            <span class="badge badge-primary" style="background-color: #f53a0b;">
-                                                HOD
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="row text-center">
-                                      <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <a href="#"> <i class="fa fa-calendar"></i>  Rejected On :  <span class="badge badge-danger pull-center r-activity">24/02/2020</span></a>
-                                        </li>
-                                    </ul>
-                                  </div>
-                                      <div class="row text-center">
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
-                                          </li>
-                                      </ul>
-                                    </div>
-                                </div>
-                                <div class="row text-center">
-                                    <div class="col-lg-3"></div>
-                                    <div class="col-lg-6"><button type="button" class="btn btn-secondary"
-                                            data-toggle="modal" data-target="#myModal" onclick="viewRejectionClickHandler()">View rejection</button></div>
-                                    <div class="col-lg-3"></div>
-                                </div>
-                                <div id="myModal" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close"
-                                                    data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Reason for rejection</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Insiufficient attendance</p>
-                                                <br />
-                                                <p>- HOD</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="height: 12px"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>
 <!-- /Widgets -->
