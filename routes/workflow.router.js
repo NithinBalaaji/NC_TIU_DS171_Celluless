@@ -4,10 +4,11 @@ const router = require('express').Router();
 const workflowController = require('../controllers/workflow.controller');
 
 // Importing middlewares
+const { isLoggedIn } = require('../middlewares/auth');
 
-// Auth routes
-router.post('/create', workflowController.createWorkflow);
-router.post('/view', workflowController.viewWorkflow);
-router.post('/edit', workflowController.editWorkflow);
+// POST Routes
+router.post('/create', isLoggedIn, workflowController.createWorkflow);
+router.post('/view', isLoggedIn, workflowController.viewWorkflow);
+router.post('/edit', isLoggedIn, workflowController.editWorkflow);
 
 module.exports = router;
