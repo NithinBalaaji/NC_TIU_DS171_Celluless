@@ -1,9 +1,9 @@
-<%include partials/header%>
+<%include partials/adminHeader%>
 <span style="display: none;" id="hidden-pieValueCompleted">></span>
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span>
 <div class="animated fadeIn">
     <!-- Widgets  -->
-    
+
     <!-- /Widgets -->
     <!--  Traffic  -->
     <div class="row text-center">
@@ -12,7 +12,7 @@
                 <div class="card-body">
                   <h2 class="mb-3">Pending Requests</h2>
                   <div class="row">
-                    <%approvalRequests.forEach(request =>{%>
+                    <!--<%approvalRequests.forEach(request =>{%>
                   <div class="col-md-4">
                       <aside class="profile-nav alt">
                           <section class="card">
@@ -37,7 +37,7 @@
                           </section>
                       </aside>
                   </div>
-                  <%})%>
+                  <%})%>-->
                   <div class="col-md-4">
                       <aside class="profile-nav alt">
                           <section class="card">
@@ -52,12 +52,20 @@
 
                               <ul class="list-group list-group-flush">
                                   <li class="list-group-item">
-                                      <a href="#"><i class="fa fa-user"></i>  Applied By : <span class="badge badge-info pull-center r-activity"><%=request.owner.username%> </a>
+                                      <a href="#"><i class="fa fa-user"></i>  Applied By : <span class="badge badge-info pull-center r-activity">Username </a>
                                   </li>
                                   <li class="list-group-item">
                                       <a href="#"> <i class="fa fa-calendar"></i>  Due Date :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
                                   </li>
                               </ul>
+                              <div class="row text-center">
+                                      <div class="col-lg-2"></div>
+                                      <div class="col-lg-4"><button class="btn remind btn-success m-1" id="remind"
+                                              onclick="remindClickHandler()">Approve</button></div>
+                                      <div class="col-lg-4"><button class="btn withdraw btn-danger m-1" id="withdraw"
+                                              onclick="withdrawClickHandler()">Reject</button></div>
+                                      <div class="col-lg-2"></div>
+                                    </div>
                           </section>
                       </aside>
                   </div>
@@ -73,7 +81,7 @@
                     <a id="btnNewForm" class="btn btn-info btn-block btn-md" href="/workflow/create">Create a New Form</a>
                     <br>
                     <br>
-                    <a id="btnEditWorkflow" class="btn btn-info btn-block btn-md" href="/workflow/edit">Edit an existing workflow</a>
+                    <a id="btnEditWorkflow" class="btn btn-info btn-block btn-md" href="/workflow/edit">Edit an existing workflow of a form</a>
                 </div>
               </div>
         </div>
