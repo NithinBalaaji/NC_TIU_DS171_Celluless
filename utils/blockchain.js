@@ -1,13 +1,14 @@
 const fs = require('fs');
+const path = require('path');
 const Web3 = require('web3');
 const {CONTRACT_ADDRESS} = require('../config');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 
 const getCertificateContract = async () => {
     try {
-        const response = await fs.readFileSync('../build/contracts/CertificateFactory.json','utf8');
+        const response = fs.readFileSync(path.resolve(__dirname,'../build/contracts/CertificateFactory.json'),'utf8');
         let certificateContractAddress = CONTRACT_ADDRESS;
-        let certificateContractJSON = response.data;
+        let certificateContractJSON = JSON.parse(response);
         var contractABI = certificateContractJSON.abi;
         var certificateContract = new web3.eth.Contract(contractABI, certificateContractAddress);
         return certificateContract;
@@ -19,12 +20,14 @@ const getCertificateContract = async () => {
 exports.createRequest = async (fromAddress, nextApprover, fields) => {
     try {
         let certificateContract = await getCertificateContract();
-        let blockchainId = await certificateContract.methods.createCertificate(nextApprover,fields).send({from: fromAddress});
-        
+        // console.log("hi");
+        let a = await certificateContract.methods.createCertificate(nextApprover,fields).send({from: fromAddress,gas:200000000});
+        let blockchainId = await certificateContract.methods.getLastCertificateIndex().call({from: fromAddress});
         console.log(blockchainId);
+        // return 1;
         return blockchainId;
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };
 
@@ -36,7 +39,7 @@ exports.approveRequest = async (blockchainId, nextApprover) => {
         console.log(response);
         return response;
     } catch (err) {
-        console.log(err.toString());
+        console.log(err);
     }
 };
 

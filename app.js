@@ -13,6 +13,7 @@ var express = require("express"),
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 mongoose.connect(config.DB_URI, (err) => {
     if(err){
         console.log(err);

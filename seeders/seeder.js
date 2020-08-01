@@ -109,7 +109,7 @@ exports.seedDB = async (req,res) => {
             email: "abc@abc.com",
             mobile: "999999999",
             isAdmin: true,
-            pubKey: "insertpubhere"
+            pubKey: "0xd6f26DAB93B724EbD822277B07b80F5576685c95",
         }),"12345");
 
         let faSpider = await User.register(new User({
@@ -193,7 +193,7 @@ exports.seedDB = async (req,res) => {
             email: "abc@abc.com",
             mobile: "999999999",
             isAdmin: false,
-            pubKey: "insertpubhere"
+            pubKey: "0xE76759C0E555c724824E78bc4382cd6B116D7de0"
         }),"12345");
 
         let student2 = await User.register(new User({

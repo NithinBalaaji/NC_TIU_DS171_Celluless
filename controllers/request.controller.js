@@ -49,7 +49,8 @@ exports.renderCreateRequest = async (req, res) => {
 
 exports.createRequest = async (req, res) => {
     try{
-        if(!req.body.workflowId || !req.body.approvers){
+        if(!req.body.workflowId || !req.body.approvers || !req.body.approvers){
+            // console.log(req.body);
             return res.json({success: false})
         }
         let workflowId = req.body.workflowId;
@@ -60,9 +61,10 @@ exports.createRequest = async (req, res) => {
         }
 
         let approvers = [];
-
-        req.body.approvers.forEach( async (approver) => {
-            let user = await User.findById(approver.approverId);
+        let user;
+        for (let i = 0; i < req.body.approvers.length; i++) {
+            let approver = req.body.approvers[i];
+            user = await User.findById(approver.approverId);
             if(!user){
                 console.log('User doesnt exists!');
                 return;
@@ -70,10 +72,11 @@ exports.createRequest = async (req, res) => {
             approvers.push({
                 approverId: user,
                 level: approver.level
-            });
-        });
+            });            
+        }
 
-        let blockchainId = await blockchainUtil.createRequest(user.pubKey, approver[0].approverId, fields);
+
+        let blockchainId = await blockchainUtil.createRequest(req.user.pubKey, approvers[0].approverId.pubKey, req.body.fields);
 
         let request = new Request({
             blockchainId: blockchainId,
@@ -84,8 +87,9 @@ exports.createRequest = async (req, res) => {
         await request.save();
 
         console.log('Request created');
+        res.json({blockchainId})
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
     }
 }
 

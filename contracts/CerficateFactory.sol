@@ -13,14 +13,14 @@ contract CertificateFactory {
         bool isRejected;
     }
 
+    event NewCertificate(uint id);
     Certificate[] public certificates;
     mapping(address => uint256) pendingApprovalCount;
 
     function createCertificate(address _nextVerification, string[] memory fields)
         public
-        returns (uint newCertificateId)
     {
-        uint id = certificates.push(
+        certificates.push(
             Certificate(
                 msg.sender,
                 _nextVerification,
@@ -31,7 +31,10 @@ contract CertificateFactory {
                 false
             )
         );
-        return id;
+    }
+
+    function getLastCertificateIndex() public view returns (uint len) {
+        return 2;
     }
 
     // function getCertificates() public view returns (Certificate[]) {
