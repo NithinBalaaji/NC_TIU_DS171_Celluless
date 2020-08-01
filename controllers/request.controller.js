@@ -6,9 +6,9 @@ const Workflow = require('../models/workflow');
 const User = require("../models/user");
 
 //Importing utils
-const blockchainUtil = require("../utils/blockchain");
+const blockchainUtil = require("../utils/blockchaain");
 
-const getNextApprover = async (request) => {
+const getNextApproverId = async (request) => {
     let lvl = 0;
     for(let i=0; i<request.approvedBy.length; i++){
         lvl=Math.max(request.approvedBy[i].level, lvl);
@@ -21,16 +21,16 @@ const getNextApprover = async (request) => {
         }
     }
 
-    let pubKeys = [];
+    let ids = [];
 
     for(let i=0; i<approvers.length; i++){
         let user = await User.findById(approvers[i].approverId).exec();
         if(user){
-            pubKeys.push(user.pubKey);
+            ids.push(user.pubKey);
         }
     }
 
-    return pubKeys;
+    return ids;
 }
 
 exports.renderCreateRequest = async (req, res) => {
@@ -82,12 +82,15 @@ exports.createRequest = async (req, res) => {
             blockchainId: blockchainId,
             workflowId: workflow,
             approvers: approvers,
-            approvedBy: []
+            approvedBy: [],
+            fields:req.body.fields,
+            level:0,
+            verificationKey:randomString.generate(10)
         });
         await request.save();
 
         console.log('Request created');
-        res.json({blockchainId})
+        res.redirect('/');
     } catch(error){
         console.log(error);
     }
@@ -111,7 +114,7 @@ exports.viewRequest = async (req, res) => {
 
 
         console.log('View request');
-        return res.json({success: true, certificate: certificate});
+        return res.json({success: true, certificate: request});
     } catch(error){
         console.log(error.toString());
     }
@@ -132,14 +135,14 @@ exports.approveRequest = async (req, res) => {
         }
 
         let nextApprover = await getNextApprover(request);
-        await blockchainUtil.approveCertificate(request.blockchainId, nextApprover);
+        await blockchainUtil.approveRequest(requestId);
         request.approvedBy.push(req.user);
         await request.save();
         
         console.log('Approve request');
-        return res.json({success: true });
+        return res.redirect('/'));
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
     }
 }
 
@@ -157,10 +160,10 @@ exports.rejectRequest = async (req, res) => {
             return res.json({success: false});
         }
 
-        await blockchainUtil.rejectCertificate(request.blockchainId);
+        await blockchainUtil.rejectCertificate(requestId);
         
         console.log('Reject request');
-        return res.json({success: true });
+        return res.redirect('/');
     } catch(error){
         console.log(error.toString());
     }
@@ -183,13 +186,13 @@ exports.viewRequestCertificate = async (req, res) => {
         let certificate = await blockchainUtil.getCertificate(request.blockchainId);
         console.log(certificate);
 
-        let ejsPath = request.workflowId.path;
+        let ejsPath = path.resolve('../uploads/',request.workflowId.path);
         let compiledEJS = await ejs.compile(fs.readFileSync(ejsPath, 'utf8'),{ async: true });
-        let html = await compiledEJS(certificate.fields);
+        let html = await compiledEJS(request.fields);
         
         console.log('View certificate request');
         return res.json({success: true, html: html});
     } catch(error){
-        console.log(error.toString());
+        console.log(error);
     }
 }

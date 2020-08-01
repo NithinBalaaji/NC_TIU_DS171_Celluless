@@ -12,6 +12,15 @@ var requestSchema = new Schema({
         approverId: {type:Schema.Types.ObjectId, ref: "User"},
         level: Number
     }],
+    fields: String,
+    level: Number,
+    isVerified: {
+        type:Boolean, default:false
+    },
+    verificationKey: String,
+    isRejected: {
+        type:Boolean, default:false
+    },
     ownerId: {type: Schema.Types.ObjectId, ref: "User"}
 })
 
