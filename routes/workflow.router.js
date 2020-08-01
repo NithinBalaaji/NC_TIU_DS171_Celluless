@@ -1,6 +1,7 @@
 const router = require('express').Router();
 var multer = require('multer')
 var upload = multer({ dest: '../uploads/' });
+const fs = require("fs")
 // Importing controllers
 const workflowController = require('../controllers/workflow.controller');
 

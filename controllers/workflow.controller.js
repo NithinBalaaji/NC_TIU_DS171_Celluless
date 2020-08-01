@@ -17,10 +17,10 @@ exports.listWorkflow = async (req, res) => {
                 path: 'members'
             }
         }).exec();
-        workflows.forEach(async workflow => {
-            const templateEjs = await fs.readFileSync(path.join('../uploads', workflow.path), 'utf8');
-            workflow.templateEjs = templateEjs;
-        });
+        // workflows.forEach(async workflow => {
+        //     const templateEjs = await fs.readFileSync(path.join('../uploads', workflow.path), 'utf8');
+        //     workflow.templateEjs = templateEjs;
+        // });
         return res.render('listWorkflow', { workflows });
     } catch (error) {
         console.log(error.toString());

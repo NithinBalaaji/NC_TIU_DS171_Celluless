@@ -1,6 +1,7 @@
 <%include partials/studentHeader%>
 
 <div id="datasource" style="display: none">
+  <%= JSON.stringify(workflows) %>
 </div>
 <div class="animated fadeIn">
     <!-- Widgets  -->
@@ -12,29 +13,31 @@
           <div class="card" >
               <div class="card-body">
                 <div class="row">
+                <% for(let i=0; i<workflows.length; i++) { %>
                 <div class="col-md-4">
                     <aside class="profile-nav alt">
                         <section class="card">
                             <div class="card-header user-header alt bg-dark">
                                 <div class="media">
                                     <div class="media-body">
-                                        <h2 class="text-light display-6">Bonafide Certificate</h2>
+                                        <h2 class="text-light display-6"><%= workflows[i].name %></h2>
                                     </div>
                                 </div>
                             </div>
-                            <div id="heap"></div>
+                            <div id="heap<%=i%>"></div>
                             <div class="row text-center">
                                     <div class="col-lg-2"></div>
                                     <div class="col-lg-4"><button class="btn remind btn-info m-1" id="remind"
-                                            onclick="viewClickHandler()">View Form</button></div>
+                                            onclick="">View Form</button></div>
                                     <div class="col-lg-4"><button class="btn withdraw btn-success m-1" id="withdraw"
-                                            onclick="applyClickHandler()">Apply</button></div>
+                                            href="/request/create/<%=workflows[i].id%>">Apply</button></div>
                                     <div class="col-lg-2"></div>
                                   </div>
                         </section>
                     </aside>
                 </div>
-                <div class="col-md-4">
+                <% } %>
+                <!-- <div class="col-md-4">
                     <aside class="profile-nav alt">
                         <section class="card">
                             <div class="card-header user-header alt bg-dark">
@@ -64,7 +67,7 @@
                                   </div>
                         </section>
                     </aside>
-                </div>
+                </div> -->
          </div>
       </div>
     </div>
@@ -91,121 +94,27 @@
         // View rejection string of this formID and also get who wrote this rejection. Priority 2
     }
 
-/*var treeData = [
-{
-  "name": "Top Level",
-  "parent": "null",
-  "children": [
-    {
-      "name": "Level 2: A",
-      "parent": "Top Level",
-      "children": [
-        {
-          "name": "Son of A",
-          "parent": "Level 2: A"
-        },
-        {
-          "name": "Daughter of A",
-          "parent": "Level 2: A"
-        }
-      ]
-    },
-    {
-      "name": "Level 2: B",
-      "parent": "Top Level"
-    }
-  ]
-}
-];
-
-// Set the dimensions and margins of the diagram
-var margin = {top: 20, right: 30, bottom: 90, left: 50},
-    width = 500 - margin.left - margin.right,
-    height = 960 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-var svg = d3.select("#heap").append("svg")
-    .attr("width", width + margin.right + margin.left)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate("
-          + margin.left + "," + margin.top + ")");
-
-var i = 0,
-    duration = 750,
-    root;
-
-// declares a tree layout and assigns the size
-var tree = d3.tree().size([height, width]);
-
-// Assigns parent, children, height, depth
-root = treeData[0];
-console.log(root);/*d3.hierarchy(treeData, function(d) { return d.children; });
-root.x0 = height / 2;
-root.y0 = 0;*/
-
-// Collapse after the second level
-//root.children.forEach(collapse);
-
-/*update(root);
-
-// Collapse the node and all it's children
-function collapse(d) {
-  if(d.children) {
-    d._children = d.children
-    d._children.forEach(collapse)
-    d.children = null
-  }
-}
-
-function update(source) {
-
-  // Assigns the x and y position for the nodes
-  //var treeData = treemap(root);
-
-  var nodes = tree.nodes(root).reverse(),
-	  links = tree.links(nodes);
-
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 100; });
-
-  // Declare the nodes…
-  var node = svg.selectAll("g.node")
-	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
-
-  // Enter the nodes.
-  var nodeEnter = node.enter().append("g")
-	  .attr("class", "node")
-	  .attr("transform", function(d) {
-		  return "translate(" + d.x + "," + d.y + ")"; });
-
-  nodeEnter.append("circle")
-	  .attr("r", 10)
-	  .style("fill", "#fff");
-
-  nodeEnter.append("text")
-	  .attr("y", function(d) {
-		  return d.children || d._children ? -18 : 18; })
-	  .attr("dy", ".35em")
-	  .attr("text-anchor", "middle")
-	  .text(function(d) { return d.name; })
-	  .style("fill-opacity", 1);
-
-  // Declare the links…
-  var link = svg.selectAll("path.link")
-	  .data(links, function(d) { return d.target.id; });
-
-  // Enter the links.
-  link.enter().insert("path", "g")
-	  .attr("class", "link")
-	  .attr("d", diagonal);
-
-}*/
-var treeData =
+var treeData1 =
   {
-    "name": "Top Level",
+    "name": "Head of Department",
+    "children": [
+      {
+        "name": "Hostel Warden",
+        "children": [
+          { "name": "Associate Dean" }
+        ]
+      }
+    ]
+  };
+
+  var treeData2 = 
+  {
+    "name": "Faculty Advisor",
+  };
+
+  var treeData3 =
+  {
+    "name": "",
     "children": [
       {
         "name": "Level 2: A",
@@ -216,38 +125,49 @@ var treeData =
     ]
   };
 
+  let workflows = JSON.parse(document.getElementById("datasource").textContent);
+  console.log(workflows);
+  let treeDatas =[];
+  for(let i=0; i<workflows.length; i++){
+    let parent = {};
+    let temp=parent;
+    let approvers = workflows[i].approvers;
+    console.log(approvers);
+    for(let j=0; j<approvers.length; j++){
+      temp.name=approvers[i].grp.name;
+      temp.children={};
+      temp=temp.children;
+    }
+    treeDatas.push(parent);
+  }
+  console.log(treeDatas[0]);
+
+
 // Set the dimensions and margins of the diagram
 var margin = {top: 20, right: 0, bottom: 30, left: -80},
     width = 500 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
-
 // append the svg object to the body of the page
 // appends a 'group' element to 'svg'
 // moves the 'group' element to the top left margin
-var svg = d3.select("#heap").append("svg")
+var svg = d3.select("#heap0").append("svg")
     .attr("width", width + margin.right + margin.left)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate("
           + margin.left + "," + margin.top + ")");
-
 var i = 0,
     duration = 750,
     root;
-
 // declares a tree layout and assigns the size
 var treemap = d3.tree().size([height, width]);
-
 // Assigns parent, children, height, depth
-root = d3.hierarchy(treeData, function(d) { return d.children; });
+root = d3.hierarchy(treeData1, function(d) { return d.children; });
 root.x0 = height / 2;
 root.y0 = 0;
-
 // Collapse after the second level
 //root.children.forEach(collapse);
-
 update(root);
-
 // Collapse the node and all it's children
 function collapse(d) {
   if(d.children) {
@@ -256,25 +176,18 @@ function collapse(d) {
     d.children = null
   }
 }
-
 function update(source) {
-
   // Assigns the x and y position for the nodes
   var treeData = treemap(root);
-
   // Compute the new tree layout.
   var nodes = treeData.descendants(),
       links = treeData.descendants().slice(1);
-
   // Normalize for fixed-depth.
   nodes.forEach(function(d){ d.y = d.depth * 180});
-
   // ****************** Nodes section ***************************
-
   // Update the nodes...
   var node = svg.selectAll('g.node')
       .data(nodes, function(d) {return d.id || (d.id = ++i); });
-
   // Enter any new modes at the parent's previous position.
   var nodeEnter = node.enter().append('g')
       .attr('class', 'node')
@@ -282,7 +195,6 @@ function update(source) {
         return "translate(" + source.y0 + "," + source.x0 + ")";
     })
     .on('click', click);
-
   // Add Circle for the nodes
   nodeEnter.append('circle')
       .attr('class', 'node')
@@ -290,7 +202,6 @@ function update(source) {
       .style("fill", function(d) {
           return d._children ? "lightsteelblue" : "#fff";
       });
-
   // Add labels for the nodes
   nodeEnter.append('text')
       .attr("dy", ".35em")
@@ -301,17 +212,14 @@ function update(source) {
           return d.children || d._children ? "end" : "start";
       })
       .text(function(d) { return d.data.name; });
-
   // UPDATE
   var nodeUpdate = nodeEnter.merge(node);
-
   // Transition to the proper position for the node
   nodeUpdate.transition()
     .duration(duration)
     .attr("transform", function(d) {
         return "translate(" + d.x + "," + d.y + ")";
      });
-
   // Update the node attributes and style
   nodeUpdate.select('circle.node')
     .attr('r', 10)
@@ -319,8 +227,6 @@ function update(source) {
         return d._children ? "lightsteelblue" : "#fff";
     })
     .attr('cursor', 'pointer');
-
-
   // Remove any exiting nodes
   var nodeExit = node.exit().transition()
       .duration(duration)
@@ -328,21 +234,16 @@ function update(source) {
           return "translate(" + source.x + "," + source.y + ")";
       })
       .remove();
-
   // On exit reduce the node circles size to 0
   nodeExit.select('circle')
     .attr('r', 1e-6);
-
   // On exit reduce the opacity of text labels
   nodeExit.select('text')
     .style('fill-opacity', 1e-6);
-
   // ****************** links section ***************************
-
   // Update the links...
   var link = svg.selectAll('path.link')
       .data(links, function(d) { return d.id; });
-
   // Enter any new links at the parent's previous position.
   var linkEnter = link.enter().insert('path', "g")
       .attr("class", "link")
@@ -350,15 +251,12 @@ function update(source) {
         var o = {x: source.x0, y: source.y0}
         return diagonal(o, o)
       });
-
   // UPDATE
   var linkUpdate = linkEnter.merge(link);
-
   // Transition back to the parent element position
   linkUpdate.transition()
       .duration(duration)
       .attr('d', function(d){ return diagonal(d, d.parent) });
-
   // Remove any exiting links
   var linkExit = link.exit().transition()
       .duration(duration)
@@ -367,23 +265,19 @@ function update(source) {
         return diagonal(o, o)
       })
       .remove();
-
   // Store the old positions for transition.
   nodes.forEach(function(d){
     d.x0 = d.x;
     d.y0 = d.y;
   });
-
   // Creates a curved (diagonal) path from parent to the child nodes
  function diagonal(s, d) {
   //console.log('in diag and s = ', s);
   //console.log('d = ', d)
-
   path = `M ${s.x} ${s.y}
           C ${(s.x + d.x) / 2} ${s.y},
             ${(s.x + d.x) / 2} ${d.y},
             ${d.x} ${d.y}`
-
   return path;
  }
   // Toggle children on click.
