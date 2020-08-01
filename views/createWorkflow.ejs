@@ -1,4 +1,15 @@
 <%include partials/adminHeader%>
+<style>
+    .list-group-item {
+        border: none;
+        background-color: yellow !important;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+    .box-item {
+        
+    }
+</style>
 <!-- <span style="display: none;" id="hidden-pieValueCompleted">></span>
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span> -->
 <div class="animated fadeIn">
@@ -19,13 +30,34 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-3" style="background-color: black;">
+        <div class="col-lg-3">
             <!-- Barry -->
-            sad
+            <div class="card border-primary">
+                <div class="card-header">
+                    Administrators
+                </div>
+                <div class="box-container card-body" style="min-height: 100px; min-width: 100px;">
+                        <div class="box">
+                            <li class="admin list-group-item"><div class="box-item">Dean</div>
+                            </li>
+                        </div>
+                        <div class="box">
+                            <li class="admin list-group-item"><div class="box-item">HOD</div>
+                            </li>
+                        </div>
+                        <div class="box">
+                            <li class="admin list-group-item"><div class="box-item">Warden</div>
+                            </li>
+                        </div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-9">
             <div class="row">
-
+                <div class="box card border-primary">
+                    Drop here!
+                </div>
+                <div class="container"></div>
             </div>
         </div>
     </div>
@@ -45,8 +77,13 @@
 <!--  Traffic  -->
 
 </div>
-
 <script>
+    var boxArray = document.getElementsByClassName("box");
+    var boxes = Array.prototype.slice.call(boxArray);
+    var boxContArray = Array.prototype.slice.call(document.getElementsByClassName('box-container'))
+    boxes = boxes.concat(boxContArray);
+    dragula({ containers: boxes });
+
     function remindClickHandler() {
         console.log("remind Clicked!")
         // this formID should send a reminder to its next approver. Priority 1
