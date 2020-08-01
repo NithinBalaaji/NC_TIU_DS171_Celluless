@@ -3,6 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<script src="https://d3js.org/d3.v4.js"></script>
 <head>
 
     <meta charset="utf-8">
@@ -75,6 +76,23 @@
         /* .card{
             background-color: #a9d5f5;
         } */
+
+        .node circle {
+          fill: #fff;
+          stroke: steelblue;
+          stroke-width: 3px;
+        }
+
+        .node text {
+          font: 12px sans-serif;
+        }
+
+        .link {
+          fill: none;
+          stroke: #ccc;
+          stroke-width: 2px;
+        }
+
     </style>
 </head>
 
@@ -88,7 +106,7 @@
                         <a href="/home"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li class="menu-item-has-children">
-                        <a href="/apply" class="dropdown-toggle"> Apply for a form</a>
+                        <a href="/workflow/list" class="dropdown-toggle"> Apply for a form</a>
                     </li>
                     <li class="menu-item-has-children">
                         <a href="/personal-details" class="dropdown-toggle"> Personal details</a>
