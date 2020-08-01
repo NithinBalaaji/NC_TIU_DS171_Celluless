@@ -4,99 +4,112 @@
 // Importing models
 const Workflow = require("../models/workflow");
 const Group = require("../models/group");
+const path = require('path');
 
 //Importing utils
 
 exports.listWorkflow = async (req, res) => {
-    try{
-        return res.render('listWorkflow');
-    } catch(error){
+    try {
+        let workflows = await Workflow.find().populate({
+            path: 'approvers.grp',
+            populate: {
+                path: 'members'
+            }
+        }).exec();
+        workflow.forEach(async workflow => {
+            const templateEjs = await fs.readFileSync(path.join('../uploads', workflow.path), 'utf8');
+            workflow.templateEjs = templateEjs;
+        });
+        return res.render('listWorkflow', { workflows });
+    } catch (error) {
         console.log(error.toString());
     }
 }
 
 exports.renderCreateWorkflow = async (req, res) => {
-    try{
+    try {
         return res.render('createWorkflow');
-    } catch(error){
+    } catch (error) {
         console.log(error.toString());
     }
 }
 
 exports.createWorkflow = async (req, res) => {
-    try{
+    try {
         let workflow = new Workflow();
         workflow.name = req.body.name;
-        workflow.fields=req.body.fields;
+        workflow.fields = req.body.fields;
         approvers = req.body.approvers;
-
-        for(let i=0; i<approvers.length; i++){
+        workflow.path = req.file.fileName;
+        
+        for (let i = 0; i < approvers.length; i++) {
             let grp = await Group.findById(approvers[i].grp).exec();
-
-            if(!grp){
-                return res.json({success: false});
+            
+            if (!grp) {
+                return res.json({ success: false });
             }
-            else{
+            else {
                 let approver = {};
                 approver.level = approvers[i].level;
                 approver.grp = grp;
                 approvers.push(approver);
             }
         }
-
+        
         await workflow.save();
-        return res.json({success: true});
-    } catch(error){
-        res.json({success: false});
+        return res.json({ success: true });
+    } catch (error) {
+        res.json({ success: false });
     }
 }
 
 exports.viewWorkflow = async (req, res) => {
-    try{
+    try {
         let workflow = await Workflow.findById(req.body.workflowId).populate({
-            path : 'approvers.grp',
-            populate : {
-              path : 'members'
+            path: 'approvers.grp',
+            populate: {
+                path: 'members'
             }
-          }).exec();
-
-        if(!workflow){
-            return res.json({success: false});
+        }).exec();
+        const templateEjs = await fs.readFileSync(path.join('../uploads', workflow.path), 'utf8');
+        workflow.templateEjs = templateEjs;
+        if (!workflow) {
+            return res.json({ success: false });
         }
-        else{
-            return res.json({success: true, workflow: workflow});
+        else {
+            return res.json({ success: true, workflow: workflow });
         }
-    } catch(error){
+    } catch (error) {
         console.log(error.toString());
     }
 }
 
 exports.editWorkflow = async (req, res) => {
-    try{
+    try {
         let workflow = await Workflow.findById(req.body.workflowId).exec();
-        if(!workflow){
-            return res.json({success: false});
+        if (!workflow) {
+            return res.json({ success: false });
         }
-        else{
+        else {
             workflow.name = req.body.name;
-            workflow.fields=req.body.fields;
+            workflow.fields = req.body.fields;
             approvers = req.body.approvers;
-    
-            for(let i=0; i<approvers.length; i++){
+
+            for (let i = 0; i < approvers.length; i++) {
                 let grp = await Group.findById(approvers[i].grp);
-    
-                if(!grp){
-                    return res.json({success: false});
+
+                if (!grp) {
+                    return res.json({ success: false });
                 }
-                else{
+                else {
                     approvers.push(approvers[i]);
                 }
             }
-    
+
             await workflow.save();
-            return res.json({success: true});
+            return res.json({ success: true });
         }
-    } catch(error){
-        res.json({success: false});
+    } catch (error) {
+        res.json({ success: false });
     }
 }

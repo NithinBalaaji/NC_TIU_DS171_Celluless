@@ -52,14 +52,12 @@ exports.renderHome = async(req, res) => {
         if(user.isAdmin){
             //TODO get all requests to be approved by admin and return it
             approvalRequests=[]
-            console.log(":(")
             return res.render("home");
         }else{
             let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").exec();
-            console.log(":)")
-            let completedRequests=[];//to be mapped from blockchain
-            let activeRequests=[];//to be mapped from blockchain
-            let rejecetedRequests=[];//to be mapped from blockchain
+            let completedRequests=[];
+            let activeRequests=[];
+            let rejecetedRequests=[];
             let data={};
             data.activeRequests=activeRequests;
             data.completedRequests=completedRequests;
@@ -67,7 +65,7 @@ exports.renderHome = async(req, res) => {
             res.render('studentHome', {data})
         }
     } catch(error){
-        console.log("WQ")
+        console.log(error);
         return res.json({success: false});
     }
 }

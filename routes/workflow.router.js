@@ -1,5 +1,6 @@
 const router = require('express').Router();
-
+var multer = require('multer')
+var upload = multer({ dest: '../uploads/' });
 // Importing controllers
 const workflowController = require('../controllers/workflow.controller');
 
@@ -11,7 +12,7 @@ router.get('/list', isLoggedIn, workflowController.listWorkflow);
 router.get('/create', isLoggedIn, workflowController.renderCreateWorkflow);
 
 // POST Routes
-router.post('/create', workflowController.createWorkflow);
+router.post('/create', isLoggedIn, upload.single('template'), workflowController.createWorkflow);
 router.post('/view', isLoggedIn, workflowController.viewWorkflow);
 router.post('/edit', isLoggedIn, workflowController.editWorkflow);
 

@@ -14,6 +14,7 @@ router.use('/auth', authRouter);
 router.use('/workflow', workflowRouter);
 router.use('/request', requestRouter);
 router.use('/user', userRouter);
-// router.get('/home',isLoggedIn,(req,res) => {res.render("home")})
+router.get('/',(req,res) => {res.redirect("/user/home")});
+router.get('/login',(req,res) => {res.redirect("/auth/user/login")});
 
 module.exports = router;
