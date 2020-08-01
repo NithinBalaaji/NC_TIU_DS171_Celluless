@@ -12,8 +12,8 @@ router.get('/create', isLoggedIn, requestController.renderCreateRequest);
 // POST Routes
 router.post('/create', isLoggedIn, requestController.createRequest);
 router.post('/view', isLoggedIn, requestController.viewRequest);
-router.post('/approve', isLoggedIn, requestController.approveRequest);
-router.post('/reject', isLoggedIn, requestController.rejectRequest);
+router.get('/approve/:requestId', isLoggedIn, requestController.approveRequest);
+router.get('/reject/:requestId', isLoggedIn, requestController.rejectRequest);
 
 router.post('/certificate/view', requestController.viewRequestCertificate);
 

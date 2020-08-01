@@ -23,7 +23,7 @@ exports.listWorkflow = async (req, res) => {
         // });
         return res.render('listWorkflow', { workflows });
     } catch (error) {
-        console.log(error.toString());
+        console.log(error);
     }
 }
 

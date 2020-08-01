@@ -54,15 +54,11 @@ exports.renderHome = async(req, res) => {
             approvalRequests=await blockchainUtil.getPendingApprovals();
             return res.render("adminHome");
         }else{
-            let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").exec();
-            let completedRequests=[];
-            let activeRequests=[];
-            let rejecetedRequests=[];
-            let data={};
-            data.activeRequests=activeRequests;
-            data.completedRequests=completedRequests;
-            data.rejecetedRequests=rejecetedRequests;
-            res.render('studentHome', {data})
+            let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").populate('ownerId').exec();
+            let completedRequests=requests.filter(request=>request.isVerified);
+            let rejecetedRequests=requests.filter(request=>request.isRejected);
+            let activeRequests=requests.filter(request=>(!(request.isVerified||request.isRejected)));
+            res.render('studentHome', {activeRequests,completedRequests, rejecetedRequests})
         }
     } catch(error){
         console.log(error);
