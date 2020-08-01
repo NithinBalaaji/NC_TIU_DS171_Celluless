@@ -41,6 +41,9 @@ testem.log
 Thumbs.db
 
 config/index.js
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 build/

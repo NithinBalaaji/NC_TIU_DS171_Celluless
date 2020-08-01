@@ -5,7 +5,7 @@
 const Request = require("../../models/request")
 const User= require("../../models/user")
 //Importing utils
-
+const blockchainUtil = require("../../utils/blockchain");
 
 exports.registerUser = async (req, res) => {
     try{
@@ -51,7 +51,7 @@ exports.renderHome = async(req, res) => {
 
         if(user.isAdmin){
             //TODO get all requests to be approved by admin and return it
-            approvalRequests=[]
+            approvalRequests=await blockchainUtil.getPendingApprovals();
             return res.render("home");
         }else{
             let requests = await Request.find({ownerId: req.User}).populate("approvers").populate("approvedBy").populate("workflow_id").exec();

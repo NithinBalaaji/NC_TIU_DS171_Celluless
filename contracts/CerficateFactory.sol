@@ -16,9 +16,9 @@ contract CertificateFactory {
 
     function createCertificate(address _nextVerification, string[] fields)
         public
-        returns (uint newCertificateId)
+        returns (uint256 newCertificateId)
     {
-        uint id = ceritificates.push(
+        uint256 id = ceritificates.push(
             Certificate(
                 msg.sender,
                 _nextVerification,
@@ -58,7 +58,6 @@ contract CertificateFactory {
             }
         }
         return certificate;
-
     }
 
     function getPendingApprovals() public view returns (Certificates[]) {
@@ -87,6 +86,16 @@ contract CertificateFactory {
         if (_newNextVerification == address(0)) {
             ceritificates[_certificateId].isVerified = true;
         }
+    }
+
+    function getRequestsOfStudent() public view returns (Certificates[]) {
+        Certificate results[];
+        for (uint256 i = 0; i < certificates.length; i++) {
+            if (certificates[i].student == msg.sender) {
+                results.push(certificates[i]);
+            }
+        }
+        return results;
     }
 
 }
