@@ -6,9 +6,6 @@ const requestController = require('../controllers/request.controller');
 // Importing middlewares
 const {isLoggedIn} = require('../middlewares/auth');
 
-// GET Routes
-router.get('/list', isLoggedIn, requestController.listRequest);
-
 // POST Routes
 router.post('/create', isLoggedIn, requestController.createRequest);
 router.post('/view', isLoggedIn, requestController.viewRequest);

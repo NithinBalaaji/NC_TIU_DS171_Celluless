@@ -2,10 +2,19 @@
 // Importing config/env variables
 
 // Importing models
-Workflow = require("../models/workflow");
-Group = require("../models/group");
+const Workflow = require("../models/workflow");
+const Group = require("../models/group");
+
 //Importing utils
 
+exports.listWorkflow = async (req, res) => {
+    try{
+        return res.render('listWorkflow');
+        console.log('Request created');
+    } catch(error){
+        console.log(error.toString());
+    }
+}
 
 exports.createWorkflow = async (req, res) => {
     try{
