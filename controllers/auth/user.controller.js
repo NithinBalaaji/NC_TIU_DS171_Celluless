@@ -5,7 +5,7 @@
 const Request = require("../../models/request")
 const User= require("../../models/user")
 //Importing utils
-const blockchainUtil = require("../../utils/blockchain");
+const blockchainUtil = require("../../utils/blockchaain");
 
 exports.registerUser = async (req, res) => {
     try{

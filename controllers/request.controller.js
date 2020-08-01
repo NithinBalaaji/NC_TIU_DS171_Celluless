@@ -22,15 +22,15 @@ const getNextApproverId = async (request) => {
     }
 
     let ids = [];
+    return approvers.map(approver=>approver.approverId)
+    // for(let i=0; i<approvers.length; i++){
+    //     let user = await User.findById(approvers[i].approverId).exec();
+    //     if(user){
+    //         ids.push(user._id);
+    //     }
+    // }
 
-    for(let i=0; i<approvers.length; i++){
-        let user = await User.findById(approvers[i].approverId).exec();
-        if(user){
-            ids.push(user.pubKey);
-        }
-    }
-
-    return ids;
+    // return ids;
 }
 
 exports.renderCreateRequest = async (req, res) => {
@@ -195,3 +195,5 @@ exports.viewRequestCertificate = async (req, res) => {
         console.log(error);
     }
 }
+
+exports.getNextApproverId = getNextApproverId;
