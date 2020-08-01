@@ -149,14 +149,8 @@ exports.seedDB = async (req,res) => {
 
         let workflow1 = new Workflow();
         workflow1.name="Workflow 1";
-        workflow1.fields.push({
-            desc: "a",
-            htmlId: "field_a"
-        })
-        workflow1.fields.push({
-            desc: "b",
-            htmlId: "field_b"
-        })
+        workflow1.fields.push(['a']);
+        workflow1.fields.push(['b']);
         workflow1.approvers.push({
                 grp: faGrp,
                 level: 0
@@ -170,14 +164,8 @@ exports.seedDB = async (req,res) => {
 
         let workflow2 = new Workflow();
         workflow2.name="Workflow 2";
-        workflow2.fields.push({
-            desc: "2a",
-            htmlId: "field_2a"
-        })
-        workflow2.fields.push({
-            desc: "2b",
-            htmlId: "field_2b"
-        })
+        workflow2.fields.push(['2a']);
+        workflow2.fields.push(['2b']);
         workflow2.approvers.push({
                 grp: hodGrp,
                 level: 0

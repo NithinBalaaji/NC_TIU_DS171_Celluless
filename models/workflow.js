@@ -3,10 +3,7 @@ var Schema = mongoose.Schema;
 
 var workflowSchema = new Schema({
     name: String,
-    fields: [{
-        desc: String,
-        htmlId: String
-    }],
+    fields: Array,
     approvers: [{
         grp: {type:Schema.Types.ObjectId, ref: "Group"},
         level: Number

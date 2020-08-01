@@ -301,6 +301,7 @@
     let treeDatas =[];
 
     var approversArray = [];
+    var apArr = [];
     var boxArray = document.getElementsByClassName("box");
     var boxes = Array.prototype.slice.call(boxArray);
     var boxContArray = Array.prototype.slice.call(document.getElementsByClassName('box-container'))
@@ -328,16 +329,14 @@
             for(var i=0;i<itemArray.length;i++){
                 approversArray.push({
                     name: itemArray[i].innerHTML,
-                    approverId: $(itemArray[i]).attr("id"),
+                    grp: $(itemArray[i]).attr("id"),
                     level: i
                 });
             }
-            treeDatas = treeData1;
         }
-        console.log(approversArray);
+        apArr = JSON.parse(JSON.stringify(approversArray));
+        treeData1 = getmapping(apArr);
 
-        treeData1 = getmapping(approversArray);
-        console.log(treeData1);
         root = d3.hierarchy(treeData1, function(d) { return d.children; });
         update(root);
     });

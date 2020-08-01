@@ -38,11 +38,10 @@ exports.renderCreateWorkflow = async (req, res) => {
 
 exports.createWorkflow = async (req, res) => {
     try {
-        console.log("dffdf")
         let workflow = new Workflow();
         workflow.name = req.body.name;
         workflow.fields = req.body.fields;
-        approvers = req.body.approvers;
+        let approvers = req.body.approvers;
         //workflow.path = req.file.fileName;
         workflow.path = ';;';
         
@@ -56,13 +55,13 @@ exports.createWorkflow = async (req, res) => {
                 let approver = {};
                 approver.level = approvers[i].level;
                 approver.grp = grp;
-                approvers.push(approver);
+                workflow.approvers.push(approver);
             }
         }
-        console.log('helllllllll')
         await workflow.save();
         return res.json({ success: true });
     } catch (error) {
+        console.log(error);
         res.json({ success: false });
     }
 }
