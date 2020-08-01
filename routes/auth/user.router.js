@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const passport = require("passport");
 
 // Importing controllers
 const userController = require('../../controllers/auth/user.controller');
@@ -12,8 +13,8 @@ const userController = require('../../controllers/auth/user.controller');
 router.post('/register', userController.registerUser);
 router.post('/login',passport.authenticate("local",
                         {
-                            successRedirect:"/",
-                            failureRedirect:"/login"
+                            successRedirect:"/home",
+                            failureRedirect:"/auth/user/login"
                         }),(req,res)=>{}
 );
 
