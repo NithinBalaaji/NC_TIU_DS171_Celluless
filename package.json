@@ -30,8 +30,5 @@
     "util": "^0.12.1",
     "web3": "^1.2.6",
     "wkhtmltopdf": "^0.3.4"
-  },
-  "scripts": {
-    "start": "nodemon app.js"
   }
 }

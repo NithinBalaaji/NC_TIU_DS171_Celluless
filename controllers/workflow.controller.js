@@ -4,8 +4,6 @@
 // Importing models
 const Workflow = require("../models/workflow");
 const Group = require("../models/group");
-const path = require('path');
-const fs = require('fs');
 
 //Importing utils
 const Uploader = require('../utils/upload');
@@ -124,5 +122,21 @@ exports.editWorkflow = async (req, res) => {
         }
     } catch (error) {
         res.json({ success: false });
+    }
+}
+
+exports.uploadCertifTemplate = async (req, res) => {
+    try {
+        console.log(req.file);
+        let groups = await Group.find({});
+        res.render('createWorkflow', {
+            groups: groups,
+            msg: req.file.originalname + " has been uploaded successfully!"
+        });
+    }
+    catch (error) {
+        res.render('createWorkflow', {
+            msg: error
+        });
     }
 }

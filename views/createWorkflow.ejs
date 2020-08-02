@@ -1,9 +1,12 @@
 <%include partials/adminHeader%>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <style>
     .box:hover {
         cursor: pointer;
     }
+
     .list-group-item {
         border: none !important;
         background-color: #83CC61 !important;
@@ -48,7 +51,6 @@
         font-size: 11px;
         line-height: 1.42857;
     }
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -80,13 +82,13 @@
                     Administrators
                 </div>
                 <div id="leftBoxContainer" class="box-container card-body" style="min-height: 100px; min-width: 100px;">
-                        <% for(let i=0; i<groups.length; i++) {%>
-                            <div class="box">
-                                <li class="admin list-group-item">
-                                    <div id="<%= groups[i].id %>" class="box-item"><%= groups[i].name %></div>
-                                </li>
-                            </div>
-                        <% } %>
+                    <% for(let i=0; i<groups.length; i++) {%>
+                    <div class="box">
+                        <li class="admin list-group-item">
+                            <div id="<%= groups[i].id %>" class="box-item"><%= groups[i].name %></div>
+                        </li>
+                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -103,46 +105,48 @@
             </div>
         </div>
         <div class="col-lg-6">
-                <div class="card border-primary">
-                    <div class="card-header">
-                        Workflow Tree
-                    </div>
-                    <div class="card-body">
-                        <div id="heap0" style="text-align: center"></div>
-                    </div>
+            <div class="card border-primary">
+                <div class="card-header">
+                    Workflow Tree
+                </div>
+                <div class="card-body">
+                    <div id="heap0" style="text-align: center"></div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                    <div id="heap0"></div>
-                    <div class="card border-primary">
-                        <div class="card-header">
-                            Enter Certificate Fields
-                        </div>
-                        <div class="card-body">
-                            <div id="fieldsContainer">
-                                <div class="form-group">
-                                    <input type="file" id="template" name="template" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="field form-control" placeholder="Enter field name">
-                                </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="heap0"></div>
+            <div class="card border-primary">
+                <div class="card-header">
+                    Upload Certificate Template
+                </div>
+                <div class="card-body">
+                    <% typeof msg != 'undefined' ? msg : '' %>
+                    <form action="/workflow/uploadCertifTemplate" method="post" enctype="multipart/form-data">
+                        <div class="file-field input-field">
+                            <div class="btn grey">
+                                <span>File</span>
+                                <input name="certifTemplate" type="file">
                             </div>
-                            <div style="text-align: center;">
-                                <button onclick="handleAddFields()" type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-plus"></i></button>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
                             </div>
+                            <button type="submit" class="btn">SUBMIT</button>
                         </div>
-                    </div>
 
+                    </form>
                 </div>
             </div>
-            <div class="col-lg-6"></div>
         </div>
     </div>
-    <div style="text-align: center; margin-bottom: 30px;">
-        <button onclick="handleWorkflowCreate()" class="btn btn-primary">Upload form</button>
-    </div>
+    <div class="col-lg-6"></div>
+</div>
+</div>
+<div style="text-align: center; margin-bottom: 30px;">
+    <button onclick="handleWorkflowCreate()" class="btn btn-primary">Upload form</button>
+</div>
 
 </div>
 <!-- /Widgets -->
@@ -154,7 +158,7 @@
     var treeData1 = {};
 
     // Set the dimensions and margins of the diagram
-    var margin = {top: 20, right: 0, bottom: 30, left: -80},
+    var margin = { top: 20, right: 0, bottom: 30, left: -80 },
         width = 500 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
     // append the svg object to the body of the page
@@ -163,7 +167,7 @@
     var svg = d3.select("#heap0").append("svg")
         .attr("width", width + margin.right + margin.left)
         .attr("height", height + margin.top + margin.bottom)
-    .append("g")
+        .append("g")
         .attr("transform", "translate("
             + margin.left + "," + margin.top + ")");
     var i = 0,
@@ -172,7 +176,7 @@
     // declares a tree layout and assigns the size
     var treemap = d3.tree().size([height, width]);
     // Assigns parent, children, height, depth
-    root = d3.hierarchy(treeData1, function(d) { return d.children; });
+    root = d3.hierarchy(treeData1, function (d) { return d.children; });
     root.x0 = height / 2;
     root.y0 = 0;
     // Collapse after the second level
@@ -180,131 +184,131 @@
     update(root);
     // Collapse the node and all it's children
     function collapse(d) {
-    if(d.children) {
-        d._children = d.children
-        d._children.forEach(collapse)
-        d.children = null
-    }
+        if (d.children) {
+            d._children = d.children
+            d._children.forEach(collapse)
+            d.children = null
+        }
     }
     function update(source) {
-    // Assigns the x and y position for the nodes
-    var treeData = treemap(root);
-    // Compute the new tree layout.
-    var nodes = treeData.descendants(),
-        links = treeData.descendants().slice(1);
-    // Normalize for fixed-depth.
-    nodes.forEach(function(d){ d.y = d.depth * 180});
-    // ****************** Nodes section ***************************
-    // Update the nodes...
-    var node = svg.selectAll('g.node')
-        .data(nodes, function(d) {return d.id || (d.id = ++i); });
-    // Enter any new modes at the parent's previous position.
-    var nodeEnter = node.enter().append('g')
-        .attr('class', 'node')
-        .attr("transform", function(d) {
-            return "translate(" + source.y0 + "," + source.x0 + ")";
-        })
-        .on('click', click);
-    // Add Circle for the nodes
-    nodeEnter.append('circle')
-        .attr('class', 'node')
-        .attr('r', 1e-6)
-        .style("fill", function(d) {
-            return d._children ? "lightsteelblue" : "#fff";
+        // Assigns the x and y position for the nodes
+        var treeData = treemap(root);
+        // Compute the new tree layout.
+        var nodes = treeData.descendants(),
+            links = treeData.descendants().slice(1);
+        // Normalize for fixed-depth.
+        nodes.forEach(function (d) { d.y = d.depth * 180 });
+        // ****************** Nodes section ***************************
+        // Update the nodes...
+        var node = svg.selectAll('g.node')
+            .data(nodes, function (d) { return d.id || (d.id = ++i); });
+        // Enter any new modes at the parent's previous position.
+        var nodeEnter = node.enter().append('g')
+            .attr('class', 'node')
+            .attr("transform", function (d) {
+                return "translate(" + source.y0 + "," + source.x0 + ")";
+            })
+            .on('click', click);
+        // Add Circle for the nodes
+        nodeEnter.append('circle')
+            .attr('class', 'node')
+            .attr('r', 1e-6)
+            .style("fill", function (d) {
+                return d._children ? "lightsteelblue" : "#fff";
+            });
+        // Add labels for the nodes
+        nodeEnter.append('text')
+            .attr("dy", ".35em")
+            .attr("x", function (d) {
+                return d.children || d._children ? -13 : 13;
+            })
+            .attr("text-anchor", function (d) {
+                return d.children || d._children ? "end" : "start";
+            })
+            .text(function (d) { return d.data.name; });
+        // UPDATE
+        var nodeUpdate = nodeEnter.merge(node);
+        // Transition to the proper position for the node
+        nodeUpdate.transition()
+            .duration(duration)
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
+        // Update the node attributes and style
+        nodeUpdate.select('circle.node')
+            .attr('r', 10)
+            .style("fill", function (d) {
+                return d._children ? "lightsteelblue" : "#fff";
+            })
+            .attr('cursor', 'pointer');
+        // Remove any exiting nodes
+        var nodeExit = node.exit().transition()
+            .duration(duration)
+            .attr("transform", function (d) {
+                return "translate(" + source.x + "," + source.y + ")";
+            })
+            .remove();
+        // On exit reduce the node circles size to 0
+        nodeExit.select('circle')
+            .attr('r', 1e-6);
+        // On exit reduce the opacity of text labels
+        nodeExit.select('text')
+            .style('fill-opacity', 1e-6);
+        // ****************** links section ***************************
+        // Update the links...
+        var link = svg.selectAll('path.link')
+            .data(links, function (d) { return d.id; });
+        // Enter any new links at the parent's previous position.
+        var linkEnter = link.enter().insert('path', "g")
+            .attr("class", "link")
+            .attr('d', function (d) {
+                var o = { x: source.x0, y: source.y0 }
+                return diagonal(o, o)
+            });
+        // UPDATE
+        var linkUpdate = linkEnter.merge(link);
+        // Transition back to the parent element position
+        linkUpdate.transition()
+            .duration(duration)
+            .attr('d', function (d) { return diagonal(d, d.parent) });
+        // Remove any exiting links
+        var linkExit = link.exit().transition()
+            .duration(duration)
+            .attr('d', function (d) {
+                var o = { x: source.x, y: source.y }
+                return diagonal(o, o)
+            })
+            .remove();
+        // Store the old positions for transition.
+        nodes.forEach(function (d) {
+            d.x0 = d.x;
+            d.y0 = d.y;
         });
-    // Add labels for the nodes
-    nodeEnter.append('text')
-        .attr("dy", ".35em")
-        .attr("x", function(d) {
-            return d.children || d._children ? -13 : 13;
-        })
-        .attr("text-anchor", function(d) {
-            return d.children || d._children ? "end" : "start";
-        })
-        .text(function(d) { return d.data.name; });
-    // UPDATE
-    var nodeUpdate = nodeEnter.merge(node);
-    // Transition to the proper position for the node
-    nodeUpdate.transition()
-        .duration(duration)
-        .attr("transform", function(d) {
-            return "translate(" + d.x + "," + d.y + ")";
-        });
-    // Update the node attributes and style
-    nodeUpdate.select('circle.node')
-        .attr('r', 10)
-        .style("fill", function(d) {
-            return d._children ? "lightsteelblue" : "#fff";
-        })
-        .attr('cursor', 'pointer');
-    // Remove any exiting nodes
-    var nodeExit = node.exit().transition()
-        .duration(duration)
-        .attr("transform", function(d) {
-            return "translate(" + source.x + "," + source.y + ")";
-        })
-        .remove();
-    // On exit reduce the node circles size to 0
-    nodeExit.select('circle')
-        .attr('r', 1e-6);
-    // On exit reduce the opacity of text labels
-    nodeExit.select('text')
-        .style('fill-opacity', 1e-6);
-    // ****************** links section ***************************
-    // Update the links...
-    var link = svg.selectAll('path.link')
-        .data(links, function(d) { return d.id; });
-    // Enter any new links at the parent's previous position.
-    var linkEnter = link.enter().insert('path', "g")
-        .attr("class", "link")
-        .attr('d', function(d){
-            var o = {x: source.x0, y: source.y0}
-            return diagonal(o, o)
-        });
-    // UPDATE
-    var linkUpdate = linkEnter.merge(link);
-    // Transition back to the parent element position
-    linkUpdate.transition()
-        .duration(duration)
-        .attr('d', function(d){ return diagonal(d, d.parent) });
-    // Remove any exiting links
-    var linkExit = link.exit().transition()
-        .duration(duration)
-        .attr('d', function(d) {
-            var o = {x: source.x, y: source.y}
-            return diagonal(o, o)
-        })
-        .remove();
-    // Store the old positions for transition.
-    nodes.forEach(function(d){
-        d.x0 = d.x;
-        d.y0 = d.y;
-    });
-    // Creates a curved (diagonal) path from parent to the child nodes
-    function diagonal(s, d) {
-    //console.log('in diag and s = ', s);
-    //console.log('d = ', d)
-    path = `M ${s.x} ${s.y}
+        // Creates a curved (diagonal) path from parent to the child nodes
+        function diagonal(s, d) {
+            //console.log('in diag and s = ', s);
+            //console.log('d = ', d)
+            path = `M ${s.x} ${s.y}
             C ${(s.x + d.x) / 2} ${s.y},
                 ${(s.x + d.x) / 2} ${d.y},
                 ${d.x} ${d.y}`
-    return path;
-    }
-    // Toggle children on click.
-    function click(d) {
-        if (d.children) {
-            d._children = d.children;
-            d.children = null;
-        } else {
-            d.children = d._children;
-            d._children = null;
+            return path;
         }
-        update(d);
-    }
+        // Toggle children on click.
+        function click(d) {
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+            } else {
+                d.children = d._children;
+                d._children = null;
+            }
+            update(d);
+        }
     }
 
     let workflows = [];
-    let treeDatas =[];
+    let treeDatas = [];
 
     var approversArray = [];
     var apArr = [];
@@ -314,25 +318,25 @@
     boxes = boxes.concat(boxContArray);
     var drake = dragula({ containers: boxes });
 
-    function getmapping(arr){
-        if(arr.length<1)
-            return ;
+    function getmapping(arr) {
+        if (arr.length < 1)
+            return;
         let obj = new Object();
         obj.name = arr[0].name;
 
         arr.shift();
 
         let getMap = getmapping(arr);
-        if(getMap)
-            obj.children=[getMap];
+        if (getMap)
+            obj.children = [getMap];
         return obj;
     }
 
     drake.on('drop', (el, target) => {
-        if($(target).attr("id")=="boxContainer"){
+        if ($(target).attr("id") == "boxContainer") {
             var itemArray = document.getElementById("boxContainer").getElementsByClassName("box-item");
             approversArray = [];
-            for(var i=0;i<itemArray.length;i++){
+            for (var i = 0; i < itemArray.length; i++) {
                 approversArray.push({
                     name: itemArray[i].innerHTML,
                     grp: $(itemArray[i]).attr("id"),
@@ -343,35 +347,30 @@
         apArr = JSON.parse(JSON.stringify(approversArray));
         treeData1 = getmapping(apArr);
 
-        root = d3.hierarchy(treeData1, function(d) { return d.children; });
+        root = d3.hierarchy(treeData1, function (d) { return d.children; });
         update(root);
     });
-
-    function handleAddFields(){
-        let html = '<div class="form-group"><input type="text" class="field form-control" placeholder="Enter field name"></div>'
-        $(html).appendTo($('#fieldsContainer'));
-    }
 
     const fileInput = document.getElementById('template');
 
     // This will upload the file after having read it
     const upload = (file) => {
         console.log(file)
-    fetch('/workflow/uploadFormImage', { // Your POST endpoint
-        method: 'POST',
-        // headers: {
-        // // Content-Type may need to be completely **omitted**
-        // // or you may need something
-        // "Content-Type": "You will perhaps need to define a content-type here"
-        // },
-        body: file // This is your file object
-    }).then(
-        response => response.json() // if the response is a JSON object
-    ).then(
-        success => console.log(success) // Handle the success response object
-    ).catch(
-        error => console.log(error) // Handle the error response object
-    );
+        fetch('/workflow/uploadFormImage', { // Your POST endpoint
+            method: 'POST',
+            // headers: {
+            // // Content-Type may need to be completely **omitted**
+            // // or you may need something
+            // "Content-Type": "You will perhaps need to define a content-type here"
+            // },
+            body: file // This is your file object
+        }).then(
+            response => response.json() // if the response is a JSON object
+        ).then(
+            success => console.log(success) // Handle the success response object
+        ).catch(
+            error => console.log(error) // Handle the error response object
+        );
     };
 
     // Event handler executed when a file is selected
@@ -381,36 +380,36 @@
     // It will be triggered when a file will be selected
     fileInput.addEventListener('change', onSelectFile, false);
 
-    function handleWorkflowCreate(){
+    function handleWorkflowCreate() {
         let fieldsArray = document.getElementsByClassName('field');
         let fields = [];
         let certName = document.getElementById("certName").value;
 
-        if(fieldsArray.length<1 || fieldsArray[0].value=="" || !certName){
+        if (fieldsArray.length < 1 || fieldsArray[0].value == "" || !certName) {
             alert("Cannot create workflow. Please fill atleast one field.");
             return;
         }
 
-        for(var i=0;i<fieldsArray.length;i++){
-            if(fieldsArray[i].value){
+        for (var i = 0; i < fieldsArray.length; i++) {
+            if (fieldsArray[i].value) {
                 fields.push(fieldsArray[i].value);
             }
         }
         console.log(certName, approversArray, fields);
 
-        let url = (window.location.protocol+"//"+window.location.host+"/workflow/create");
+        let url = (window.location.protocol + "//" + window.location.host + "/workflow/create");
 
         $.post(url, {
             name: certName,
             approvers: approversArray,
             fields: fields
-        }, function(data, status){
-            console.log(data,status);
-            if(data.success){
-                let url = (window.location.protocol+"//"+window.location.host+"/workflow/list");
+        }, function (data, status) {
+            console.log(data, status);
+            if (data.success) {
+                let url = (window.location.protocol + "//" + window.location.host + "/workflow/list");
                 window.location = url;
             }
-            console.log(data,status);
+            console.log(data, status);
         });
     }
 

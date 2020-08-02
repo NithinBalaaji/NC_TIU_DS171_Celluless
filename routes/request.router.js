@@ -15,7 +15,6 @@ router.get('/view', isLoggedIn, requestController.viewRequest);
 router.get('/approve/:requestId', isLoggedIn, requestController.approveRequest);
 router.get('/reject/:requestId', isLoggedIn, requestController.rejectRequest);
 router.get('/remind/:requestId', isLoggedIn, requestController.remindRequest);
-
 router.get('/certificate/view', requestController.viewRequestCertificate);
 
 module.exports = router;

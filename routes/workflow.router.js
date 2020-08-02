@@ -1,7 +1,18 @@
 const router = require('express').Router();
 var multer = require('multer')
 var upload = multer({ dest: '../uploads/' });
-const fs = require("fs")
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: './public/uploads/certifTemplates',
+    filename: function(req, file, cb){
+        cb(null, file.originalname);
+    }
+});
+const certifTemplateUpload = multer({
+    storage: storage
+}).single('certifTemplate');
+
 // Importing controllers
 const workflowController = require('../controllers/workflow.controller');
 
@@ -17,5 +28,6 @@ router.post('/uploadFormImage', upload.single('template') ,isLoggedIn, workflowC
 router.post('/create', isLoggedIn, workflowController.createWorkflow);
 router.post('/view', isLoggedIn, workflowController.viewWorkflow);
 router.post('/edit', isLoggedIn, workflowController.editWorkflow);
+router.post('/uploadCertifTemplate', certifTemplateUpload, workflowController.uploadCertifTemplate)
 
 module.exports = router;
