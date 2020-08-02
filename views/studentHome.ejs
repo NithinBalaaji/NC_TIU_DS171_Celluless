@@ -19,11 +19,16 @@
     }
 </style>
 <div class="animated fadeIn">
+  <br/>
+  <h3 style="text-transform: uppercase; text-align:center;">APPLICANT DASHBOARD</h3>
+  <br/>
     <div class = "row text-center">
         <div class="container">
                 <div class="card-body">
                   <div class="btn-group text-center">
-                    <a id="btnNewForm" class="btn btn-info btn-block btn-md" href="/workflow/list">Apply for a form</a>
+                    <a id="btnNewForm" href="/workflow/list" class="btn btn-info btn-lg putbelow" style="position:fixed;bottom:30px;right:30px; z-index:999;">
+          <i class="fa fa-plus-circle"></i> Apply for a form
+        </a>
                 </div>
               </div>
         </div>
@@ -290,7 +295,7 @@
                         <div class="col-lg-4 ">
                             <div class="card">
                                 <div class="card-header">
-                                    <div style="padding: 10px; justify-content: space-between;">                                       
+                                    <div style="padding: 10px; justify-content: space-between;">
                                         <b class="top-pad">
                                             <div class="form-head"><%=data.rejectedRequests[i].workflowId.name%></div>
                                         </b>
@@ -344,7 +349,7 @@
                                                                                 </div>
                                                                             </li>
                                                                     </ul>
-                                                                    
+
                                                                     </div>
                                                                     <div class="row text-center">
                                                                         <div class="col-lg-3"></div>

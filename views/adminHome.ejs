@@ -19,10 +19,13 @@
 </style>
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span>
 <div class="animated fadeIn">
+  <br/>
+  <h3 style="text-transform: uppercase; text-align: center;">admin Dashboard</h3>
+  <br/>
     <!-- Widgets  -->
 
     <!-- /Widgets -->
-    <!--  Traffic  -->
+
 <% if(requests.length>0){ %>
     <br/>
     <h3 style="text-transform: uppercase;">Pending Requests</h3>
@@ -74,7 +77,7 @@
                                 <div class="row text-center" style="margin-top: 10px; margin-bottom: 20px;">
                                     <div class="col-lg-6"><a
                                         href="/request/approve/<%=requests[i]._id%>"
-                                        class="btn btn-success" style="margin: 10px">Approve</a>
+                                        class="btn btn-success" style="margin: 10px">Approve and Sign</a>
                                     </div>
                                     <div class="col-lg-6"><a
                                         href="/request/reject/<%=requests[i]._id%>"
@@ -104,6 +107,11 @@
     </div>
 </div>
 <script>
+jQuery(document).ready(function($) {
+            "use strict";
+
+           //Traffic chart chart-js  End
+            // Traffic Chart using chartist End
     function approveClickHandler() {
         console.log("remind Clicked!")
         // this formID should send a reminder to its next approver. Priority 1
