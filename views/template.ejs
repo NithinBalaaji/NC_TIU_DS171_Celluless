@@ -10,10 +10,11 @@
     <p style="font-size: x-small;"><%= time %></p>
     <div style="margin: 10rem">
         <h1 style="text-align: center;">Bonafide Certificate</h1>
-        <p style="font-size:x-large">This is to certify that <b><%= data[0] ></b>, S/O or D/O <b><%= data[1] ></b> bearing Roll Number <b><%= data[2] ></b> is a
+        <p style="font-size:x-large">This is to certify that <b><%= fields[0]%></b>, S/O or D/O <b><%= fields[1] %></b> bearing Roll Number <b><%= fields[2] %></b> is a
         bonafide student of National Institute of Technology, Tiruchirappalli, pursuing
-        <b><%= data[3] ></b> in <b><%= data[4] ></b>, currently <b><%= data[5] ></b> year, <b><%= data[6] ></b> semester. </p>
+        <b><%= fields[3] %></b> in <b><%= fields[4] %></b>, currently <b><%= fields[5] %></b> year, <b><%= fields[6] %></b> semester. </p>
     </div>
-    <%= qrcode %>
+    <img src="<%= qrcode %>" alt="QR Code">
+    
 </body>
 </html>

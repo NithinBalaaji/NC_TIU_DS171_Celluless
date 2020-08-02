@@ -216,7 +216,7 @@ exports.viewRequestCertificate = async (req, res) => {
         //let certificate = await blockchainUtil.getCertificate(request.blockchainId);
 
         let ejsPath = '../views/template.ejs';
-        let compiledEJS = await ejs.compile(fs.readFileSync(ejsPath, 'utf8'),{ async: true });
+        let compiledEJS = await ejs.compile(fs.readFileSync(path.resolve(__dirname,ejsPath), 'utf8'),{ async: true });
         let html = await compiledEJS({
             time: new Date().toLocaleString(),
             qrcode: qrcode,
@@ -224,7 +224,7 @@ exports.viewRequestCertificate = async (req, res) => {
         });
         console.log(html);
 
-        let outputPath = '/home/teslash21/CS/Github/drsiri/public/generated-pdfs/hello.pdf';
+        let outputPath = path.resolve(__dirname,'../public/hello.pdf');
 
         let pdfOptions = {
             pageSize: 'A4',
