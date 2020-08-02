@@ -70,7 +70,7 @@ iframe {
         let fields = [];
 
         for (let i = 0; i < fieldSize; i++) {
-            let childElem = "<label for='" + data.fields[i] + "' class='form-control-label'>" + data.fields[i] + "</label><input type='text' id='" + data.fields[i] + "' name='" + data.fields[i] + "' placeholder='" + data.fields[i] + "' class='form-control inp'>";
+            let childElem = "<label for='" + data.fields[i] + "' class='form-control-label'>" + data.fields[i] + "</label><input type='text' id='" + data.fields[i] + "' name='" + data.fields[i] + "' placeholder='" + data.fields[i] + "' class='form-control'>";
             $(childElem).appendTo("#fieldContainer")
         }
 
