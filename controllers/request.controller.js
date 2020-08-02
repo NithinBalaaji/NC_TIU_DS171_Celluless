@@ -16,7 +16,7 @@ const getNextApproverId = async (request) => {
     let approvers = [];
 
     for(let i=0; i<request.approvers.length; i++){
-        if(approvers[i].level==lvl+1){
+        if(request.approvers[i].level==lvl+1){
             approvers.push(request.approvers[i]);
         }
     }
@@ -140,7 +140,7 @@ exports.approveRequest = async (req, res) => {
         await request.save();
 
         console.log('Approve request');
-        return res.redirect('/');
+        return res.redirect('/?action=approved');
     } catch(error){
         console.log(error);
     }
@@ -163,7 +163,7 @@ exports.rejectRequest = async (req, res) => {
         await blockchainUtil.rejectCertificate(requestId);
 
         console.log('Reject request');
-        return res.redirect('/');
+        return res.redirect('/?action=rejected');
     } catch(error){
         console.log(error);
     }

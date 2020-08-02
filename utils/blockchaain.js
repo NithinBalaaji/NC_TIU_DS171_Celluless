@@ -21,11 +21,14 @@ const Request = require('../models/request');
 exports.createRequest = async (fromAddress, nextApprover, fields) => {
     return 1;
 };
+const {getNextApproverId} = require('../controllers/request.controller');
 
 exports.approveRequest = async (requestId, nextApprover) => {
     try {
         let request = await Request.findById(requestId).exec();
         request.level++;
+        if(!getNextApproverId(requestId).length)
+            request.isVerified = true;
         return request.save();
     } catch (err) {
         console.log(err);
@@ -61,7 +64,6 @@ exports.getCertificateByQR = async () => {
     }
 };
 
-const {getNextApproverId} = require('../controllers/request.controller');
 
 exports.getPendingApprovals = async (adminUserId) => {
     try {
