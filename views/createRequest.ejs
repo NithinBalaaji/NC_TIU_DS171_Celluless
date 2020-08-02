@@ -3,11 +3,6 @@
 <div style="display: none;" id="workflowData">
     <%= JSON.stringify(workflow) %>
 </div>
-<script>
-    let data = document.getElementById("workflowData").innerHTML;
-    data = JSON.parse(data)
-    console.log(data)
-</script>
 
 <span style="display: none;" id="hidden-pieValueCompleted">></span>
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span>
@@ -47,6 +42,9 @@
         </div>
     </div>
     <script>
+        let data = document.getElementById("workflowData").innerHTML;
+        data = JSON.parse(data)
+        console.log(data)
         let fieldSize = data.fields.length;
         let fields = [];
 
@@ -63,11 +61,11 @@
         for (let i = 0; i < designatorsSize; i++) {
             let istr = i.toString();
 
-            let chooseDesignatorElem = "<div style='display: flex; justify-content: space-around'><label for='" + data.approvers[i].grp.name.replace(/\s+/, "")  + "' class='form-control-label'>" + data.approvers[i].grp.name.replace(/\s+/, "")  + "</label><select id='" + data.approvers[i].grp.name.replace(/\s+/, "")  + "'>";
+            let chooseDesignatorElem = "<div style='display: flex; justify-content: space-around'><label for='" + data.approvers[i].grp.name.replace(/\s+/, "") + "' class='form-control-label'>" + data.approvers[i].grp.name.replace(/\s+/, "") + "</label><select id='" + data.approvers[i].grp.name.replace(/\s+/, "") + "'>";
 
             let members = data.approvers[i].grp.members.length;
             for (let j = 0; j < members; j++) {
-                let person = "<option class='" + data.approvers[i].grp.members[j]._id + "'value='" + data.approvers[i].grp.members[j].name.replace(/\s+/, "")  + "' id='" + data.approvers[i].grp.members[j].name.replace(/\s+/, "") + "'>" + data.approvers[i].grp.members[j].name.replace(/\s+/, "")  + "</option>";
+                let person = "<option class='" + data.approvers[i].grp.members[j]._id + "'value='" + data.approvers[i].grp.members[j].name.replace(/\s+/, "") + "' id='" + data.approvers[i].grp.members[j].name.replace(/\s+/, "") + "'>" + data.approvers[i].grp.members[j].name.replace(/\s+/, "") + "</option>";
                 chooseDesignatorElem += person;
             }
 
@@ -83,7 +81,7 @@
 
             for (let i = 0; i < designatorsSize; i++) {
                 let myselect = "#" + data.approvers[i].grp.name.replace(/\s+/, "") + " option:selected";
-                approvedNames.push($(myselect).text().replace(/\s+/, "") )
+                approvedNames.push($(myselect).text().replace(/\s+/, ""))
                 approverIds.push(document.getElementById(approvedNames[i]).className);
             }
 
@@ -105,7 +103,8 @@
             }
 
             for (let i = 0; i < fieldSize; i++) {
-                fields.push($("#" + data.fields[i])[0].value)
+                fields.push(document.getElementById(data.fields[i]).value)
+                console.log("TCL: submitMe -", data.fields[i])
             }
             console.log(workflowId)
             console.log(approvers)
