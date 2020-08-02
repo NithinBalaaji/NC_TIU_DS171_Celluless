@@ -250,6 +250,42 @@ exports.rejectRequest = async (req, res) => {
     }
 }
 
+exports.remindRequest = async (req, res) => {
+    try{
+        if(!req.params.requestId){
+            return res.json({success: false})
+        }
+
+        let requestId = req.params.requestId;
+
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
+
+        if(!request){
+            return res.json({success: false});
+        }
+
+        let nextApprover = await getNextApproverId(request);
+        // Email to next approver
+        let nextApproverUser = await User.findById(nextApprover);
+        html = `<div>
+            <div>Hi ${nextApproverUser.name},</div>
+            <br/>
+            <div>An application form requested by ${request.ownerId.name} is due for your approval. Kindly review!</div>
+            <br/>
+            <div>You can view the status of the application at ${statusFullURL}</div>
+            <br/>
+        </div>`;
+        emailResponse = await emailUtil.sendEmail(nextApproverUser.email, subject, html);
+        if(emailResponse.status_code!=200){
+            console.log(emailResponse.message);
+        }
+
+        return res.redirect('/?action=reminded');
+    } catch(error){
+        console.log(error);
+    }
+}
+
 exports.viewRequestCertificate = async (req, res) => {
     try{
         if(!req.body.requestId && !req.query.requestId){
