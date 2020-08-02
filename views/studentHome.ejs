@@ -14,9 +14,9 @@
     </div>
     <!-- Widgets  -->
 <% if(data.activeRequests.length>0){ %>
-    <h3>Ongoing Requests</h3> <br />
-</br>
-<br>
+    <br/>
+    <h3 style="text-transform: uppercase;">Ongoing Requests</h3>
+    <br/>
 <div class="row text-center">
         <div class="col-lg-12 col-md-12">
             <div class="">
@@ -26,7 +26,7 @@
                         <div class="col-lg-4 ">
                             <div class="card">
                                 <div class="card-header">
-                                    <div style="display: flex; justify-content: space-between;">
+                                    <div style="padding: 10px; justify-content: space-between;">
                                         <b class="top-pad">
                                             <h3><%=data.activeRequests[i].workflowId.name%></h3>
                                         </b>
@@ -83,9 +83,9 @@
 
 <% if(data.completedRequests.length>0){ %>
     <!-- Widgets  -->
-    <h3>Completed Requests</h3> <br />
-  </br>
-  <br>
+    <br/>
+    <h3 style="text-transform: uppercase;">Completed Requests</h3>
+    <br/>
   <div class="row text-center">
         <div class="col-lg-12 col-md-12">
             <div class="">
@@ -150,9 +150,9 @@
 
 <% if(data.rejectedRequests.length>0){ %>
     <!-- Widgets  -->
-    <h3>Rejected Requests</h3> <br />
-</br>
-<br>
+    <br/>
+    <h3 style="text-transform: uppercase;">Rejected Requests</h3>
+    <br/>
 <div class="row text-center">
         <div class="col-lg-12 col-md-12">
             <div class="">
