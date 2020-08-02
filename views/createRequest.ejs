@@ -30,16 +30,7 @@
                     </div>
                 </div>
                 <div class="card-body card-block">
-                    <div class>
-                        <div class="form-group">
-                            <label class=" form-control-label">Date</label>
-                            <input type="date" name="date" class="form-control" id="date">
-                        </div>
-                        <div class="form-group">
-                            <label for="nf-email" class=" form-control-label">Email</label>
-                            <input type="email" id="nf-email" name="nf-email" placeholder="Enter Email"
-                                class="form-control">
-                        </div>
+                    <div>
                         <div id="fieldContainer">
                         </div>
                         </br>
@@ -60,11 +51,9 @@
         let fields = [];
 
         for (let i = 0; i < fieldSize; i++) {
-            let childElem = "<label for='" + data.fields[i] + "' class='form-control-label'>" + data.fields[i] + "</label><input type='text' id='" + data.fields[i] + "' name='" + data.fields[i] + "' placeholder='" + data.fields[i] + "' class='form-control'>";
+            let childElem = "<label for='" + data.fields[i] + "' class='form-control-label'>" + data.fields[i] + "</label><input type='text' id='" + data.fields[i] + "' name='" + data.fields[i] + "' placeholder='" + data.fields[i] + "' class='form-control inp'>";
             $(childElem).appendTo("#fieldContainer")
         }
-
-        console.log()
 
         let designatorsSize = data.approvers.length
         let idx = window.location.host.length + 15 + 2 + window.location.protocol.length
@@ -78,7 +67,7 @@
 
             let members = data.approvers[i].grp.members.length;
             for (let j = 0; j < members; j++) {
-                let person = "<option class='" + data.approvers[i].grp.members[j]._id + "'value='" + data.approvers[i].grp.members[j].username.replace(/\s+/, "")  + "' id='" + data.approvers[i].grp.members[j].username.replace(/\s+/, "") + "'>" + data.approvers[i].grp.members[j].username.replace(/\s+/, "")  + "</option>";
+                let person = "<option class='" + data.approvers[i].grp.members[j]._id + "'value='" + data.approvers[i].grp.members[j].name.replace(/\s+/, "")  + "' id='" + data.approvers[i].grp.members[j].name.replace(/\s+/, "") + "'>" + data.approvers[i].grp.members[j].name.replace(/\s+/, "")  + "</option>";
                 chooseDesignatorElem += person;
             }
 
@@ -114,9 +103,6 @@
                     })
                 }
             }
-
-            fields.push($("#date")[0].value)
-            fields.push($("#nf-email")[0].value)
 
             for (let i = 0; i < fieldSize; i++) {
                 fields.push($("#" + data.fields[i])[0].value)

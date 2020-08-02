@@ -2582,6 +2582,10 @@ footer.site-footer {
   padding-left: 10px;
 }
 
+.inp{
+  width: 50%;
+}
+
 /*.approver{
   /* background-color: #dc3545; */
 /*  max-height: 18px;
@@ -2595,3 +2599,4 @@ footer.site-footer {
 .date{
   text-align: right;
 }
+
