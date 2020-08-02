@@ -61,14 +61,13 @@ exports.getCertificateByQR = async () => {
     }
 };
 
-exports.getPendingApprovals = async () => {
-    try {
-        // let certificateContract = await getCertificateContract();
-        // let pendingApprovals = await certificateContract.methods.getPendingApprovals().send({from: fromAddress});
-        // console.log(pendingApprovals);
+const {getNextApproverId} = require('../controllers/request.controller');
 
-        return 1;
+exports.getPendingApprovals = async (adminUserId) => {
+    try {
+        let requests = await Request.find({}).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
+        return requests.filter(request=>((getNextApproverId(request)[0])==adminUserId));
     } catch (err) {
-        console.log(err);
+        console.log(err.toString);
     }
 };
