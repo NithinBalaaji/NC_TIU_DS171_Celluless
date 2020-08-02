@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const wkhtmltopdf = require('wkhtmltopdf');
 const QRCode = require('qrcode');
+const qr = require('qr-image');
 
 // Importing config/env variables
 
@@ -309,7 +310,14 @@ exports.viewRequestCertificate = async (req, res) => {
             return res.json({success: false});
         }
 
-        let qrcode = await QRCode.toDataURL('http://localhost:8080/request/certificate/view?requestId='+requestId);
+				let qrPng = qr.image('http://localhost:8080/request/certificate/view?requestId='+requestId, { type: 'png' });
+				let qrPath = './qr/';
+				let qrImageName = qrPath + requestId +'.png';
+				qrPng.pipe(fs.createWriteStream(qrImageName));
+
+        /*let qrcode = await QRCode.toDataURL('http://localhost:8080/request/certificate/view?requestId='+requestId);
+        var buf = new Buffer(qrcode, 'base64');
+				fs.writeFileSync(qrImageName,buf);*/
 
         //let certificate = await blockchainUtil.getCertificate(request.blockchainId);
 
