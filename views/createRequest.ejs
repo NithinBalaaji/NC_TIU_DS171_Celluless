@@ -95,14 +95,18 @@ iframe {
         }
 
         function submitMe() {
-
+            console.log("hi")
             let approverIds = [];
             let approvedNames = [];
             let approvers;
 
             for (let i = 0; i < designatorsSize; i++) {
                 let myselect = "#" + data.approvers[i].grp.name.replace(/\s+/, "") + " option:selected";
-                approvedNames.push($(myselect).text().replace(/\s+/, ""))
+                console.log("submitMe -> myselect", myselect)
+                console.log("submitMe -> $(myselect).text().replace(/\s+/, '')", $(myselect).text().replace(/\s+/, ""))
+                console.log("submitMe -> $(myselect).text()", $(myselect).text())
+                // approvedNames.push($(myselect).text().replace(/\s+/, ""))
+                approvedNames.push($(myselect).text())
                 approverIds.push(document.getElementById(approvedNames[i]).className);
             }
 

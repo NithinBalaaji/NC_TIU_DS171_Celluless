@@ -12,7 +12,7 @@ exports.seedDB = async (req,res) => {
         let csehod = await User.register(new User({
             username: "csehod",
             name: "CSE HOD",
-            email: "abc@abc.com",
+            email: "102117058@nitt.edu",
             mobile: "999999999",
             isAdmin: true,
             pubKey: "insertpubhere"
@@ -84,7 +84,7 @@ exports.seedDB = async (req,res) => {
         let deanFW = await User.register(new User({
             username: "deanfw",
             name: "DEAN FW",
-            email: "abc@abc.com",
+            email: "102117058@nitt.edu",
             mobile: "999999999",
             isAdmin: true,
             pubKey: "insertpubhere"
@@ -106,17 +106,17 @@ exports.seedDB = async (req,res) => {
         // Faculty advisor
 
         let faDelta = await User.register(new User({
-            username: "fadelta",
-            name: "FA Delta",
-            email: "abc@abc.com",
+            username: "faculty_advisor_1",
+            name: "Faculty Advisor 1",
+            email: "p.subasharavindan15@gmail.com",
             mobile: "999999999",
             isAdmin: true,
             pubKey: "0xd6f26DAB93B724EbD822277B07b80F5576685c95",
         }),"12345");
 
         let faSpider = await User.register(new User({
-            username: "faspider",
-            name: "FA SPIDER",
+            username: "faculty_advisor_2",
+            name: "Faculty Advisor 2",
             email: "abc@abc.com",
             mobile: "999999999",
             isAdmin: true,
@@ -124,8 +124,8 @@ exports.seedDB = async (req,res) => {
         }),"12345");
 
         let faRMI = await User.register(new User({
-            username: "farmi",
-            name: "FA RMI",
+            username: "faculty_advisor_3",
+            name: "Faculty Advisor 3",
             email: "abc@abc.com",
             mobile: "999999999",
             isAdmin: true,
@@ -192,16 +192,20 @@ exports.seedDB = async (req,res) => {
         workflow1.name="Bonafide";
         workflow1.fields.push(...['Name', 'Fathers Name', 'Roll No', 'Degree', 'Department', 'Year', 'Semester']);
         workflow1.approvers.push({
-                grp: hodGrp,
-                level: 0
-        })
-        workflow1.approvers.push({
             grp: wardenGrp,
-            level: 1
+            level: 0
         });
         workflow1.approvers.push({
             grp: deanGrp,
+            level: 1
+        });
+        workflow1.approvers.push({
+            grp: faGrp,
             level: 2
+        });
+        workflow1.approvers.push({
+                grp: hodGrp,
+                level: 3
         });
 
         await workflow1.save();
@@ -221,7 +225,7 @@ exports.seedDB = async (req,res) => {
         await workflow2.save();
         
         let student1 = await User.register(new User({
-            username: "106117007",
+            username: "adwaith",
             name: "Adwaith D",
             email: "abc@abc.com",
             mobile: "999999999",
@@ -230,7 +234,7 @@ exports.seedDB = async (req,res) => {
         }),"12345");
 
         let student2 = await User.register(new User({
-            username: "102117058",
+            username: "subash",
             name: "Subash Aravindan",
             email: "p.subasharavindan@gmail.com",
             mobile: "999999999",
@@ -256,32 +260,60 @@ exports.seedDB = async (req,res) => {
         request1.workflowId=workflow1;
         request1.approvers=[];
         request1.approvers.push({
-            approverId: csehod,
-            level: 0
-        })
-        request1.approvers.push({
             approverId: warden1,
-            level: 1
+            level: 0
         })
         request1.approvers.push({
             approverId: deanSW,
+            level: 1
+        })
+        request1.approvers.push({
+            approverId: faDelta,
             level: 2
+        })
+        request1.approvers.push({
+            approverId: csehod,
+            level: 3
         })
 
         request1.approvedBy.push({
-            approverId: csehod,
+            approverId: warden1,
             level: 0
         });
-        request1.level=1;
+        request1.approvedBy.push({
+            approverId: deanFW,
+            level: 1
+        });
+        request1.level=2;
         request1.verificationKey="dfjdsfgdg";
-        request1.ownerId= student1;
-        request1.fields.push(...['Student Name', 'Fathers Name', '106117007', 'BTECH', 'CSE', '3', '6']);
+        request1.ownerId= student2;
+        request1.fields.push(...['Subash', 'Parivallal', '102117058', 'BTECH', 'Chemical', '3', '6']);
         await request1.save();
 
 
 
         let request2 = new Request();
         request2.blockchainId= "bck2";
+        request2.workflowId=workflow2;
+        request2.approvers=[];
+        request2.approvers.push({
+            approverId: faDelta,
+            level: 0
+        })
+        request2.approvers.push({
+            approverId: deanSW,
+            level: 1
+        })
+        request2.approvedBy=[]
+        request2.level=0;
+        request2.verificationKey="dfjdfsfssfgdg";
+        request2.ownerId= student2;
+        request2.fields.push(...["Student Name", "106117007", "3/02/2020", "6/02/2020", "Hackathon"]);
+        await request2.save();
+
+
+        request2 = new Request();
+        request2.blockchainId= "bck3";
         request2.workflowId=workflow2;
         request2.approvers=[];
         request2.approvers.push({
