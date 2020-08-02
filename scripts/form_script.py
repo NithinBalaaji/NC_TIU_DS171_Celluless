@@ -31,6 +31,30 @@ def write_text(image, text, x1, y1, x2, y2):
     image = cv2.putText(image, text, (text_x, text_y), FONT_FACE, FONT_SCALE, TEXT_COLOR, TEXT_WEIGHT, cv2.LINE_AA)
     return image
 
+def paste_seal(image):
+    seal = cv2.imread("../public/diginitt_seal.jpeg")
+    seal = cv2.resize(seal, (0,0), fx=0.35, fy=0.35)
+    seal_height, seal_width, _ = seal.shape 
+
+    image_height, image_width, _ = image.shape
+    image_x = image_width - seal_width - 20
+    image_y = image_height - seal_height - 20
+    
+    image[image_y:image_y+seal_height, image_x:image_x+seal_width, :] = seal[0:seal_height, 0:seal_width, :]
+    return image
+
+def paste_qr(image, qr_path):
+    qr = cv2.imread(qr_path)
+    qr = cv2.resize(qr, (0,0), fx=0.35, fy=0.35)
+    qr_height, qr_width, _ = qr.shape
+
+    image_height, image_width, _ = image.shape
+    image_x = 20
+    image_y = image_height - qr_height - 20
+    
+    image[image_y:image_y+qr_height, image_x:image_x+qr_width, :] = qr[0:qr_height, 0:qr_width, :]
+    return image
+
 
 # Main Function
 def main():
@@ -43,6 +67,7 @@ def main():
     parser.add_argument('-t','--type', help='count -> Count the number of blanks / generate -> Certification generation', required=True, default="count")
     parser.add_argument('-f','--filepath', help='Filepath of the application form', required=True)
     parser.add_argument('-d','--data', help='Data for certificate population', required=False)
+    parser.add_argument('-qr','--qr', help="Filepath of the QR", required=False)
 
     args = None
     try:
@@ -123,10 +148,14 @@ def main():
     # Write data to form
     if t == "generate":
         for i in range(0, blanks_count):
-            print(i)
             text = pop_data[i] if i+1 <= len(pop_data) else "Sample data"
             pts = ordered_pts[i] 
             image = write_text(image, text, pts[1], pts[0], pts[2], pts[0])
+
+        # Paste seal
+        image = paste_seal(image)
+        if args["qr"]:
+            image = paste_qr(image, args["qr"])
 
     log.debug("No. of blanks fields: {0}".format(blanks_count))
 
