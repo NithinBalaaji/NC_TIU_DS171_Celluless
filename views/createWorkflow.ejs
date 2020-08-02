@@ -120,6 +120,9 @@
                         <div class="card-body">
                             <div id="fieldsContainer">
                                 <div class="form-group">
+                                    <input type="file" id="template" name="template" class="form-control">
+                                </div>
+                                <div class="form-group">
                                     <input type="text" class="field form-control" placeholder="Enter field name">
                                 </div>
                             </div>
@@ -364,17 +367,29 @@
         console.log(certName, approversArray, fields);
 
         let url = (window.location.protocol+"//"+window.location.host+"/workflow/create");
-        $.post(url, {
-            name: certName,
-            approvers: approversArray,
-            fields: fields
-        }, function(data, status){
-            console.log(data,status);
-            if(data.success){
-                let url = (window.location.protocol+"//"+window.location.host+"/workflow/list");
-                window.location = url;
+
+        const templateFile = document.getElementById('template').files[0];
+
+        var data = new FormData();
+        data.append('template', templateFile);
+        data.append('name',certName);
+        data.append('approvers', approversArray);
+        data.append('fields', fields);
+
+        console.log(data);
+        $.ajax({
+            url: url,
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: data,
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
             }
-            console.log(data,status);
         });
     }
 

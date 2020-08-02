@@ -13,7 +13,7 @@ router.get('/list', isLoggedIn, workflowController.listWorkflow);
 router.get('/create', isLoggedIn, workflowController.renderCreateWorkflow);
 
 // POST Routes
-router.post('/create', isLoggedIn, upload.single('template'), workflowController.createWorkflow);
+router.post('/create', isLoggedIn, workflowController.createWorkflow);
 router.post('/view', isLoggedIn, workflowController.viewWorkflow);
 router.post('/edit', isLoggedIn, workflowController.editWorkflow);
 

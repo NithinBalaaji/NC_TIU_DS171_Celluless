@@ -42,3 +42,5 @@ Thumbs.db
 
 config/index.js
 build/
+
+public/uploads

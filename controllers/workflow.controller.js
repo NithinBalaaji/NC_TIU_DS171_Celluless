@@ -8,6 +8,7 @@ const path = require('path');
 const fs = require('fs');
 
 //Importing utils
+const Uploader = require('../utils/upload');
 
 exports.listWorkflow = async (req, res) => {
     try {
@@ -38,17 +39,35 @@ exports.renderCreateWorkflow = async (req, res) => {
 
 exports.createWorkflow = async (req, res) => {
     try {
+        console.log(req.body);
+        let fieldName = 'template';
+        const fileOptions = {
+            fileName: 'template',
+            fieldName: fieldName,
+            allowedFileSize : 3000000, // 3 MB
+            allowedFileTypesRE: /ejs/,
+        }
+        let fileUploader = new Uploader(req,fileOptions);
+        let uploadResponse = await fileUploader.uploadSingle(req,res,fieldName);
+        console.log(uploadResponse);
+
+        if(uploadResponse.status_code!=200){
+            return res.json({ success: false });
+        }
+
+
         let workflow = new Workflow();
         workflow.name = req.body.name;
         workflow.fields = req.body.fields;
         let approvers = req.body.approvers;
         //workflow.path = req.file.fileName;
-        workflow.path = ';;';
+        workflow.path = uploadResponse.data.file.path;
 
+        console.log('gggg');
         for (let i = 0; i < approvers.length; i++) {
             let grp = await Group.findById(approvers[i].grp).exec();
-
             if (!grp) {
+                console.log('Group doesnt exists');
                 return res.json({ success: false });
             }
             else {
@@ -58,7 +77,9 @@ exports.createWorkflow = async (req, res) => {
                 workflow.approvers.push(approver);
             }
         }
+        console.log('aa');
         await workflow.save();
+        console.log('Success');
         return res.json({ success: true });
     } catch (error) {
         console.log(error);
