@@ -1,4 +1,12 @@
 <%include partials/studentHeader%>
+<style>
+iframe {
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <div style="display: none;" id="workflowData">
     <%= JSON.stringify(workflow) %>
@@ -9,13 +17,26 @@
 <div class="animated fadeIn">
     <div class="row text-center">
         <div class="col-lg-6">
-            <iframe width="100%" srcdoc="
-                <html>
+            <iframe scrolling="yes" width="100%" height="800px" srcdoc='
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>Generated Certificate</title>
+                </head>
                 <body>
-                Hello, <b>world</b>.
-                Hello, <b>world</b>.
-                Put html here
-                </body></html>">
+                    <p style="font-size: x-small;">Time: ..........</p>
+                    <div style="margin: 5rem 1rem;">
+                        <h1 style="text-align: center;">Bonafide Certificate</h1>
+                        <p style="font-size:x-large">This is to certify that <b>.......</b>, S/O or D/O <b>........</b> bearing Roll Number <b>......</b> is a
+                        bonafide student of National Institute of Technology, Tiruchirappalli, pursuing
+                        <b>.........</b> in <b>..........</b>, currently <b>........</b> year, <b>.........</b> semester. </p>
+                    </div>
+                    .......QR......
+                </body>
+                </html>'>
             </iframe>
         </div>
         <div class="col-lg-6">
