@@ -207,6 +207,8 @@ exports.seedDB = async (req,res) => {
                 grp: hodGrp,
                 level: 3
         });
+        workflow1.templatePath = "default.jpg";
+        workflow1.generatedPath = "default.jpg";
 
         await workflow1.save();
 
@@ -221,6 +223,8 @@ exports.seedDB = async (req,res) => {
             grp: deanGrp._id,
             level: 1
         });
+        workflow2.templatePath = "default.jpg";
+        workflow2.generatedPath = "default.jpg";
 
         await workflow2.save();
         
