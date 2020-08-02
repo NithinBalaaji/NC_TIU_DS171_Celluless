@@ -13,6 +13,7 @@ const User = require("../models/user");
 
 //Importing utils
 const blockchainUtil = require("../utils/blockchaain");
+const emailUtil = require("../utils/mail");
 
 const exportHTML = async (html,pdfOptions) => {
 	return new Promise((resolve, reject) => {
@@ -152,7 +153,7 @@ exports.approveRequest = async (req, res) => {
 
         let requestId = req.params.requestId;
 
-        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
 
         if(!request){
             return res.json({success: false});
@@ -160,11 +161,30 @@ exports.approveRequest = async (req, res) => {
 
         let nextApprover = await getNextApproverId(request);
         request.approvedBy.push({approverId:req.user._id,level:request.level});
+
         await request.save();
         await blockchainUtil.approveRequest(requestId);
         console.log(request);
         console.log(request);
         console.log('Approve request');
+
+        // Send mails
+        // Email to student
+        let subject = "Application request approval - Celluless";
+        let html = `Hi ​${request.ownerId.name}! Your request has been approved by ${req.user.name}. \n Thank you!`;
+        let emailResponse = await emailUtil.sendEmail(request.ownerId.email, subject, html);
+        if(emailResponse.status_code!=200){
+            console.log(emailResponse.message);
+        }
+
+        // Email to next approver
+        let nextApproverUser = await User.findById(nextApprover);
+        html = `An application form requested by ${request.ownerId.name} needs your approval.`;
+        emailResponse = await emailUtil.sendEmail(nextApproverUser.email, subject, html);
+        if(emailResponse.status_code!=200){
+            console.log(emailResponse.message);
+        }
+
         return res.redirect('/?action=approved');
     } catch(error){
         console.log(error);
@@ -179,13 +199,20 @@ exports.rejectRequest = async (req, res) => {
 
         let requestId = req.params.requestId;
 
-        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
 
         if(!request){
             return res.json({success: false});
         }
 
         await blockchainUtil.rejectCertificate(requestId);
+
+        // Email to user
+        let html = `Hi ​${request.ownerId.name}! Your request has been rejected by ${req.user.name}. \n Please contact ${req.user.email} for further queries!`;
+        let emailResponse = await emailUtil.sendEmail(request.ownerId.email, subject, html);
+        if(emailResponse.status_code!=200){
+            console.log(emailResponse.message);
+        }
 
         console.log('Reject request');
         return res.redirect('/?action=rejected');
