@@ -53,10 +53,10 @@ exports.seedDB = async (req,res) => {
 
         let hodGrp = new Group();
         hodGrp.name="HODs";
-        hodGrp.members.push(csehod);
-        hodGrp.members.push(csehod);
-        hodGrp.members.push(eeehod);
-        hodGrp.members.push(ecehod);
+        hodGrp.members.push(csehod._id);
+        hodGrp.members.push(csehod._id);
+        hodGrp.members.push(eeehod._id);
+        hodGrp.members.push(ecehod._id);
 
         await hodGrp.save();
 
@@ -96,9 +96,9 @@ exports.seedDB = async (req,res) => {
 
         let deanGrp = new Group();
         deanGrp.name="DEANs";
-        deanGrp.members.push(deanFW);
-        deanGrp.members.push(deanSW);
-        deanGrp.members.push(deanPD);
+        deanGrp.members.push(deanFW._id);
+        deanGrp.members.push(deanSW._id);
+        deanGrp.members.push(deanPD._id);
 
         await deanGrp.save();
 
@@ -138,9 +138,9 @@ exports.seedDB = async (req,res) => {
 
         let faGrp = new Group();
         faGrp.name="Faculty Advisors";
-        faGrp.members.push(faDelta);
-        faGrp.members.push(faRMI);
-        faGrp.members.push(faSpider);
+        faGrp.members.push(faDelta._id);
+        faGrp.members.push(faRMI._id);
+        faGrp.members.push(faSpider._id);
 
         await faGrp.save();
 
@@ -152,11 +152,11 @@ exports.seedDB = async (req,res) => {
         workflow1.fields.push(['a']);
         workflow1.fields.push(['b']);
         workflow1.approvers.push({
-                grp: faGrp,
+                grp: faGrp._id,
                 level: 0
         })
         workflow1.approvers.push({
-            grp: hodGrp,
+            grp: hodGrp._id,
             level: 1
         });
 
@@ -167,11 +167,11 @@ exports.seedDB = async (req,res) => {
         workflow2.fields.push(['2a']);
         workflow2.fields.push(['2b']);
         workflow2.approvers.push({
-                grp: hodGrp,
+                grp: hodGrp._id,
                 level: 0
         })
         workflow2.approvers.push({
-            grp: deanGrp,
+            grp: deanGrp._id,
             level: 1
         });
 
@@ -203,15 +203,15 @@ exports.seedDB = async (req,res) => {
         request1.workflowId=workflow1;
         request1.approvers=[];
         request1.approvers.push({
-            approverId: faDelta,
+            approverId: faDelta._id,
             level: 0
         })
         request1.approvers.push({
-            approverId: csehod,
+            approverId: csehod._id,
             level: 1
         })
         request1.approvedBy.push({
-            approverId: faDelta,
+            approverId: faDelta._id,
             level: 0
         });
         request1.level=1;
@@ -228,17 +228,17 @@ exports.seedDB = async (req,res) => {
         request2.workflowId=workflow2;
         request2.approvers=[];
         request2.approvers.push({
-            approverId: cahod,
+            approverId: cahod._id,
             level: 0
         })
         request2.approvers.push({
-            approverId: deanFW,
+            approverId: deanFW._id,
             level: 1
         })
         request2.approvedBy=[]
         request2.level=0;
         request2.verificationKey="dfjdfsfssfgdg";
-        request2.ownerId= student2;
+        request2.ownerId= student2._id;
         request2.fields.push("2a value");
         request2.fields.push("2b value");
         await request2.save();

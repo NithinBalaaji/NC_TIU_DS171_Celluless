@@ -27,14 +27,15 @@ const exportHTML = async (html,pdfOptions) => {
 }
 
 const getNextApproverId = async (request) => {
-    let lvl = 0;
-    for(let i=0; i<request.approvedBy.length; i++){
-        lvl=Math.max(request.approvedBy[i].level, lvl);
-    }
+    // let lvl = 0;
+    // console.log(request)
+    // for(let i=0; i<request.approvedBy.length; i++){
+    //     lvl=Math.max(request.approvedBy[i].level, lvl);
+    // }
     let approvers = [];
 
     for(let i=0; i<request.approvers.length; i++){
-        if(request.approvers[i].level==lvl+1){
+        if(request.approvers[i].level==request.level){
             approvers.push(request.approvers[i]);
         }
     }
@@ -154,10 +155,11 @@ exports.approveRequest = async (req, res) => {
         }
 
         let nextApprover = await getNextApproverId(request);
-        await blockchainUtil.approveRequest(requestId);
-        request.approvedBy.push(req.user);
+        request.approvedBy.push({approverId:req.user._id,level:request.level});
         await request.save();
-
+        await blockchainUtil.approveRequest(requestId);
+        console.log(request);
+        console.log(request);
         console.log('Approve request');
         return res.redirect('/?action=approved');
     } catch(error){

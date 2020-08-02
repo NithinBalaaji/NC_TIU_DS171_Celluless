@@ -30,11 +30,13 @@
                                              Approved by:
                                         </div>
                                         <div class="col-lg-3 approver">
-                                          <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                               <%=data.activeRequests[i].approvedBy[j].approverId.name%>
-                                            </span>
-                                            <%}%>
+                                            <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
+                                                <%if(data.activeRequests[i].approvedBy[j].approverId){%>
+                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                       <%=data.activeRequests[i].approvedBy[j].approverId.username%>
+                                                    </span>
+                                                <%}%>
+                                              <%}%>
                                         </div>
                                     </div>
                                     <br />
@@ -95,13 +97,15 @@
                                 <div class="card-body">
                                     <div class="row text-center">
                                         <div class="col-lg-8">
-                                             Approved by:
+                                             Approved by: 
                                         </div>
                                         <div class="col-lg-3 approver">
                                           <%for(let j=0;j<data.completedRequests[i].approvedBy.length;j++){%>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                               <%=data.completedRequests[i].approvedBy[j].approverId.name%>
-                                            </span>
+                                              <%if(data.completedRequests[i].approvedBy[j].approverId){%>
+                                                  <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                     <%=data.completedRequests[i].approvedBy[j].approverId.username%>
+                                                  </span>
+                                              <%}%>
                                             <%}%>
                                         </div>
                                     </div>
@@ -158,14 +162,16 @@
                                 <div class="card-body">
                                     <div class="row text-center">
                                         <div class="col-lg-8">
-                                             Approved by:
+                                             Approved by: 
                                         </div>
                                         <div class="col-lg-3 approver">
-                                          <%for(let j=0;j<data.rejectedRequests[i].approvedBy.length;j++){%>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                               <%=data.rejectedRequests[i].approvedBy[j].approverId.name%>
-                                            </span>
-                                            <%}%>
+                                            <%for(let j=0;j<data.rejectedRequests[i].approvedBy.length;j++){%>
+                                                <%if(data.rejectedRequests[i].approvedBy[j].approverId){%>
+                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                       <%=data.rejectedRequests[i].approvedBy[j].approverId.username%>
+                                                    </span>
+                                                <%}%>
+                                              <%}%>
                                         </div>
                                     </div>
                                     <br />

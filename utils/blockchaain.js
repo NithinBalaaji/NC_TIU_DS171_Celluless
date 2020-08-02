@@ -25,9 +25,10 @@ const {getNextApproverId} = require('../controllers/request.controller');
 
 exports.approveRequest = async (requestId, nextApprover) => {
     try {
-        let request = await Request.findById(requestId).exec();
+        let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
         request.level++;
-        if(!getNextApproverId(requestId).length)
+        console.log(request.approvers)
+        if(request.approvers.length==request.level)
             request.isVerified = true;
         return request.save();
     } catch (err) {
@@ -67,7 +68,18 @@ exports.getCertificateByQR = async () => {
 exports.getPendingApprovals = async (adminUserId) => {
     try {
         let requests = await Request.find({isVerified:false,isRejected:false}).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
-        return requests.filter(request=>((getNextApproverId(request)[0])==adminUserId));
+        console.log('next pending is : ')
+        let result =  [];
+        requests.forEach(request=>{
+            request.approvers.forEach(approver=>{
+                console.log("TCL: exports.getPendingApprovals -> adminUserId", adminUserId)
+                console.log("TCL: exports.getPendingApprovals -> approver.approverId._id.toString()", approver.approverId._id.toString())
+                if(approver.level===request.level&&approver.approverId._id.toString()==adminUserId)
+                    result.push(request);
+            })
+        })
+        return result;
+        // return requests.filter(request=>((getNextApproverId(request)[0])===adminUserId));
     } catch (err) {
         console.log(err.toString);
     }
