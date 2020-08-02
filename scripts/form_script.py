@@ -167,7 +167,7 @@ def main():
 
     # Save generated certificate
     save_filename = filepath.split('/')[-1]
-    save_path = os.path.join(os.getcwd(), "..", "public/generated_files", save_filename)
+    save_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "public/generated_files", save_filename)
     save_path = os.path.abspath(save_path)
 
     log.debug("Generated certificate path: {0}".format(save_path))

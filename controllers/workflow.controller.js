@@ -3,9 +3,12 @@
 // Importing models
 const Workflow = require('../models/workflow');
 const Group = require('../models/group');
-
+const path = require('path');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 //Importing utils
 const Uploader = require('../utils/upload');
+const { command } = require('wkhtmltopdf');
 
 exports.listWorkflow = async (req, res) => {
 	try {
@@ -51,6 +54,8 @@ exports.createWorkflow = async (req, res) => {
 		let workflow = new Workflow();
 		workflow.name = req.body.name;
 		workflow.fields = req.body.fields;
+		workflow.templatePath = req.body.templatePath;
+		workflow.generatedPath = req.body.generatedPath;
 		let approvers = req.body.approvers;
 		//workflow.path = req.file.fileName;
 		workflow.path = '';
@@ -130,39 +135,29 @@ exports.uploadCertifTemplate = async (req, res) => {
 	try {
 		console.log(req.file, __dirname + '/../');
 
-		type = '-t generate';
-		python_filepath = __dirname + '/../scripts/form_script.py';
-		image_filepath = '-f ' + __dirname + '/../public/uploads/certifTemplate/' + req.file.originalname;
-		command = 'python ' + python_filepath + ' -f ' + image_filepath + ' -t ' + type;
+		type = 'count';
+		python_filepath = path.join(__dirname,'../scripts/form_script.py');
+		image_filepath = path.join(__dirname,'../public/uploads/certifTemplates/', req.file.filename);
+		let command = 'python ' + python_filepath + ' -f ' + image_filepath + ' -t ' + type;
 
 		console.log(command);
-
-		// var childProcess = require('child_process');
-
-		// var commitMessage = (function() {
-		// 	var spawn = childProcess.spawnSync('python', [ python_filepath, type, image]);
-		// 	var errorText = spawn.stderr.toString().trim();
-
-		// 	if (errorText) {
-		// 		console.log('Fatal error from `' + command + '`');
-		// 		throw new Error(errorText);
-		// 	} else {
-		// 		return spawn.stdout.toString().trim();
-		// 	}
-        // })();
-        
+        const { stdout, stderr } = await exec(command);
+        if (stderr) {
+            throw(stderr);
+        }
+        let {blanks, filepath} = JSON.parse(stdout);
+        filepath = path.relative(path.join(__dirname,'public'),'/generated_files/' + req.file.filename);
         // console.log(commitMessage)
 
 		let groups = await Group.find({});
 		res.render('createWorkflow', {
 			groups: groups,
 			uploadState: 1,
-			filepath: '/generated_files/' + req.file.originalname,
-			blanks: 8
+            filepath,
+            templatePath:req.file.filename,
+			blanks,
 		});
 	} catch (error) {
-		res.render('createWorkflow', {
-			msg: error
-		});
+		console.error(error);
 	}
 };

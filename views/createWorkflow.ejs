@@ -104,7 +104,7 @@
                     <% for(let i=1; i<=blanks; i++) {%>
                     <div class="box" style="margin-left: 30px; margin-right: 30px; margin-top: 20px;">
                         <ul>
-                            <b> Field <%= i %>:  <input type="text" id="field<%= i %>" placeholder="Name for Field <%= i %>"></b>
+                            <b> Field <%= i %>:  <input type="text" id="field<%= i %>" class="field" placeholder="Name for Field <%= i %>"></b>
                             
                         </ul>
                     </div>
@@ -185,6 +185,13 @@
     <div class="col-lg-6"></div>
 </div>
 </div>
+<% if (typeof templatePath != 'undefined') {%>
+    <div id="templatePath" class="<%= templatePath %>"></div>
+    <% } %>
+    
+    <% if (typeof filepath != 'undefined') {%>
+        <div id="generatedPath" class="<%= filepath %>"></div>
+        <% } %>
 <div style="text-align: center; margin-bottom: 30px;">
     <button onclick="handleWorkflowCreate()" class="btn btn-primary">Upload form</button>
 </div>
@@ -446,11 +453,13 @@
         $.post(url, {
             name: certName,
             approvers: approversArray,
-            fields: fields
+            fields: fields,
+            templatePath: document.querySelector('#templatePath').className,
+            generatedPath: document.querySelector('#generatedPath').className,
         }, function (data, status) {
             console.log(data, status);
             if (data.success) {
-                let url = (window.location.protocol + "//" + window.location.host + "/workflow/list");
+                let url = (window.location.protocol + "//" + window.location.host + "/");
                 window.location = url;
             }
             console.log(data, status);

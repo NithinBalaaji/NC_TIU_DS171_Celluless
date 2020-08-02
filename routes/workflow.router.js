@@ -5,7 +5,7 @@ var upload = multer({ dest: '../uploads/' });
 const storage = multer.diskStorage({
     destination: './public/uploads/certifTemplates',
     filename: function(req, file, cb){
-        cb(null, file.originalname);
+        cb(null, Date.now()+ '.' +file.originalname.split('.')[1]);
     }
 });
 const certifTemplateUpload = multer({

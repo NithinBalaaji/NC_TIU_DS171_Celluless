@@ -9,6 +9,8 @@ var workflowSchema = new Schema({
         level: Number
     }],
     path: String,
+    templatePath: String,
+    generatedPath: String,
 })
 
 module.exports= mongoose.model("Workflow", workflowSchema);
