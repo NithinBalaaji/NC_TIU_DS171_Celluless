@@ -24,7 +24,7 @@ exports.createRequest = async (fromAddress, nextApprover, fields) => {
 
 exports.approveRequest = async (requestId, nextApprover) => {
     try {
-        let request = Request.findById(requestId).exec();
+        let request = await Request.findById(requestId).exec();
         request.level++;
         return request.save();
     } catch (err) {
