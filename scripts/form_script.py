@@ -3,6 +3,7 @@ import math
 import logging
 import sys
 import uuid
+import json
 
 import cv2
 import argparse
@@ -175,12 +176,12 @@ def main():
         "blanks": blanks_count,
         "filepath": save_path
     }
-    print(response_data)
+    print(json.dumps(response_data))
 
     cv2.imwrite(save_path, image)
     #cv2.imshow('image', image)
     #cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main()
