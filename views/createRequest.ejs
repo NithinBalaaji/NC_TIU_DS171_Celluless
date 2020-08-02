@@ -27,9 +27,9 @@ iframe {
                     <title>Generated Certificate</title>
                 </head>
                 <body>
-                    <p style="font-size: x-small;">Time: ..........</p>
+                    <p style="font-size: x-small;font-family: "Roboto Slab sans-serif";">Time: ..........</p>
                     <div style="margin: 5rem 1rem;">
-                        <h1 style="text-align: center;">Bonafide Certificate</h1>
+                        <h1 style="text-align: center;font-family: "Roboto Slab sans-serif";">Bonafide Certificate</h1>
                         <p style="font-size:x-large">This is to certify that <b>.......</b>, S/O or D/O <b>........</b> bearing Roll Number <b>......</b> is a
                         bonafide student of National Institute of Technology, Tiruchirappalli, pursuing
                         <b>.........</b> in <b>..........</b>, currently <b>........</b> year, <b>.........</b> semester. </p>
@@ -47,6 +47,7 @@ iframe {
                 </div>
                 <div class="card-body card-block">
                     <div>
+                      Please fill in the required details for the form
                         <div id="fieldContainer">
                         </div>
                         </br>
@@ -54,9 +55,9 @@ iframe {
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-sm" onclick="submitMe()">
-                        <i class="fa fa-dot-circle-o"></i> Submit
+                <div class="card-footer" style="background-color: #00bcd4;">
+                    <button type="submit" class="btn btn-sm" style="color: white; font-size: 20px; " onclick="submitMe()">
+                     <b>Submit</b>
                     </button>
                 </div>
             </div>
@@ -70,7 +71,7 @@ iframe {
         let fields = [];
 
         for (let i = 0; i < fieldSize; i++) {
-            let childElem = "<label for='" + data.fields[i] + "' class='form-control-label'>" + data.fields[i] + "</label><input type='text' id='" + data.fields[i] + "' name='" + data.fields[i] + "' placeholder='" + data.fields[i] + "' class='form-control'>";
+            let childElem = "<label for='" + data.fields[i] + "' class='form-control-label'>" + "</label><input type='text' id='" + data.fields[i] + "' name='" + data.fields[i] + "' placeholder='" + data.fields[i] + "' class='form-control'>";
             $(childElem).appendTo("#fieldContainer")
         }
 
