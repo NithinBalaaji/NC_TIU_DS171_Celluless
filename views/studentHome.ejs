@@ -1,7 +1,23 @@
 <%include partials/studentHeader%>
 <!--<div> <%=JSON.stringify(data.activeRequests[0])%></div>-->
 
+<style>
+    .list-group-item {
+        border: none;
+    }
+    .form-head {
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-right: 5px;
+        font-size: 25px;
+        color: rgba(0,0,0,0.8);
+    }
 
+    .d-flex {
+        color: rgb(51,51,51);
+        font-size: 16px;
+    }
+</style>
 <div class="animated fadeIn">
     <div class = "row text-center">
         <div class="container">
@@ -107,53 +123,65 @@
                                 <div class="card-header">
                                     <div style="padding: 10px; justify-content: space-between;">
                                         <b class="top-pad">
-                                            <h3><%=data.activeRequests[i].workflowId.name%></h3>
+                                            <div class="form-head"><%=data.activeRequests[i].workflowId.name%></div>
                                         </b>
                                         <!--<div class="circle">712</div>-->
 
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-5" style="padding-left: 10px;">
-                                            Approved by:
-                                        </div>
-                                        <div class="col-lg-7 approver" style="text-align: left;">
-                                            <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
-                                            <%if(data.activeRequests[i].approvedBy[j].approverId){%>
-                                            <span  style="color: #24bb2b; font-size: 16px;">
-                                                <b><%=data.activeRequests[i].approvedBy[j].approverId.username%></b>
-                                            </span>
-                                            <%}%>
-                                              <%}%>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row text-center">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <i class="fa fa-calendar"></i> Approved On : <span
-                                                    class=" pull-center r-activity" style="color: #24bb2b; font-size: 18px;"><b>02/08/2020</b></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="row text-center">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <i class="fa fa-calendar"></i> Applied On : <span
-                                                    class=" pull-center r-activity" style="color: #24bb2b; font-size: 18px;"><b>02/08/2020</b></span>
-                                            </li>
-                                        </ul>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div style="padding-left: 10px;">
+                                                    <i class="fa fa-user"></i> <span style="margin-left: 3px;">Approvals: </span>
+                                                </div>
+                                                <div class="flex-grow-1 approver">
+                                                    <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
+                                                    <%if(data.activeRequests[i].approvedBy[j].approverId){%>
+                                                    <span class="badge badge-primary"
+                                                        style="background-color: #24bb2b; font-size: 16px;">
+                                                        <%=data.activeRequests[i].approvedBy[j].approverId.username%>
+                                                    </span>
+                                                    <%}%>
+                                                    <%}%>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <!-- </div> -->
+                                        <!-- <br /> -->
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div style="padding-left: 10px;">
+                                                    <i class="fa fa-calendar"></i> <span style="margin-left: 3px;">Approved on: </span>
+                                                </div>
+                                                <div class="flex-grow-1 approver">
+                                                    <span class="pull-center r-activity" style="color:#3694F7">
+                                                        02/08/2020
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div style="padding-left: 10px;">
+                                                    <i class="fa fa-calendar"></i> <span style="margin-left: 3px;">Applied on: </span>
+                                                </div>
+                                                <div class="flex-grow-1 approver">
+                                                    <span class="pull-center r-activity" style="color:#3694F7">
+                                                        02/08/2020
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                </ul>
+                                </div>
+                                <div class="row text-center" style="margin-top: 10px; margin-bottom: 20px;">
+                                    <div class="col-lg-12"><a
+                                        href="/request/view?requestId=<%=data.activeRequests[i]._id%>"
+                                        class="btn btn-success" style="margin: 10px">View Status</a></div>
                                     </div>
                                 </div>
-                                <div class="row text-center">
-                                    <div class="col-lg-2"></div>
-                                    <div class="col-lg-8"><a
-                                            href="/request/view?requestId=<%=data.activeRequests[i]._id%>"><button
-                                                class="btn remind btn-success" id="remind">View Status</button></div>
-                                    <div class="col-lg-2"></div>
-                                </div>
-                                <div style="height: 30px"></div>
                             </div>
                         </div>
                         <%}%>
@@ -178,9 +206,9 @@
                         <div class="col-lg-4 ">
                             <div class="card">
                                 <div class="card-header">
-                                    <div style="display: flex; justify-content: space-between;">
+                                    <div style="padding: 10px; justify-content: space-between;">
                                         <b class="top-pad">
-                                            <h3><%=data.completedRequests[i].workflowId.name%></h3>
+                                            <div class="form-head"><%=data.completedRequests[i].workflowId.name%></div>
                                         </b>
                                         <!--<div class="circle">712</div>-->
 
@@ -188,12 +216,12 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item" style = "padding: 15px 0">
+                                                            <li class="list-group-item">
                                                                 <div class="d-flex">
                                                                     <div style="padding-left: 10px;">
-                                                                        Approved by:
+                                                                        <i class="fa fa-user"></i> <span style="margin-left: 3px;">Approvals: </span>
                                                                     </div>
-                                                                    <div class="flex-grow-1 col-lg-7 approver">
+                                                                    <div class="flex-grow-1 approver">
                                                                         <%for(let j=0;j<data.completedRequests[i].approvedBy.length;j++){%>
                                                                         <%if(data.completedRequests[i].approvedBy[j].approverId){%>
                                                                         <span class="badge badge-primary"
@@ -201,32 +229,41 @@
                                                                             <%=data.completedRequests[i].approvedBy[j].approverId.username%>
                                                                         </span>
                                                                         <%}%>
-                                            <%}%>
+                                                                        <%}%>
                                                                     </div>
+                                                                </div>
                                                             </li>
                                                             <!-- </div> -->
                                                             <!-- <br /> -->
                                                             <li class="list-group-item">
-                                                                <div class="row text-center">
-                                                                    <a href="#"> <i class="fa fa-calendar"></i> Approved
-                                                                        on
-                                                                        : <span
-                                                                            class=" pull-center r-activity" style="color:#3694F7">02/08/2020</span></a>
-                                                                        </div>
+                                                                <div class="d-flex">
+                                                                    <div style="padding-left: 10px;">
+                                                                        <i class="fa fa-calendar"></i> <span style="margin-left: 3px;">Approved on: </span>
+                                                                    </div>
+                                                                    <div class="flex-grow-1 approver">
+                                                                        <span class="pull-center r-activity" style="color:#3694F7">
+                                                                            02/08/2020
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                             </li>
-                                                    <li class="list-group-item">
-                                                        <div class="row text-center">
-                                                            <a href="#"> <i class="fa fa-calendar"></i> Applied on :
-                                                                <span
-                                                                    class=" pull-center r-activity" style="color:#3694F7">02/08/2020</span></a>
-                                                        </div>
-                                                    </li>
+                                                            <li class="list-group-item">
+                                                                <div class="d-flex">
+                                                                    <div style="padding-left: 10px;">
+                                                                        <i class="fa fa-calendar"></i> <span style="margin-left: 3px;">Applied on: </span>
+                                                                    </div>
+                                                                    <div class="flex-grow-1 approver">
+                                                                        <span class="pull-center r-activity" style="color:#3694F7">
+                                                                            02/08/2020
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
                                                     </ul>
-                                                    <div class="row text-center">
-                                                        <div class="col-lg-6"><a
+                                                    <div class="row text-center" style="margin-top: 10px;">
+                                                        <div class="col-lg-12"><a
                                                             href="/request/certificate/view?requestId=<%=data.completedRequests[i]._id%>"
-                                                            class="btn btn-info" style="margin: 10px">Download form with
-                                                            details</a></div>
+                                                            class="btn btn-info" style="margin: 10px">Download Application</a></div>
                                                         </div>
                                                     </div>
                                                 <!-- <div style="height: 30px"></div> -->
@@ -254,57 +291,66 @@
                         <div class="col-lg-4 ">
                             <div class="card">
                                 <div class="card-header">
-                                    <div style="display: flex; justify-content: space-between;">
+                                    <div style="padding: 10px; justify-content: space-between;">                                       
                                         <b class="top-pad">
-                                            <h3><%=data.rejectedRequests[i].workflowId.name%></h3>
+                                            <div class="form-head"><%=data.rejectedRequests[i].workflowId.name%></div>
                                         </b>
                                         <!--<div class="circle">712</div>-->
 
                                                                         </div>
                                                                     </div>
                                                                     <div class="card-body">
-                                                                        <div class="row text-center">
-                                                                            <div class="col-lg-5"
-                                                                                style="padding-left: 10px;">
-                                                                                Approved by:
-                                                                            </div>
-                                                                            <div class="col-lg-7 approver">
-                                                                                <%for(let j=0;j<data.rejectedRequests[i].approvedBy.length;j++){%>
-                                                                                <%if(data.rejectedRequests[i].approvedBy[j].approverId){%>
-                                                                                <span class="badge badge-primary"
-                                                                                    style="background-color: #24bb2b; font-size:16px;">
-                                                                                    <%=data.rejectedRequests[i].approvedBy[j].approverId.username%>
-                                                                                </span>
-                                                                                <%}%>
-                                              <%}%>
-                                                                            </div>
-                                                                        </div>
-                                                                        <br />
-                                                                        <div class="row text-center">
-                                                                            <ul class="list-group list-group-flush">
-                                                                                <li class="list-group-item">
-                                                                                    <a href="#"> <i
-                                                                                            class="fa fa-calendar"></i>
-                                                                                        Approved On : <span
-                                                                                            class="pull-center r-activity" style="color:#3694F7">02/08/2020</span></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div class="row text-center">
-                                                                            <ul class="list-group list-group-flush">
-                                                                                <li class="list-group-item">
-                                                                                    <a href="#"> <i
-                                                                                            class="fa fa-calendar"></i>
-                                                                                        Applied On : <span
-                                                                                            class="pull-center r-activity" style="color:#3694F7">02/08/2020</span></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
+                                                                        <ul class="list-group list-group-flush">
+                                                                            <li class="list-group-item">
+                                                                                <div class="d-flex">
+                                                                                    <div style="padding-left: 10px;">
+                                                                                        <i class="fa fa-user"></i> <span style="margin-left: 3px;">Approvals: </span>
+                                                                                    </div>
+                                                                                    <div class="flex-grow-1 approver">
+                                                                                        <%for(let j=0;j<data.rejectedRequests[i].approvedBy.length;j++){%>
+                                                                                        <%if(data.rejectedRequests[i].approvedBy[j].approverId){%>
+                                                                                        <span class="badge badge-primary"
+                                                                                            style="background-color: #24bb2b; font-size: 16px;">
+                                                                                            <%=data.rejectedRequests[i].approvedBy[j].approverId.username%>
+                                                                                        </span>
+                                                                                        <%}%>
+                                                                                        <%}%>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <!-- </div> -->
+                                                                            <!-- <br /> -->
+                                                                            <li class="list-group-item">
+                                                                                <div class="d-flex">
+                                                                                    <div style="padding-left: 10px;">
+                                                                                        <i class="fa fa-calendar"></i> <span style="margin-left: 3px;">Approved on: </span>
+                                                                                    </div>
+                                                                                    <div class="flex-grow-1 approver">
+                                                                                        <span class="pull-center r-activity" style="color:#3694F7">
+                                                                                            02/08/2020
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="list-group-item">
+                                                                                <div class="d-flex">
+                                                                                    <div style="padding-left: 10px;">
+                                                                                        <i class="fa fa-calendar"></i> <span style="margin-left: 3px;">Applied on: </span>
+                                                                                    </div>
+                                                                                    <div class="flex-grow-1 approver">
+                                                                                        <span class="pull-center r-activity" style="color:#3694F7">
+                                                                                            02/08/2020
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                    </ul>
+                                                                    
                                                                     </div>
                                                                     <div class="row text-center">
                                                                         <div class="col-lg-3"></div>
                                                                         <div class="col-lg-6"><button type="button"
-                                                                                class="btn btn-secondary"
+                                                                                class="btn btn-danger"
                                                                                 data-toggle="modal"
                                                                                 data-target="#myModal"
                                                                                 onclick="viewRejectionClickHandler()">View
