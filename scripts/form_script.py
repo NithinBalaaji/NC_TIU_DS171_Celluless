@@ -80,7 +80,8 @@ def main():
     filepath = args["filepath"]
     pop_data = args["data"]
     if t=='generate':
-        pop_data = pop_data.split(',')
+        if pop_data != None:
+            pop_data = pop_data.split(',')
         
     
     log.debug("Execution type: " + t)
@@ -148,8 +149,11 @@ def main():
 
     # Write data to form
     if t == "generate":
+        
         for i in range(0, blanks_count):
-            text = pop_data[i] if i+1 <= len(pop_data) else "Sample data"
+            text = str(i+1)
+            if pop_data != None:
+                text = pop_data[i] if i+1 <= len(pop_data) else "Sample data"
             pts = ordered_pts[i] 
             image = write_text(image, text, pts[1], pts[0], pts[2], pts[0])
 
@@ -161,7 +165,7 @@ def main():
     log.debug("No. of blanks fields: {0}".format(blanks_count))
 
     # Save generated certificate
-    save_filename = "{0}.jpg".format(str(uuid.uuid4()))
+    save_filename = filepath.split('/')[-1]
     save_path = os.path.join(os.getcwd(), "..", "public/generated_files", save_filename)
     save_path = os.path.abspath(save_path)
 

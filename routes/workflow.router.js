@@ -1,7 +1,6 @@
 const router = require('express').Router();
 var multer = require('multer')
 var upload = multer({ dest: '../uploads/' });
-const path = require('path');
 
 const storage = multer.diskStorage({
     destination: './public/uploads/certifTemplates',
@@ -22,9 +21,9 @@ const { isLoggedIn } = require('../middlewares/auth');
 // GET Routes
 router.get('/list', isLoggedIn, workflowController.listWorkflow);
 router.get('/create', isLoggedIn, workflowController.renderCreateWorkflow);
-router.post('/uploadFormImage', upload.single('template') ,isLoggedIn, workflowController.uploadFormImage);
 
 // POST Routes
+router.post('/uploadFormImage', upload.single('template') ,isLoggedIn, workflowController.uploadFormImage);
 router.post('/create', isLoggedIn, workflowController.createWorkflow);
 router.post('/view', isLoggedIn, workflowController.viewWorkflow);
 router.post('/edit', isLoggedIn, workflowController.editWorkflow);
