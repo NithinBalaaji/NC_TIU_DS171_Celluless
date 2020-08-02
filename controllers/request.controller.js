@@ -124,11 +124,11 @@ exports.createRequest = async (req, res) => {
 
 exports.viewRequest = async (req, res) => {
     try {
-        if(!req.body.requestId){
+        if(!req.query.requestId){
             return res.json({success: false})
         }
 
-        let requestId = req.body.requestId;
+        let requestId = req.query.requestId;
         let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
 
         if(!request){
@@ -171,7 +171,16 @@ exports.approveRequest = async (req, res) => {
         // Send mails
         // Email to student
         let subject = "Application request approval - Celluless";
-        let html = `Hi ​${request.ownerId.name}! Your request has been approved by ${req.user.name}. \n Thank you!`;
+        let statusFullURL = `${config.APP_BASE_URL}/request/view?requestId=${requestId}`;
+        let html = `<div>
+            <div>Hi ${request.ownerId.name},</div>
+            <br/>
+            <div>Your request has been approved by ${req.user.name}.</div>
+            <br/>
+            <div>You can view the current status at ${statusFullURL}</div>
+            <br/>
+            <div>Email info@celluless.org if you have any questions.</div>
+        </div>`;
         let emailResponse = await emailUtil.sendEmail(request.ownerId.email, subject, html);
         if(emailResponse.status_code!=200){
             console.log(emailResponse.message);
@@ -179,7 +188,14 @@ exports.approveRequest = async (req, res) => {
 
         // Email to next approver
         let nextApproverUser = await User.findById(nextApprover);
-        html = `An application form requested by ${request.ownerId.name} needs your approval.`;
+        let html = `<div>
+            <div>Hi ${nextApproverUser.name},</div>
+            <br/>
+            <div>An application form requested by ${request.ownerId.name} needs your approval. Please kindly review!</div>
+            <br/>
+            <div>You can view the status of the application at ${statusFullURL}</div>
+            <br/>
+        </div>`;
         emailResponse = await emailUtil.sendEmail(nextApproverUser.email, subject, html);
         if(emailResponse.status_code!=200){
             console.log(emailResponse.message);
@@ -208,7 +224,18 @@ exports.rejectRequest = async (req, res) => {
         await blockchainUtil.rejectCertificate(requestId);
 
         // Email to user
-        let html = `Hi ​${request.ownerId.name}! Your request has been rejected by ${req.user.name}. \n Please contact ${req.user.email} for further queries!`;
+        let statusFullURL = `${config.APP_BASE_URL}/request/view?requestId=${requestId}`;
+        let html = `<div>
+            <div>Hi ${request.ownerId.name},</div>
+            <br/>
+            <div>Your request has been rejected by ${req.user.name}.</div>
+            <br/>
+            <div>Please contact ${req.user.email} for further queries.</div>
+            <br/>
+            <div>You can view the status of the application at ${statusFullURL}</div>
+            <br/>
+            <div>Email info@celluless.org if you have any questions.</div>
+        </div>`;
         let emailResponse = await emailUtil.sendEmail(request.ownerId.email, subject, html);
         if(emailResponse.status_code!=200){
             console.log(emailResponse.message);

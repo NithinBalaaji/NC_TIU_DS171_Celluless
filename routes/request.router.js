@@ -11,7 +11,7 @@ router.get('/create/:workflowId', isLoggedIn, requestController.renderCreateRequ
 
 // POST Routes
 router.post('/create', isLoggedIn, requestController.createRequest);
-router.post('/view', isLoggedIn, requestController.viewRequest);
+router.get('/view', isLoggedIn, requestController.viewRequest);
 router.get('/approve/:requestId', isLoggedIn, requestController.approveRequest);
 router.get('/reject/:requestId', isLoggedIn, requestController.rejectRequest);
 
