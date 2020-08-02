@@ -133,11 +133,7 @@
 
             }, function (data, status) {
                 console.log(data, status);
-                if (data.success) {
-                    let url = (window.location.protocol + "//" + window.location.host + "/users/home");
-                    window.location = url;
-                }
-                console.log(data, status);
+                window.location.href = '/';
             });
         }
 

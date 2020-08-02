@@ -107,12 +107,13 @@ exports.createRequest = async (req, res) => {
             approvedBy: [],
             fields:req.body.fields,
             level:0,
-            verificationKey:randomString.generate(10)
+            ownerId:req.user._id,
+            verificationKey:"agdsafsfayu"
         });
-        await request.save();
+        let newReq = await request.save();
 
         console.log('Request created');
-        res.redirect('/');
+        res.json(newReq);
     } catch(error){
         console.log(error);
     }
