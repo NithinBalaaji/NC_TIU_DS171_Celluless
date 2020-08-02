@@ -6,6 +6,8 @@ const QRCode = require('qrcode');
 
 // Importing config/env variables
 
+const config = require('../config')
+
 // Importing models
 const Request = require('../models/request');
 const Workflow = require('../models/workflow');
@@ -188,7 +190,7 @@ exports.approveRequest = async (req, res) => {
 
         // Email to next approver
         let nextApproverUser = await User.findById(nextApprover);
-        let html = `<div>
+        html = `<div>
             <div>Hi ${nextApproverUser.name},</div>
             <br/>
             <div>An application form requested by ${request.ownerId.name} needs your approval. Please kindly review!</div>

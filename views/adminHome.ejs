@@ -33,9 +33,9 @@
                               </ul>
                               <div class="row text-center">
                                       <div class="col-lg-2"></div>
-                                      <div class="col-lg-4"><a class="btn remind btn-success m-1" id="remind"
+                                      <div class="col-lg-4"><a class="btn remind btn-success m-1 disabled"  id="remind"
                                               href="/request/approve/<%=requests[i]._id%>">Approve</a></div>
-                                      <div class="col-lg-4"><a class="btn withdraw btn-danger m-1" id="withdraw"
+                                      <div class="col-lg-4"><a class="btn withdraw btn-danger m-1 disabled"  id="withdraw"
                                               href="/request/reject/<%=requests[i]._id%>">Reject</a></div>
                                       <div class="col-lg-2"></div>
                                     </div>
@@ -53,10 +53,10 @@
         <div class="col-lg-3">
                 <div class="card-body">
                   <div class="btn-group text-center">
-                    <a id="btnNewForm" class="btn btn-info btn-block btn-md" href="/workflow/create">Create a New Form</a>
+                    <a id="btnNewForm" class="btn btn-info btn-block btn-md disabled" href="/workflow/create">Create a New Form</a>
                     <br>
                     <br>
-                    <a id="btnEditWorkflow" class="btn btn-info btn-block btn-md" href="/workflow/edit">Edit an existing workflow of a form</a>
+                    <a id="btnEditWorkflow" class="btn btn-info btn-block btn-md disabled" href="/workflow/edit">Edit an existing workflow of a form</a>
                 </div>
               </div>
         </div>
