@@ -17,6 +17,7 @@ const getCertificateContract = async () => {
     }
 }
 
+
 exports.createRequest = async (fromAddress, nextApprover, fields) => {
     try {
         let certificateContract = await getCertificateContract();
