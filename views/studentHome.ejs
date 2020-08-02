@@ -34,7 +34,7 @@
                    <!--/.col-->
 
                    <div class="col-sm-6 col-lg-3">
-                       <div class="card text-white " style="background-color:#faf35e;">
+                       <div class="card text-white " style="background-color:#FCCC00;">
                            <div class="card-body">
                              <div class="card-left pt-1 float-left">
                                  <h3 class="mb-0 fw-r" style="color: white;">
@@ -121,7 +121,7 @@
                                         <div class="col-lg-7 approver" style="text-align: left;">
                                             <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
                                             <%if(data.activeRequests[i].approvedBy[j].approverId){%>
-                                            <span  style="color: #24bb2b; font-size: 18px;">
+                                            <span  style="color: #24bb2b; font-size: 16px;">
                                                 <b><%=data.activeRequests[i].approvedBy[j].approverId.username%></b>
                                             </span>
                                             <%}%>
@@ -197,7 +197,7 @@
                                                                         <%for(let j=0;j<data.completedRequests[i].approvedBy.length;j++){%>
                                                                         <%if(data.completedRequests[i].approvedBy[j].approverId){%>
                                                                         <span class="badge badge-primary"
-                                                                            style="background-color: #24bb2b;">
+                                                                            style="background-color: #24bb2b; font-size: 16px;">
                                                                             <%=data.completedRequests[i].approvedBy[j].approverId.username%>
                                                                         </span>
                                                                         <%}%>
@@ -211,14 +211,14 @@
                                                                     <a href="#"> <i class="fa fa-calendar"></i> Approved
                                                                         on
                                                                         : <span
-                                                                            class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                                                            class=" pull-center r-activity" style="color:#3694F7">24/02/2020</span></a>
                                                                         </div>
                                                             </li>
                                                     <li class="list-group-item">
                                                         <div class="row text-center">
                                                             <a href="#"> <i class="fa fa-calendar"></i> Applied on :
                                                                 <span
-                                                                    class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                                                    class=" pull-center r-activity" style="color:#3694F7">24/02/2020</span></a>
                                                         </div>
                                                     </li>
                                                     </ul>
@@ -272,7 +272,7 @@
                                                                                 <%for(let j=0;j<data.rejectedRequests[i].approvedBy.length;j++){%>
                                                                                 <%if(data.rejectedRequests[i].approvedBy[j].approverId){%>
                                                                                 <span class="badge badge-primary"
-                                                                                    style="background-color: #24bb2b;">
+                                                                                    style="background-color: #24bb2b; font-size:16px;">
                                                                                     <%=data.rejectedRequests[i].approvedBy[j].approverId.username%>
                                                                                 </span>
                                                                                 <%}%>
@@ -286,7 +286,7 @@
                                                                                     <a href="#"> <i
                                                                                             class="fa fa-calendar"></i>
                                                                                         Approved On : <span
-                                                                                            class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                                                                            class="pull-center r-activity" style="color:#3694F7">24/02/2020</span></a>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
@@ -296,7 +296,7 @@
                                                                                     <a href="#"> <i
                                                                                             class="fa fa-calendar"></i>
                                                                                         Applied On : <span
-                                                                                            class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                                                                            class="pull-center r-activity" style="color:#3694F7">24/02/2020</span></a>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
