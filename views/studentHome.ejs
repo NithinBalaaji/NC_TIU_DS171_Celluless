@@ -121,8 +121,8 @@
                                         <div class="col-lg-7 approver" style="text-align: left;">
                                             <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
                                             <%if(data.activeRequests[i].approvedBy[j].approverId){%>
-                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                <%=data.activeRequests[i].approvedBy[j].approverId.username%>
+                                            <span  style="color: #24bb2b; font-size: 18px;">
+                                                <b><%=data.activeRequests[i].approvedBy[j].approverId.username%></b>
                                             </span>
                                             <%}%>
                                               <%}%>
@@ -133,7 +133,7 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
                                                 <i class="fa fa-calendar"></i> Approved On : <span
-                                                    class="badge badge-warning pull-center r-activity">24/02/2020</span>
+                                                    class=" pull-center r-activity" style="color: #24bb2b; font-size: 18px;"><b>24/02/2020</b></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -141,7 +141,7 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
                                                 <i class="fa fa-calendar"></i> Applied On : <span
-                                                    class="badge badge-info pull-center r-activity">24/02/2020</span>
+                                                    class=" pull-center r-activity" style="color: #24bb2b; font-size: 18px;"><b>24/02/2020</b></span>
                                             </li>
                                         </ul>
                                     </div>

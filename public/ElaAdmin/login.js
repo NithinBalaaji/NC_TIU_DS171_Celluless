@@ -1,5 +1,6 @@
 
 document.querySelector('#otpBtn').addEventListener('click', (e) => {
+    document.querySelectorAll('.message-hidden').forEach(e => e.style.display = 'block')
     e.preventDefault()
     fetch('/auth/user/sendOtp', {
         method: 'POST',
