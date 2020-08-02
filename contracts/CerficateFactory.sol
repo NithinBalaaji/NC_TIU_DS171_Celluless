@@ -34,7 +34,7 @@ contract CertificateFactory {
     }
 
     function getLastCertificateIndex() public view returns (uint len) {
-        return 2;
+        return certificates.length;
     }
 
     // function getCertificates() public view returns (Certificate[]) {

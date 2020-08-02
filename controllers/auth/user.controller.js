@@ -38,7 +38,7 @@ exports.renderLoginUser = async (req, res) => {
 exports.logoutUser = async (req, res) => {
     try{
         req.logout();
-        res.redirect("auth/user/login");
+        res.redirect("/");
     } catch(error){
         console.log(error);
         res.json({success: false, error})

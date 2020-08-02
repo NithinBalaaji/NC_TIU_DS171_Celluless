@@ -21,7 +21,6 @@ const getCertificateContract = async () => {
 exports.createRequest = async (fromAddress, nextApprover, fields) => {
     try {
         let certificateContract = await getCertificateContract();
-        // console.log("hi");
         let a = await certificateContract.methods.createCertificate(nextApprover,fields).send({from: fromAddress,gas:200000000});
         let blockchainId = await certificateContract.methods.getLastCertificateIndex().call({from: fromAddress});
         console.log(blockchainId);
@@ -29,12 +28,18 @@ exports.createRequest = async (fromAddress, nextApprover, fields) => {
         return blockchainId;
     } catch (err) {
         console.log(err);
+        return null;
     }
 };
+
+exports.getAccounts = async () =>{
+    return web3.eth.getAccounts();
+}
 
 exports.approveRequest = async (blockchainId, nextApprover) => {
     try {
         let certificateContract = await getCertificateContract();
+        console.log("exports.approveRequest -> fromAddress", fromAddress)
         let response = await certificateContract.methods.approve(blockchainId, nextApprover).send({from: fromAddress});
         
         console.log(response);
@@ -80,7 +85,7 @@ exports.getCertificateByQR = async () => {
     }
 };
 
-exports.getPendingApprovals = async () => {
+exports.getPendingApprovals = async (fromAddress) => {
     try {
         let certificateContract = await getCertificateContract();
         let pendingApprovals = await certificateContract.methods.getPendingApprovals().send({from: fromAddress});

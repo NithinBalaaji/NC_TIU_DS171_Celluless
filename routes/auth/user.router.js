@@ -18,7 +18,7 @@ router.post('/login',passport.authenticate("local",
                         }),(req,res)=>{}
 );
 
-router.post('/logout', userController.logoutUser);
+router.get('/logout', userController.logoutUser);
 
 router.get('/login', userController.renderLoginUser);
 router.get('/', userController.renderHome)
