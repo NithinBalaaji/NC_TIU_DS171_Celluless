@@ -23,8 +23,6 @@
                                       </div>
                                   </div>
                               </div>
-
-
                               <ul class="list-group list-group-flush">
                                   <li class="list-group-item">
                                       <a href="#"><i class="fa fa-user"></i>  Applied By : <span class="badge badge-info pull-center r-activity"><%=requests[i].ownerId.name%> </a>
@@ -36,9 +34,9 @@
                               <div class="row text-center">
                                       <div class="col-lg-2"></div>
                                       <div class="col-lg-4"><a class="btn remind btn-success m-1" id="remind"
-                                              href="/approve:<%=request[i]._id%>">Approve</a></div>
+                                              href="/request/approve/<%=requests[i]._id%>">Approve</a></div>
                                       <div class="col-lg-4"><a class="btn withdraw btn-danger m-1" id="withdraw"
-                                              href="/reject:<%=request[i]._id%>">Reject</a></div>
+                                              href="/request/reject/<%=requests[i]._id%>">Reject</a></div>
                                       <div class="col-lg-2"></div>
                                     </div>
                           </section>
