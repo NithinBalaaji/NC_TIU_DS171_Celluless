@@ -1,4 +1,6 @@
 .history/
+public/generated_files/
+public/hello.pdf
 # compiled output
 /dist
 /tmp

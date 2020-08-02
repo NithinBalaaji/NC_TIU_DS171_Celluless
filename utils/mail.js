@@ -3,6 +3,7 @@ const sgMail = require('@sendgrid/mail');
 // Importing configuration/env variables
 const config = require('../config/index');
 
+
 // Setting Sendgrid API key
 sgMail.setApiKey(config.SENDGRID_API_KEY);
 
@@ -10,7 +11,7 @@ sgMail.setApiKey(config.SENDGRID_API_KEY);
 exports.sendEmail = async (email, subject, html) => {
     try {
         const message = {
-            from: "noreply@celluless.org",
+            from: config.FROM_MAIL_ADDRESS,
             to: email,
             subject: subject,
             html: html,
