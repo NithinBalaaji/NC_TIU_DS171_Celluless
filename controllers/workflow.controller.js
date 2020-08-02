@@ -135,12 +135,12 @@ exports.uploadCertifTemplate = async (req, res) => {
 		image_filepath = '-f ' + __dirname + '/../public/uploads/certifTemplate/' + req.file.originalname;
 		command = 'python ' + python_filepath + ' -f ' + image_filepath + ' -t ' + type;
 
-		// console.log(command);
+		console.log(command);
 
 		// var childProcess = require('child_process');
 
 		// var commitMessage = (function() {
-		// 	var spawn = childProcess.spawnSync('python', [ python_filepath, type, image_filepath]);
+		// 	var spawn = childProcess.spawnSync('python', [ python_filepath, type, image]);
 		// 	var errorText = spawn.stderr.toString().trim();
 
 		// 	if (errorText) {
@@ -151,14 +151,14 @@ exports.uploadCertifTemplate = async (req, res) => {
 		// 	}
         // })();
         
-        console.log(commitMessage)
+        // console.log(commitMessage)
 
 		let groups = await Group.find({});
 		res.render('createWorkflow', {
 			groups: groups,
 			uploadState: 1,
 			filepath: '/generated_files/' + req.file.originalname,
-			blanks: 1
+			blanks: 8
 		});
 	} catch (error) {
 		res.render('createWorkflow', {

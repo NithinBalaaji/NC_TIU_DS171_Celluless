@@ -75,103 +75,111 @@
         <div class="col-lg-4"></div>
     </div>
     <% if (uploadState == 1) {%>
-        <div class="row">
-            <div class="col-lg-6">
-                <!-- Barry -->
-                <div class="card border-primary">
-                    <div class="card-header">
-                        Certificate template
-                    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- Barry -->
+            <div class="card border-primary">
+                <div class="card-header">
+                    <center>
+                        <h5>Certificate template</h5>
+                    </center>
+                </div>
 
-                    <div id="leftBoxContainer" class="box-container card-body" style="min-height: 100px; min-width: 100px;">
-                        <center>Your form has been uploaded successfully and has <%= blanks%> blanks!</center>
-                        <br />
-                        <center><img src="<%= filepath %>"></center>
-                    </div>
+                <div id="leftBoxContainer" class="box-container card-body" style="min-height: 100px; min-width: 100px;">
+                    <center>Your form has been uploaded successfully and has <%= blanks%> blanks!</center>
+                    <br />
+                    <center><img src="<%= filepath %>"></center>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <!-- Barry -->
-                <div class="card border-primary">
-                    <div class="card-header">
-                        Certificate template
-                    </div>
-
-                    <div id="leftBoxContainer" class="box-container card-body" style="min-height: 100px; min-width: 100px;">
-                        <center>Your form has been uploaded successfully and has <%= blanks%> blanks!</center>
-                        <br />
-                        <center><img src="<%= filepath %>"></center>
-                    </div>
-                </div>
-            </div>
-
         </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <!-- Barry -->
-                <div class="card border-primary">
-                    <div class="card-header">
-                        Administrators
+        <div class="col-lg-6">
+            <!-- Barry -->
+            <div class="card border-primary">
+                <div class="card-header">
+                    <center>
+                        <h5>Name the blanks for your new template!</h5>
+                    </center>
+                </div>
+                <div id='fields'>
+                    <% for(let i=1; i<=blanks; i++) {%>
+                    <div class="box" style="margin-left: 30px; margin-right: 30px; margin-top: 20px;">
+                        <ul>
+                            <b> Field <%= i %>:  <input type="text" id="field<%= i %>" placeholder="Name for Field <%= i %>"></b>
+                            
+                        </ul>
                     </div>
-                    <div id="leftBoxContainer" class="box-container card-body" style="min-height: 100px; min-width: 100px;">
-                        <% for(let i=0; i<groups.length; i++) {%>
-                        <div class="box">
-                            <li class="admin list-group-item">
-                                <div id="<%= groups[i].id %>" class="box-item"><%= groups[i].name %></div>
-                            </li>
-                        </div>
-                        <% } %>
-                    </div>
+                    <% } %>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <!-- Barry -->
-                <div class="card border-primary">
-                    <div class="card-header">
-                        Drop here
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <!-- Barry -->
+            <div class="card border-primary">
+                <div class="card-header">
+                    Administrators
+                </div>
+                <div id="leftBoxContainer" class="box-container card-body" style="min-height: 100px; min-width: 100px;">
+                    <% for(let i=0; i<groups.length; i++) {%>
+                    <div class="box">
+                        <li class="admin list-group-item">
+                            <div id="<%= groups[i].id %>" class="box-item"><%= groups[i].name %></div>
+                        </li>
                     </div>
-                    <div id="boxContainer" class="box-container card-body" style="min-height: 100px; min-width: 100px;">
-                        <div class="box">
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="card border-primary">
-                    <div class="card-header">
-                        Workflow Tree
-                    </div>
-                    <div class="card-body">
-                        <div id="heap0" style="text-align: center"></div>
+        </div>
+        <div class="col-lg-3">
+            <!-- Barry -->
+            <div class="card border-primary">
+                <div class="card-header">
+                    Drop here
+                </div>
+                <div id="boxContainer" class="box-container card-body" style="min-height: 100px; min-width: 100px;">
+                    <div class="box">
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-lg-6">
+            <div class="card border-primary">
+                <div class="card-header">
+                    Workflow Tree
+                </div>
+                <div class="card-body">
+                    <div id="heap0" style="text-align: center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <% } else if (uploadState == 0) {%>
-        <div class="row">
-            <div class="col-lg-6">
-                <div id="heap0"></div>
-                <div class="card border-primary">
-                    <div class="card-header">
-                        Upload Certificate Template
-                    </div>
-                    <div class="card-body">
-                        <form action='/workflow/uploadCertifTemplate' method='post' enctype="multipart/form-data">
-                            <div class="file-field input-field">
-                                <div class="btn grey">
-                                    <span>File</span>
-                                    <input name="certifTemplate" id="certifTemplateInput" type="file">
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text">
-                                </div>
-                                <button type="submit" class="btn" id="submit-template">SUBMIT</button>
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="heap0"></div>
+            <div class="card border-primary">
+                <div class="card-header">
+                    Upload Certificate Template
+                </div>
+                <div class="card-body">
+                    <form action='/workflow/uploadCertifTemplate' method='post' enctype="multipart/form-data">
+                        <div class="file-field input-field">
+                            <div class="btn grey">
+                                <span>File</span>
+                                <input name="certifTemplate" id="certifTemplateInput" type="file">
                             </div>
-                        </form>
-                    </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                            <button type="submit" class="btn" id="submit-template">SUBMIT</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     <% } %>
 
     <div class="col-lg-6"></div>
