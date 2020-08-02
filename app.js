@@ -41,6 +41,9 @@ app.use((req, res, next) => {
 
 app.use(routes);
 app.get('/seed',seeder.seedDB )
+app.get('/template', (req, res)=>{
+    res.render('template')
+})
 
 app.use(express.static(__dirname + "/public/ElaAdmin"));
 app.use(express.static(__dirname + "/public"));
