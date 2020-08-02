@@ -6,7 +6,7 @@ Inter-NIT communication platform
 - Huge gap between industries and technically gifted students.
 
 ## The product
-The CommuNITTy software is a web application that can help overcome the aforementioned problems. The application connects industrialists to students and college clubs, as well as research enthusiasts with like minded individuals in the country.
+The DigiNITTy software is a web application that can help overcome the aforementioned problems. The application connects industrialists to students and college clubs, as well as research enthusiasts with like minded individuals in the country.
 
 ## Tech stack
 - Node.JS
