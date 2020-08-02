@@ -1,5 +1,5 @@
 .status-container {
-  margin: 100px auto; 
+  margin: 100px auto;
 }
 
 .meta-container {
@@ -107,7 +107,7 @@
 }
 .step:after {
   width: 0;
-  background-color: #ff2267;
+  background-color: #83cc61;
 }
 .step--complete:after {
   width: 100% !important;
@@ -126,8 +126,8 @@
   position: relative;
   width: 4rem;
   height: 4rem;
-  background-color: #292627;
-  border: 0.25rem solid #e6e7e8;
+  background-color: black;
+  border: 0.75rem solid #e6e7e8;
   border-radius: 50%;
   color: transparent;
   font-size: 3rem;
@@ -137,21 +137,24 @@
   color: #fff;
   content: '\2713';
 }
+.step__icon:after {
+  background-color: #83cc61 ;
+}
 .step--complete.step--active .step__icon {
   color: #fff;
   -webkit-transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 .step--incomplete.step--active .step__icon {
-  border-color: #ff2267;
+  border-color: #83cc61;
   -webkit-transition-delay: 0.5s;
           transition-delay: 0.5s;
 }
 .step--complete .step__icon {
   -webkit-animation: bounce 0.5s ease-in-out;
           animation: bounce 0.5s ease-in-out;
-  background-color: #ff2267;
-  border-color: #ff2267;
+  background-color: #83cc61;
+  border-color: #83cc61;
   color: #fff;
 }
 

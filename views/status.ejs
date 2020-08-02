@@ -11,13 +11,13 @@
                 <div class="col-lg-1"></div>
                     <div class="col-lg-5">
                         <div class="detail">
-                            <span class="mfield">Applicant name: </span> 
+                            <span class="mfield">Applicant name: </span>
                             <span><%= request.ownerId.name %></span>
                         </div>
                     </div>
                     <div class="col-lg-5">
                         <div class="detail">
-                            <span class="mfield">Date: </span> 
+                            <span class="mfield">Date: </span>
                             <span>02/08/2020</span>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         <span class="step__icon"></span>
                         <span class="step__label"><%= request.approvers[i].approverId.name %></span>
                     </li>
-                  <% } else if(i == request.approvedBy.length ) { %>  
+                  <% } else if(i == request.approvedBy.length ) { %>
                     <li class="step step--incomplete step--active">
                         <span class="step__icon"></span>
                         <span class="step__label"><%= request.approvers[i].approverId.name %></span>
@@ -45,7 +45,7 @@
                         <span class="step__label"><%= request.approvers[i].approverId.name %></span>
                     </li>
                  <% } %>
-                
+
              <% } %>
         </ul>
     </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-lg-3">
                         <a href="/request/withdraw/<%= request._id %>">
-                            <button class="btn btn-lg remind btn-primary">WITHDRAW</button>
+                            <button class="btn btn-lg remind " style="background-color:#0da2ff; color:white;">WITHDRAW</button>
                         </a>
                     </div>
                 <% } %>
