@@ -31,6 +31,9 @@
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
 
    <style>
+        html, body {
+           background-color: #f1f2f7;
+       }
     #weatherWidget .currentDesc {
         color: #ffffff!important;
     }
@@ -71,7 +74,7 @@
             font-size: 1.2rem !important;
         }
         .right-panel{
-            height: 100%;
+            min-height: 100vh;
         }
         /* .card{
             background-color: #a9d5f5;
@@ -238,13 +241,13 @@
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <!-- <img class="user-avatar rounded-circle" src="/images/admin.jpg" alt="User Avatar"> -->
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-user" style="color: grey";></i>
                         </a>
 
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link text-center" href="#"><strong>Hello, <%=currentUser.username%></strong></a>
-                            <a class="nav-link" href="/users/<%=currentUser._id%>"><i class="fa fa- user"></i>My Profile</a>
-                            <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="/users/<%=currentUser._id%>"><i class="fa fa-user"></i>My Profile</a>
+                            <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i>Logout</a>
                         </div>
                     </div>
 

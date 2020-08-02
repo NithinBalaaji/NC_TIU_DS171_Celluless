@@ -2519,7 +2519,7 @@ footer.site-footer {
 /*# sourceMappingURL=style.css.map */
 
 .ongoing-card{
-  background-image: -webkit-linear-gradient(90deg,#3f5efb 0%,#fc466b 100%);
+  /* background-image: -webkit-linear-gradient(90deg,#3f5efb 0%,#fc466b 100%); */
   font-family: poppins,sans-serif;
     font-weight: 400;
     font-size: 16px;

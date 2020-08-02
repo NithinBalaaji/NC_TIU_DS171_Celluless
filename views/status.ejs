@@ -1,0 +1,18 @@
+
+<%include partials/studentHeader%>
+    <link rel="stylesheet" href="/css/statuspage.css">
+   
+    <div class="status-container">
+        <ul class="progressbar">
+            <% for(let i=0; i < request.approvers.length; i++) { %>
+                <% if(i < request.approvedBy.length){ %>
+                    <li class="active"><%= request.approvers[i].approverId.name %></li>
+                  <% } else{ %>  
+                    <li><%= request.approvers[i].approverId.name %></li>
+                 <% } %>
+                
+             <% } %>
+        </ul>
+    </div>
+</div>
+<%include partials/footer%>

@@ -137,11 +137,12 @@ exports.viewRequest = async (req, res) => {
             return res.json({success: false});
         }
 
+        console.log(request);
         let certificate = await blockchainUtil.getCertificate(request.blockchainId);
 
-
         console.log('View request');
-        return res.json({success: true, certificate: request});
+        //return res.json({success: true, certificate: request});
+        return res.render('status', {request});
     } catch(error){
         console.log(error);
     }

@@ -4,12 +4,13 @@
 
 <div class="animated fadeIn">
     <!-- Widgets  -->
+<% if(data.activeRequests.length>0){ %>
     <h3>Ongoing Requests</h3> <br />
 </br>
 <br>
 <div class="row text-center">
         <div class="col-lg-12 col-md-12">
-            <div class="card ongoing-card">
+            <div class="">
                   <div class="card-body">
                     <div class="row text-center">
                       <%for(let i=0;i<data.activeRequests.length;i++){%>
@@ -25,11 +26,11 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row text-center">
-                                        <div class="col-lg-8">
+                                    <div class="row">
+                                        <div class="col-lg-5" style="padding-left: 10px;">
                                              Approved by:
                                         </div>
-                                        <div class="col-lg-3 approver">
+                                        <div class="col-lg-7 approver" style="text-align: left;">
                                             <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
                                                 <%if(data.activeRequests[i].approvedBy[j].approverId){%>
                                                     <span class="badge badge-primary" style="background-color: #24bb2b;">
@@ -43,27 +44,24 @@
                                     <div class="row text-center">
                                       <ul class="list-group list-group-flush">
                                           <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                              <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span>
                                           </li>
                                         </ul>
                                       </div>
                                       <div class="row text-center">
                                         <ul class="list-group list-group-flush">
                                           <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                              <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span>
                                           </li>
                                       </ul>
                                     </div>
                                 </div>
                                 <div class="row text-center">
                                         <div class="col-lg-2"></div>
-                                        <div class="col-lg-4"><button class="btn remind btn-success" id="remind"
-                                                onclick="remindClickHandler()">Remind</button></div>
-                                        <div class="col-lg-4"><button class="btn withdraw btn-secondary" id="withdraw"
-                                                onclick="withdrawClickHandler()">Withdraw</button></div>
+                                        <div class="col-lg-8"><a href="/request/view?requestId=<%=data.activeRequests[i]._id%>"><button class="btn remind btn-success" id="remind">View Status</button></div>
                                         <div class="col-lg-2"></div>
                                       </div>
-                                      <div style="height: 12px"></div>
+                                      <div style="height: 30px"></div>
                             </div>
                         </div>
                         <%}%>
@@ -72,14 +70,16 @@
             </div>
         </div>
     </div>
+<% } %>
 
+<% if(data.completedRequests.length>0){ %>
     <!-- Widgets  -->
     <h3>Completed Requests</h3> <br />
   </br>
   <br>
   <div class="row text-center">
         <div class="col-lg-12 col-md-12">
-            <div class="card completed-card">
+            <div class="">
                   <div class="card-body">
                     <div class="row text-center">
                       <%for(let i=0;i<data.completedRequests.length;i++){%>
@@ -96,10 +96,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row text-center">
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-5" style="padding-left: 10px;">
                                              Approved by: 
                                         </div>
-                                        <div class="col-lg-3 approver">
+                                        <div class="col-lg-7 approver">
                                           <%for(let j=0;j<data.completedRequests[i].approvedBy.length;j++){%>
                                               <%if(data.completedRequests[i].approvedBy[j].approverId){%>
                                                   <span class="badge badge-primary" style="background-color: #24bb2b;">
@@ -128,7 +128,7 @@
                                 <div class="row text-center">
                                     <div class="col-lg-6"><a href="/request/certificate/view?requestId=<%=data.completedRequests[i]._id%>" class="btn btn-info" style="margin: 30px" >Download form with details</a></div>
                                 </div>
-                                      <div style="height: 12px"></div>
+                                      <div style="height: 30px"></div>
                             </div>
                         </div>
                         <%}%>
@@ -137,14 +137,16 @@
             </div>
         </div>
     </div>
+<% } %>
 
+<% if(data.rejectedRequests.length>0){ %>
     <!-- Widgets  -->
     <h3>Rejected Requests</h3> <br />
 </br>
 <br>
 <div class="row text-center">
         <div class="col-lg-12 col-md-12">
-            <div class="card rejected-card">
+            <div class="">
                   <div class="card-body">
                     <div class="row text-center">
                       <%for(let i=0;i<data.rejectedRequests.length;i++){%>
@@ -161,10 +163,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row text-center">
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-5" style="padding-left: 10px;">
                                              Approved by: 
                                         </div>
-                                        <div class="col-lg-3 approver">
+                                        <div class="col-lg-7 approver">
                                             <%for(let j=0;j<data.rejectedRequests[i].approvedBy.length;j++){%>
                                                 <%if(data.rejectedRequests[i].approvedBy[j].approverId){%>
                                                     <span class="badge badge-primary" style="background-color: #24bb2b;">
@@ -206,7 +208,7 @@
                                                 <h4 class="modal-title">Reason for rejection</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Insiufficient attendance</p>
+                                                <p>Insufficient attendance</p>
                                                 <br />
                                                 <p>- HOD</p>
                                             </div>
@@ -217,7 +219,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                      <div style="height: 12px"></div>
+                                      <div style="height: 30px"></div>
                             </div>
                         </div>
                         <%}%>
@@ -226,6 +228,8 @@
             </div>
         </div>
     </div>
+<% } %>
+
 <!-- /Widgets -->
 <!--  Traffic  -->
 
