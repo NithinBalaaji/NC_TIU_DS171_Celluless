@@ -110,7 +110,6 @@ exports.viewRequest = async (req, res) => {
         }
 
         let certificate = await blockchainUtil.getCertificate(request.blockchainId);
-        console.log(certificate);
 
 
         console.log('View request');

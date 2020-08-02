@@ -56,7 +56,6 @@ exports.getCertificateByQR = async () => {
     try {
         let certificateContract = await getCertificateContract();
         let certificate = await certificateContract.methods.getPendingApprovals().send({from: fromAddress});
-        console.log(certificate);
 
         return certificate;
     } catch (err) {
@@ -67,7 +66,7 @@ exports.getCertificateByQR = async () => {
 
 exports.getPendingApprovals = async (adminUserId) => {
     try {
-        let requests = await Request.find({}).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
+        let requests = await Request.find({isVerified:false,isRejected:false}).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
         return requests.filter(request=>((getNextApproverId(request)[0])==adminUserId));
     } catch (err) {
         console.log(err.toString);
