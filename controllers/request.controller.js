@@ -4,6 +4,8 @@ const path = require('path');
 const wkhtmltopdf = require('wkhtmltopdf');
 const QRCode = require('qrcode');
 const qr = require('qr-image');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 // Importing config/env variables
 
@@ -141,9 +143,25 @@ exports.viewRequest = async (req, res) => {
         console.log(request);
         let certificate = await blockchainUtil.getCertificate(request.blockchainId);
 
+        // Run python script
+        let data = request.fields.join();
+        let templateFilePath = path.resolve(__dirname, "../public/uploads/certifTemplates", request.workflowId.templatePath);
+        let scriptFilepath = path.join(__dirname,'../scripts/form_script.py');
+        let command = `python ${scriptFilepath} --type=generate --filepath=${templateFilePath} --data=${data}`;
+
+        const { stdout, stderr } = await exec(command);
+        if(stderr){
+            console.error(stderr);
+        }
+
+        let response = JSON.parse(stdout);
+        console.log(response.filepath);
+        let genFilePath = response.filepath.split("/");
+        genFilePath = genFilePath[genFilePath.length-1];
+
         console.log('View request');
         //return res.json({success: true, certificate: request});
-        return res.render('status', {request, isAdmin: req.user.isAdmin});
+        return res.render('status', {request, isAdmin: req.user.isAdmin, genFilePath});
     } catch(error){
         console.log(error);
     }
@@ -292,7 +310,7 @@ exports.remindRequest = async (req, res) => {
 }
 
 exports.viewRequestCertificate = async (req, res) => {
-    try{
+    try {
         if(!req.body.requestId && !req.query.requestId){
             return res.json({success: false})
         }
@@ -310,42 +328,30 @@ exports.viewRequestCertificate = async (req, res) => {
             return res.json({success: false});
         }
 
-				let qrPng = qr.image('http://localhost:8080/request/certificate/view?requestId='+requestId, { type: 'png' });
-				let qrPath = './qr/';
-				let qrImageName = qrPath + requestId +'.png';
-				qrPng.pipe(fs.createWriteStream(qrImageName));
+        let qrPng = qr.image(`${config.APP_BASE_URL}/request/certificate/view?requestId=${requestId}`, { type: 'png' });
+        let qrPath = './qr/';
+        let qrImageName = qrPath + requestId +'.png';
+        qrPng.pipe(fs.createWriteStream(qrImageName));
 
-        /*let qrcode = await QRCode.toDataURL('http://localhost:8080/request/certificate/view?requestId='+requestId);
-        var buf = new Buffer(qrcode, 'base64');
-				fs.writeFileSync(qrImageName,buf);*/
+        let data = request.fields.join();
+        let qrFullPath = path.resolve(qrImageName);
+        console.log("ABCD", qrFullPath);
 
-        //let certificate = await blockchainUtil.getCertificate(request.blockchainId);
+        let templateFilePath = path.resolve(__dirname, "../public/uploads/certifTemplates", request.workflowId.templatePath);
+        let scriptFilepath = path.join(__dirname,'../scripts/form_script.py');
+        let command = `python ${scriptFilepath} --type=generate --filepath=${templateFilePath} --data=${data} --qr=${qrFullPath}`;
 
-        let ejsPath = '../views/template.ejs';
-        let compiledEJS = await ejs.compile(fs.readFileSync(path.resolve(__dirname,ejsPath), 'utf8'),{ async: true });
-        let html = await compiledEJS({
-            time: new Date().toLocaleString(),
-            qrcode: qrcode,
-            fields: request.fields
-        });
-        console.log(html);
+        const { stdout, stderr } = await exec(command);
+        if(stderr){
+            console.error(stderr);
+        }
 
-        let outputPath = path.resolve(__dirname,'../public/hello.pdf');
-
-        let pdfOptions = {
-            pageSize: 'A4',
-            output: outputPath,
-            "margin-top": '20mm',
-            "margin-bottom": '20mm',
-            "margin-left": '20mm',
-            "margin-right": '20mm',
-        };
-
-        await exportHTML(html, pdfOptions);
+        let response = JSON.parse(stdout);
+        console.log(response);
+        let genFilePath = response.filepath;
 
         console.log('View certificate request');
-        return res.sendFile(outputPath);
-        return res.json({success: true, html: html});
+        return res.sendFile(genFilePath);
     } catch(error){
         console.log(error);
     }

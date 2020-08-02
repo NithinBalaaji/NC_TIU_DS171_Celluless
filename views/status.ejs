@@ -24,9 +24,7 @@
                 <div class="col-lg-1"></div>
             </div>
         </div>
-        <div class="pdf container">
 
-        </div>
         <ul class="steps">
             <% for(let i=0; i < request.approvers.length; i++) { %>
                 <% if(i < request.approvedBy.length){ %>
@@ -48,6 +46,11 @@
 
              <% } %>
         </ul>
+    </div>
+
+    <div class="image-container">
+        <!-- <div class="image-head">Application Form</div> -->
+        <img src="/generated_files/<%= genFilePath %>" alt="application-form" class="app-image">
     </div>
 
     <% if( !request.isVerified ){ %>

@@ -33,7 +33,8 @@ def write_text(image, text, x1, y1, x2, y2):
     return image
 
 def paste_seal(image):
-    seal = cv2.imread("../public/diginitt_seal.jpeg")
+    seal_fullpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "public/diginitt_seal.jpeg")
+    seal = cv2.imread(seal_fullpath)
     seal = cv2.resize(seal, (0,0), fx=0.35, fy=0.35)
     seal_height, seal_width, _ = seal.shape 
 
@@ -159,8 +160,8 @@ def main():
             image = write_text(image, text, pts[1], pts[0], pts[2], pts[0])
 
         # Paste seal
-        image = paste_seal(image)
         if args["qr"]:
+            image = paste_seal(image)
             image = paste_qr(image, args["qr"])
 
     log.debug("No. of blanks fields: {0}".format(blanks_count))

@@ -16,8 +16,28 @@
   margin-right: 5px;
 }
 
+.image-container {
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+
+.image-head {
+  font-size: 40px;
+  font-weight: 400;
+  margin-top: 80px;
+  padding-top: 80px;
+  margin-bottom: 40px;
+}
+
+.app-image {
+  margin-top: 40px;
+  max-width: 650px;
+}
+
 .action-container {
   padding-top: 70px;
+  margin-bottom: 50px;
 }
 /* Mixins */
 /* Color Variables */
@@ -160,7 +180,7 @@
 
 .step__label {
   position: absolute;
-  bottom: -3rem;
+  bottom: -5rem;
   left: 50%;
   margin-top: 2rem;
   font-size: 1.4rem;

@@ -55,7 +55,7 @@ exports.createWorkflow = async (req, res) => {
 		workflow.name = req.body.name;
 		workflow.fields = req.body.fields;
 		workflow.templatePath = req.body.templatePath;
-		workflow.generatedPath = req.body.generatedPath;
+		workflow.generatedPath = req.body.generatedPath.split('/')[req.body.generatedPath.split('/').length-1];
 		let approvers = req.body.approvers;
 		//workflow.path = req.file.fileName;
 		workflow.path = '';
