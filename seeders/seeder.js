@@ -238,8 +238,18 @@ exports.seedDB = async (req,res) => {
             pubKey: "insertpubhere"
         }),"12345");
 
+        let student3 = await User.register(new User({
+            username: "108117021",
+            name: "Bharath Kumar R",
+            email: "bharathkumarravichandran@gmail.com",
+            mobile: "7708845078",
+            isAdmin: false,
+            pubKey: "insertpubhere"
+        }),"12345");
+
         await student1.save();
         await student2.save();
+        await student3.save();
 
         let request1 = new Request();
         request1.blockchainId= "bck1";
