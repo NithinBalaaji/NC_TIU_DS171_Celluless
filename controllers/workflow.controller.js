@@ -30,6 +30,12 @@ exports.listWorkflow = async (req, res) => {
     }
 }
 
+exports.uploadFormImage = (req, res)=>{
+    console.log(req.file)
+    console.log(JSON.stringify(req.file))
+    res.send('hi')
+}
+
 exports.renderCreateWorkflow = async (req, res) => {
     try {
         let groups = await Group.find({});

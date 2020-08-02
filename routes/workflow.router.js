@@ -11,6 +11,7 @@ const { isLoggedIn } = require('../middlewares/auth');
 // GET Routes
 router.get('/list', isLoggedIn, workflowController.listWorkflow);
 router.get('/create', isLoggedIn, workflowController.renderCreateWorkflow);
+router.post('/uploadFormImage', upload.single('template') ,isLoggedIn, workflowController.uploadFormImage);
 
 // POST Routes
 router.post('/create', isLoggedIn, workflowController.createWorkflow);

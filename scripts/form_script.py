@@ -79,8 +79,9 @@ def main():
     t = args["type"]
     filepath = args["filepath"]
     pop_data = args["data"]
-    
-    pop_data = pop_data.split(',')
+    if t=='generate':
+        pop_data = pop_data.split(',')
+        
     
     log.debug("Execution type: " + t)
     log.debug("Filepath: " + filepath)
@@ -89,8 +90,8 @@ def main():
         log.error("Invalid arguments!")
         log.error("Exiting...")       
         sys.exit(0)
-
     image = cv2.imread(filepath)
+    image = image.astype('uint8')
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
 
