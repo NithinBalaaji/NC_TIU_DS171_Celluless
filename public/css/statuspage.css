@@ -2,7 +2,23 @@
   margin: 100px auto; 
 }
 
-  
+.meta-container {
+  margin-bottom: 70px;
+}
+
+.meta-container .detail {
+  font-size: 20px;
+}
+
+.meta-container .detail .mfield {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.action-container {
+  padding-top: 70px;
+}
 /* Mixins */
 /* Color Variables */
 /* Theme Variables */

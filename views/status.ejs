@@ -4,7 +4,25 @@
 
     <div class="status-container">
         <div style="text-align: center;">
-            <div style="font-size: 35px; font-weight: 600; margin-bottom: 100px; text-transform: uppercase;"><%= request.workflowId.name%> Form</div>
+            <div style="font-size: 35px; font-weight: 600; margin-bottom: 70px; text-transform: uppercase;"><%= request.workflowId.name%> Form</div>
+        </div>
+        <div class="meta-container">
+            <div class="row text-center">
+                <div class="col-lg-1"></div>
+                    <div class="col-lg-5">
+                        <div class="detail">
+                            <span class="mfield">Applicant name: </span> 
+                            <span><%= request.ownerId.name %></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="detail">
+                            <span class="mfield">Date: </span> 
+                            <span>02/08/2020</span>
+                        </div>
+                    </div>
+                <div class="col-lg-1"></div>
+            </div>
         </div>
         <div class="pdf container">
 
