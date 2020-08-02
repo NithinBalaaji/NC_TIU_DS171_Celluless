@@ -65,7 +65,7 @@ const {getNextApproverId} = require('../controllers/request.controller');
 
 exports.getPendingApprovals = async (adminUserId) => {
     try {
-        let requests = await Request.find({}).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
+        let requests = await Request.find({}).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').populate('ownerId').exec();
         return requests.filter(request=>((getNextApproverId(request)[0])==adminUserId));
     } catch (err) {
         console.log(err.toString);
