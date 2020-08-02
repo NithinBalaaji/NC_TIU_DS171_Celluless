@@ -201,7 +201,7 @@ exports.seedDB = async (req,res) => {
         });
         workflow1.approvers.push({
             grp: deanGrp,
-            level: 1
+            level: 2
         });
 
         await workflow1.save();

@@ -71,6 +71,7 @@ exports.renderCreateRequest = async (req, res) => {
 
 exports.createRequest = async (req, res) => {
     try{
+        console.log("inside", req.body)
         if(!req.body.workflowId || !req.body.approvers || !req.body.approvers){
             // console.log(req.body);
             return res.json({success: false})
@@ -116,6 +117,7 @@ exports.createRequest = async (req, res) => {
         res.json(newReq);
     } catch(error){
         console.log(error);
+        res.json({success: false});
     }
 }
 

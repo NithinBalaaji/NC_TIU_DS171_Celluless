@@ -44,6 +44,9 @@ app.get('/seed',seeder.seedDB )
 app.get('/template', (req, res)=>{
     res.render('template')
 })
+app.get('/logout', (req, res)=>{
+    res.redirect('/auth/user/logout')
+})
 
 app.use(express.static(__dirname + "/public/ElaAdmin"));
 app.use(express.static(__dirname + "/public"));
