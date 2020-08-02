@@ -11,11 +11,14 @@ const userController = require('../../controllers/auth/user.controller');
 
 
 router.post('/register', userController.registerUser);
-router.post('/login',passport.authenticate("local",
-                        {
-                            successRedirect:"/user/home",
-                            failureRedirect:"/auth/user/login"
-                        }),(req,res)=>{}
+router.post('/login', passport.authenticate("local",
+    {
+        failureRedirect: "/login"
+    }), (req, res) => {
+        const redirectTo = req.session.redirectTo || "/";
+        req.session.redirectTo = null;
+        res.redirect(redirectTo);
+    }
 );
 
 router.get('/logout', userController.logoutUser);

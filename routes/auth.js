@@ -47,9 +47,12 @@ authRouter.get("/login",(req,res)=>{
 
 authRouter.post("/login",passport.authenticate("local",
 	{
-		successRedirect:"/",
 		failureRedirect:"/login"
-	}),(req,res)=>{}
+	}),(req,res)=>{
+		const redirectTo = req.session.redirectTo || "/";
+		req.session.redirectTo = null;
+		res.redirect(redirectTo);
+	}
 );
 
 
