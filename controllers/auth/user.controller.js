@@ -52,7 +52,8 @@ exports.renderHome = async(req, res) => {
         if(user.isAdmin){
             //TODO get all requests to be approved by admin and return it
             approvalRequests=await blockchainUtil.getPendingApprovals();
-            return res.render("adminHome");
+            console.log(approvalRequests);
+            return res.render("adminHome",{requests: approvalRequests});
         }else{
             console.log(user);
             let requests = await Request.find({ownerId: user}).populate("approvers").populate("approvedBy").populate("workflowId").populate('ownerId').exec();
