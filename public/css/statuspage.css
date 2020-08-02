@@ -107,7 +107,7 @@
 }
 .step:after {
   width: 0;
-  background-color: #83cc61;
+  background-color: #00C70E;
 }
 .step--complete:after {
   width: 100% !important;
@@ -126,7 +126,7 @@
   position: relative;
   width: 4rem;
   height: 4rem;
-  background-color: black;
+  background-color: rgb(10,10,10,0.6);
   border: 0.75rem solid #e6e7e8;
   border-radius: 50%;
   color: transparent;
@@ -138,7 +138,7 @@
   content: '\2713';
 }
 .step__icon:after {
-  background-color: #83cc61 ;
+  background-color: #00C70E;
 }
 .step--complete.step--active .step__icon {
   color: #fff;
@@ -146,15 +146,15 @@
   transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 .step--incomplete.step--active .step__icon {
-  border-color: #83cc61;
+  border-color: rgb(10,10,10,0.1);
   -webkit-transition-delay: 0.5s;
           transition-delay: 0.5s;
 }
 .step--complete .step__icon {
   -webkit-animation: bounce 0.5s ease-in-out;
           animation: bounce 0.5s ease-in-out;
-  background-color: #83cc61;
-  border-color: #83cc61;
+  background-color: #00C70E;
+  border-color: #00C70E;
   color: #fff;
 }
 
