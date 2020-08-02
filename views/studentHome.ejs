@@ -20,9 +20,9 @@
 <div class="row text-center">
         <div class="col-lg-12 col-md-12">
             <div class="">
-                  <div class="card-body">
+                <div class="card-body">
                     <div class="row text-center">
-                      <%for(let i=0;i<data.activeRequests.length;i++){%>
+                        <%for(let i=0;i<data.activeRequests.length;i++){%>
                         <div class="col-lg-4 ">
                             <div class="card">
                                 <div class="card-header">
@@ -37,40 +37,44 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-5" style="padding-left: 10px;">
-                                             Approved by:
+                                            Approved by:
                                         </div>
                                         <div class="col-lg-7 approver" style="text-align: left;">
                                             <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
-                                                <%if(data.activeRequests[i].approvedBy[j].approverId){%>
-                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                       <%=data.activeRequests[i].approvedBy[j].approverId.username%>
-                                                    </span>
-                                                <%}%>
+                                            <%if(data.activeRequests[i].approvedBy[j].approverId){%>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                                <%=data.activeRequests[i].approvedBy[j].approverId.username%>
+                                            </span>
+                                            <%}%>
                                               <%}%>
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row text-center">
-                                      <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div class="row text-center">
                                         <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span>
-                                          </li>
-                                      </ul>
+                                            <li class="list-group-item">
+                                                <i class="fa fa-calendar"></i> Approved On : <span
+                                                    class="badge badge-warning pull-center r-activity">24/02/2020</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="row text-center">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <i class="fa fa-calendar"></i> Applied On : <span
+                                                    class="badge badge-info pull-center r-activity">24/02/2020</span>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="row text-center">
-                                        <div class="col-lg-2"></div>
-                                        <div class="col-lg-8"><a href="/request/view?requestId=<%=data.activeRequests[i]._id%>"><button class="btn remind btn-success" id="remind">View Status</button></div>
-                                        <div class="col-lg-2"></div>
-                                      </div>
-                                      <div style="height: 30px"></div>
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-8"><a
+                                            href="/request/view?requestId=<%=data.activeRequests[i]._id%>"><button
+                                                class="btn remind btn-success" id="remind">View Status</button></div>
+                                    <div class="col-lg-2"></div>
+                                </div>
+                                <div style="height: 30px"></div>
                             </div>
                         </div>
                         <%}%>
@@ -101,46 +105,55 @@
                                         </b>
                                         <!--<div class="circle">712</div>-->
 
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row text-center">
-                                        <div class="col-lg-5" style="padding-left: 10px;">
-                                             Approved by: 
-                                        </div>
-                                        <div class="col-lg-7 approver">
-                                          <%for(let j=0;j<data.completedRequests[i].approvedBy.length;j++){%>
-                                              <%if(data.completedRequests[i].approvedBy[j].approverId){%>
-                                                  <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                     <%=data.completedRequests[i].approvedBy[j].approverId.username%>
-                                                  </span>
-                                              <%}%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item" style = "padding: 15px 0">
+                                                                <div class="d-flex">
+                                                                    <div style="padding-left: 10px;">
+                                                                        Approved by:
+                                                                    </div>
+                                                                    <div class="flex-grow-1 col-lg-7 approver">
+                                                                        <%for(let j=0;j<data.completedRequests[i].approvedBy.length;j++){%>
+                                                                        <%if(data.completedRequests[i].approvedBy[j].approverId){%>
+                                                                        <span class="badge badge-primary"
+                                                                            style="background-color: #24bb2b;">
+                                                                            <%=data.completedRequests[i].approvedBy[j].approverId.username%>
+                                                                        </span>
+                                                                        <%}%>
                                             <%}%>
+                                                                    </div>
+                                                            </li>
+                                                            <!-- </div> -->
+                                                            <!-- <br /> -->
+                                                            <li class="list-group-item">
+                                                                <div class="row text-center">
+                                                                    <a href="#"> <i class="fa fa-calendar"></i> Approved
+                                                                        on
+                                                                        : <span
+                                                                            class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                                                        </div>
+                                                            </li>
+                                                    <li class="list-group-item">
+                                                        <div class="row text-center">
+                                                            <a href="#"> <i class="fa fa-calendar"></i> Applied on :
+                                                                <span
+                                                                    class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                                        </div>
+                                                    </li>
+                                                    </ul>
+                                                    <div class="row text-center">
+                                                        <div class="col-lg-6"><a
+                                                            href="/request/certificate/view?requestId=<%=data.completedRequests[i]._id%>"
+                                                            class="btn btn-info" style="margin: 10px">Download form with
+                                                            details</a></div>
+                                                        </div>
+                                                    </div>
+                                                <!-- <div style="height: 30px"></div> -->
+                                            </div>
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="row text-center">
-                                      <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div class="row text-center">
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
-                                          </li>
-                                      </ul>
-                                    </div>
-                                </div>
-                                <div class="row text-center">
-                                    <div class="col-lg-6"><a href="/request/certificate/view?requestId=<%=data.completedRequests[i]._id%>" class="btn btn-info" style="margin: 30px" >Download form with details</a></div>
-                                </div>
-                                      <div style="height: 30px"></div>
-                            </div>
-                        </div>
-                        <%}%>
+                                        <%}%>
                     </div>
                 </div>
             </div>
@@ -168,70 +181,84 @@
                                         </b>
                                         <!--<div class="circle">712</div>-->
 
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row text-center">
-                                        <div class="col-lg-5" style="padding-left: 10px;">
-                                             Approved by: 
-                                        </div>
-                                        <div class="col-lg-7 approver">
-                                            <%for(let j=0;j<data.rejectedRequests[i].approvedBy.length;j++){%>
-                                                <%if(data.rejectedRequests[i].approvedBy[j].approverId){%>
-                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                       <%=data.rejectedRequests[i].approvedBy[j].approverId.username%>
-                                                    </span>
-                                                <%}%>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row text-center">
+                                                                            <div class="col-lg-5"
+                                                                                style="padding-left: 10px;">
+                                                                                Approved by:
+                                                                            </div>
+                                                                            <div class="col-lg-7 approver">
+                                                                                <%for(let j=0;j<data.rejectedRequests[i].approvedBy.length;j++){%>
+                                                                                <%if(data.rejectedRequests[i].approvedBy[j].approverId){%>
+                                                                                <span class="badge badge-primary"
+                                                                                    style="background-color: #24bb2b;">
+                                                                                    <%=data.rejectedRequests[i].approvedBy[j].approverId.username%>
+                                                                                </span>
+                                                                                <%}%>
                                               <%}%>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="row text-center">
-                                      <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div class="row text-center">
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
-                                          </li>
-                                      </ul>
-                                    </div>
-                                </div>
-                                <div class="row text-center">
-                                    <div class="col-lg-3"></div>
-                                    <div class="col-lg-6"><button type="button" class="btn btn-secondary"
-                                            data-toggle="modal" data-target="#myModal" onclick="viewRejectionClickHandler()">View rejection</button></div>
-                                    <div class="col-lg-3"></div>
-                                </div>
-                                <div id="myModal" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close"
-                                                    data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Reason for rejection</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Insufficient attendance</p>
-                                                <br />
-                                                <p>- HOD</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                      <div style="height: 30px"></div>
-                            </div>
-                        </div>
-                        <%}%>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br />
+                                                                        <div class="row text-center">
+                                                                            <ul class="list-group list-group-flush">
+                                                                                <li class="list-group-item">
+                                                                                    <a href="#"> <i
+                                                                                            class="fa fa-calendar"></i>
+                                                                                        Approved On : <span
+                                                                                            class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="row text-center">
+                                                                            <ul class="list-group list-group-flush">
+                                                                                <li class="list-group-item">
+                                                                                    <a href="#"> <i
+                                                                                            class="fa fa-calendar"></i>
+                                                                                        Applied On : <span
+                                                                                            class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row text-center">
+                                                                        <div class="col-lg-3"></div>
+                                                                        <div class="col-lg-6"><button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-toggle="modal"
+                                                                                data-target="#myModal"
+                                                                                onclick="viewRejectionClickHandler()">View
+                                                                                rejection</button></div>
+                                                                        <div class="col-lg-3"></div>
+                                                                    </div>
+                                                                    <div id="myModal" class="modal fade" role="dialog">
+                                                                        <div class="modal-dialog">
+                                                                            <!-- Modal content-->
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal">&times;</button>
+                                                                                    <h4 class="modal-title">Reason for
+                                                                                        rejection</h4>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <p>Insufficient attendance</p>
+                                                                                    <br />
+                                                                                    <p>- HOD</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-default"
+                                                                                        data-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="height: 30px"></div>
+                                                                </div>
+                                                            </div>
+                                                            <%}%>
                     </div>
                 </div>
             </div>
@@ -239,28 +266,28 @@
     </div>
 <% } %>
 
-<!-- /Widgets -->
-<!--  Traffic  -->
+                                                            <!-- /Widgets -->
+                                                            <!--  Traffic  -->
 
-</div>
+                                                        </div>
 
-<script>
-    function remindClickHandler() {
-        console.log("remind Clicked!")
-        // this formID should send a reminder to its next approver. Priority 1
-    }
-    function withdrawClickHandler() {
-        console.log("withdraw Clicked!")
-        // delete this formID from all tables. Priority 3
-    }
-    function downloadFormClickHandler() {
-        console.log("download form clicked!")
-        // download this formID with its blanks filled in. Priority 4
-    }
-    function viewRejectionClickHandler() {
-        console.log("View Rejection CLicked!")
-        // View rejection string of this formID and also get who wrote this rejection. Priority 2
-    }
-</script>
+                                                        <script>
+                                                            function remindClickHandler() {
+                                                                console.log("remind Clicked!")
+                                                                // this formID should send a reminder to its next approver. Priority 1
+                                                            }
+                                                            function withdrawClickHandler() {
+                                                                console.log("withdraw Clicked!")
+                                                                // delete this formID from all tables. Priority 3
+                                                            }
+                                                            function downloadFormClickHandler() {
+                                                                console.log("download form clicked!")
+                                                                // download this formID with its blanks filled in. Priority 4
+                                                            }
+                                                            function viewRejectionClickHandler() {
+                                                                console.log("View Rejection CLicked!")
+                                                                // View rejection string of this formID and also get who wrote this rejection. Priority 2
+                                                            }
+                                                        </script>
 
-<%include partials/footer%>
+                                                        <%include partials/footer%>
