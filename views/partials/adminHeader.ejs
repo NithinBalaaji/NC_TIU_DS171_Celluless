@@ -34,9 +34,6 @@
     
     <script type="text/javascript" async=false defer=false src="node_modules/pnotify/dist/iife/PNotify.js"></script>
     <script type="text/javascript" async=false defer=false src="node_modules/pnotify/dist/iife/PNotifyButtons.js"></script>
-    <script type="text/javascript">
-      PNotify.alert('Notice me, senpai!');
-    </script>
     <script src="/assets/js/dragula.js"></script>
    <style>
        html, body {
@@ -91,7 +88,7 @@
     </style>
 </head>
 
-<body>
+<body class="open">
   <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -100,19 +97,19 @@
                     <li class="active">
                         <a href="/user/home"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="/workflow/list" class="dropdown-toggle"><i class="menu-icon fa fa-file"></i>Apply for a form</a>
+                    <li class="menu-item">
+                        <a href="/workflow/list"><i class="menu-icon fa fa-file"></i>Apply for a form</a>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="/personal-details" class="dropdown-toggle"><i class="menu-icon fa fa-user"></i>Personal details</a>
+                    <li class="menu-item">
+                        <a href="/personal-details"><i class="menu-icon fa fa-user"></i>Personal details</a>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="/change-password" class="dropdown-toggle"><i class="menu-icon fa fa-unlock-alt"></i>Password</a>
+                    <li class="menu-item">
+                        <a href="/change-password"><i class="menu-icon fa fa-unlock-alt"></i>Password</a>
                     </li>
-                    <li class="menu-item-has-children">
+                    <li class="menu-item">
                         <a href="/settings" class="dropdown-toggle"><i class="menu-icon fa fa-cog"></i>Settings</a>
                     </li>
-                    <li class="menu-item-has-children">
+                    <li class="menu-item">
                         <a href="/logout" class="dropdown-toggle"><i class="menu-icon fa fa-power-off"></i>Logout</a>
                     </li>
                 </ul>

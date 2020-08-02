@@ -142,7 +142,7 @@ exports.viewRequest = async (req, res) => {
 
         console.log('View request');
         //return res.json({success: true, certificate: request});
-        return res.render('status', {request});
+        return res.render('status', {request, isAdmin: req.user.isAdmin});
     } catch(error){
         console.log(error);
     }
@@ -227,6 +227,7 @@ exports.rejectRequest = async (req, res) => {
         await blockchainUtil.rejectCertificate(requestId);
 
         // Email to user
+        let subject = "Application request rejected - Celluless";
         let statusFullURL = `${config.APP_BASE_URL}/request/view?requestId=${requestId}`;
         let html = `<div>
             <div>Hi ${request.ownerId.name},</div>
@@ -265,8 +266,10 @@ exports.remindRequest = async (req, res) => {
             return res.json({success: false});
         }
 
-        let nextApprover = await getNextApproverId(request);
         // Email to next approver
+        let subject = "Application remind request - Celluless";
+        let nextApprover = await getNextApproverId(request);
+        let statusFullURL = `${config.APP_BASE_URL}/request/view?requestId=${requestId}`;
         let nextApproverUser = await User.findById(nextApprover);
         html = `<div>
             <div>Hi ${nextApproverUser.name},</div>

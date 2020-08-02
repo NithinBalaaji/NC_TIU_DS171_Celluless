@@ -1,18 +1,69 @@
 
 <%include partials/studentHeader%>
     <link rel="stylesheet" href="/css/statuspage.css">
-   
+
     <div class="status-container">
-        <ul class="progressbar">
+        <div style="text-align: center;">
+            <div style="font-size: 35px; font-weight: 600; margin-bottom: 100px; text-transform: uppercase;"><%= request.workflowId.name%> Form</div>
+        </div>
+        <div class="pdf container">
+
+        </div>
+        <ul class="steps">
             <% for(let i=0; i < request.approvers.length; i++) { %>
                 <% if(i < request.approvedBy.length){ %>
-                    <li class="active"><%= request.approvers[i].approverId.name %></li>
-                  <% } else{ %>  
-                    <li><%= request.approvers[i].approverId.name %></li>
+                    <li class="step step--complete step--active">
+                        <span class="step__icon"></span>
+                        <span class="step__label"><%= request.approvers[i].approverId.name %></span>
+                    </li>
+                  <% } else if(i == request.approvedBy.length ) { %>  
+                    <li class="step step--incomplete step--active">
+                        <span class="step__icon"></span>
+                        <span class="step__label"><%= request.approvers[i].approverId.name %></span>
+                    </li>
+                  <% } else {%>
+                    <li class="step step--incomplete step--inactive">
+                        <span class="step__icon"></span>
+                        <span class="step__label"><%= request.approvers[i].approverId.name %></span>
+                    </li>
                  <% } %>
                 
              <% } %>
         </ul>
     </div>
+
+    <% if( !request.isVerified ){ %>
+        <div class="action-container">
+            <div class="row text-center">
+                <div class="col-lg-3"></div>
+                <% if( isAdmin ){ %>
+                    <div class="col-lg-3">
+                        <a href="/request/approve/<%= request._id %>"><button
+                                class="btn btn-lg remind btn-success">APPROVE</button>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="/request/reject/<%= request._id %>">
+                            <button class="btn btn-lg remind btn-danger">REJECT</button>
+                        </a>
+                    </div>
+                <% } else {%>
+                    <div class="col-lg-3">
+                        <a href="/request/remind/<%= request._id %>"><button
+                                class="btn btn-lg remind btn-warning">REMIND</button>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="/request/withdraw/<%= request._id %>">
+                            <button class="btn btn-lg remind btn-primary">WITHDRAW</button>
+                        </a>
+                    </div>
+                <% } %>
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+    <% } %>
+
+<script src="/js/status.js"></script>
 </div>
 <%include partials/footer%>
