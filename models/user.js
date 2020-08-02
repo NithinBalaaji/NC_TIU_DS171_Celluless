@@ -11,6 +11,7 @@ var userSchema = new Schema({
     password: String,
     idFaculty: Boolean,
     isAdmin: Boolean,
+    otp:Number,
     pubKey: String
 })
 

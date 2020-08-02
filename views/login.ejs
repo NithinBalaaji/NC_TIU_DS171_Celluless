@@ -326,6 +326,10 @@ input:checked + .slider:before {
   border-radius: 34px;
 }
 
+.hidden-at-first{
+  display: none;
+}
+
 .slider.round:before {
   border-radius: 50%;
 }</style>
@@ -356,9 +360,13 @@ input:checked + .slider:before {
                         <label for="username">Username</label>
                       </div>
         
-                      <div class="form-label-group">
-                        <input type="password" id="Password" name="password" class="form-control" placeholder="Password" required>
+                      <div class="form-label-group hidden-at-first">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                         <label for="Password">Password</label>
+                      </div>
+                      <div class="form-label-group hidden-at-first">
+                        <input type="number" id="otp" name="otp" class="form-control" placeholder="OTP">
+                        <label for="otp">OTP</label>
                       </div>
 
                       <div class="custom-control custom-checkbox mb-3">
@@ -370,7 +378,8 @@ input:checked + .slider:before {
                             <span class="slider round"></span>
                           </label> -->
 
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" id="otpBtn">Send otp</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase hidden-at-first" type="submit" id="loginBtn">Sign in</button>
                                             
                       
                     </div>
@@ -386,5 +395,6 @@ input:checked + .slider:before {
               </div>
             </div>
           </div>
+          <script src="/login.js"></script>
     </body>
 </html>

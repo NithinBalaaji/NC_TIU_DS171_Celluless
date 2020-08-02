@@ -6,6 +6,7 @@ const Request = require("../../models/request")
 const User= require("../../models/user")
 //Importing utils
 const blockchainUtil = require("../../utils/blockchaain");
+const { sendEmail } = require("../../utils/mail");
 
 exports.registerUser = async (req, res) => {
     try{
@@ -40,6 +41,41 @@ exports.logoutUser = async (req, res) => {
         req.logout();
         res.redirect("/");
     } catch(error){
+        console.log(error);
+        res.json({success: false, error})
+    }
+}
+
+exports.sendOtp = async (req, res) => {
+    try {
+        const otp = Math.floor(1000 + Math.random() * 9000);
+        console.log("exports.sendOtp -> req.body", req.body)
+        let user = await User.findOne({username:req.body.username});
+        user.otp = otp;
+        await user.save();
+        const email = await sendEmail(user.email,"OTP",`<h1>Your OTP is : ${otp}</h1>`);
+        console.log("exports.sendOtp -> email", email)
+        res.json({success:true});
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, error})
+    }
+}
+
+exports.checkOtp = async (req,res, next)=>{
+    try {
+        let user =  await User.findOne({username:req.body.username})
+        // console.log("exports.checkOtp -> user", user)
+        // console.log("exports.checkOtp -> user.otp", user.otp)
+        // console.log("exports.checkOtp -> req.body.otp", req.body.otp)
+        if (parseInt(req.body.otp) == user.otp) {
+            return next()
+        } else {
+            user.otp = null;
+            user.save();
+            return res.json({message:'wrong otp'})
+        }
+    } catch (error) {
         console.log(error);
         res.json({success: false, error})
     }

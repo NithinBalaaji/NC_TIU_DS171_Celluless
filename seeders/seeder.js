@@ -232,7 +232,7 @@ exports.seedDB = async (req,res) => {
         let student2 = await User.register(new User({
             username: "102117058",
             name: "Subash Aravindan",
-            email: "abc@abc.com",
+            email: "p.subasharavindan@gmail.com",
             mobile: "999999999",
             isAdmin: false,
             pubKey: "insertpubhere"

@@ -9,9 +9,9 @@ const userController = require('../../controllers/auth/user.controller');
 // Auth routes
 // router.get('/register', userController.renderRegisterUser);
 
-
+router.post('/sendotp', userController.sendOtp);
 router.post('/register', userController.registerUser);
-router.post('/login', passport.authenticate("local",
+router.post('/login', userController.checkOtp ,passport.authenticate("local",
     {
         failureRedirect: "/login"
     }), (req, res) => {
