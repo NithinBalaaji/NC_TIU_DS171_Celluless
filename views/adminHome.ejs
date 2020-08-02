@@ -1,5 +1,22 @@
 <%include partials/adminHeader%>
 <!--<span id="hidden-pieValueCompleted"><%=JSON.stringify(requests)%></span>-->
+<style>
+    .list-group-item {
+        border: none;
+    }
+    .form-head {
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-right: 5px;
+        font-size: 25px;
+        color: rgba(0,0,0,0.8);
+    }
+
+    .d-flex {
+        color: rgb(51,51,51);
+        font-size: 16px;
+    }
+</style>
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span>
 <div class="animated fadeIn">
     <!-- Widgets  -->
@@ -7,49 +24,71 @@
     <!-- /Widgets -->
     <!--  Traffic  -->
 <% if(requests.length>0){ %>
-    <div class="row text-center">
-        <div class="col-lg-12">
-            <div class="card">
+    <br/>
+    <h3 style="text-transform: uppercase;">Pending Requests</h3>
+    <br/>
+<div class="row text-center">
+        <div class="col-lg-12 col-md-12">
+            <div class="">
                 <div class="card-body">
-                  <h2 class="mb-3">Pending Requests</h2>
-                  <div class="row">
-                    <%for(let i=0;i<requests.length;i++){%>
-                  <div class="col-md-4">
-                      <aside class="profile-nav alt">
-                          <section class="card">
-                              <div class="card-header user-header alt bg-dark">
-                                  <div class="media">
-                                      <div class="media-body">
-                                          <h2 class="text-light display-6"><%=requests[i].workflowId.name%></h2>
-                                      </div>
-                                  </div>
-                              </div>
-                              <ul class="list-group list-group-flush">
-                                  <li class="list-group-item">
-                                      <a href="#"><i class="fa fa-user"></i>  Applied By : <span class="badge badge-info pull-center r-activity"><%=requests[i].ownerId.name%> </a>
-                                  </li>
-                                  <li class="list-group-item">
-                                      <a href="#"> <i class="fa fa-calendar"></i>  Due Date :  <span class="badge badge-warning pull-center r-activity">02/08/2020</span></a>
-                                  </li>
-                              </ul>
-                              <div class="row text-center">
-                                      <div class="col-lg-2"></div>
-                                      <div class="col-lg-4"><a class="btn remind btn-success m-1"  id="remind"
-                                              href="/request/approve/<%=requests[i]._id%>">Approve</a></div>
-                                      <div class="col-lg-4"><a class="btn withdraw btn-danger m-1"  id="withdraw"
-                                              href="/request/reject/<%=requests[i]._id%>">Reject</a></div>
-                                      <div class="col-lg-2"></div>
+                    <div class="row text-center">
+                        <%for(let i=0;i<requests.length;i++){%>
+                        <div class="col-lg-4 ">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div style="padding: 10px; justify-content: space-between;">
+                                        <b class="top-pad">
+                                            <div class="form-head"><%=requests[i].workflowId.name%></div>
+                                        </b>
+                                        <!--<div class="circle">712</div>-->
                                     </div>
-                          </section>
-                      </aside>
-                  </div>
-                  <%}%>
-
-           </div>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div style="padding-left: 10px;">
+                                                    <i class="fa fa-calendar"></i> <span style="margin-left: 3px;">Applied by: </span>
+                                                </div>
+                                                <div class="flex-grow-1 approver">
+                                                    <span class="pull-center r-activity">
+                                                        <%=requests[i].ownerId.name%>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="d-flex">
+                                                <div style="padding-left: 10px;">
+                                                    <i class="fa fa-calendar"></i> <span style="margin-left: 3px;">Due date: </span>
+                                                </div>
+                                                <div class="flex-grow-1 approver">
+                                                    <span class="pull-center r-activity" style="color:#3694F7">
+                                                        05/08/2020
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                </ul>
+                                </div>
+                                <div class="row text-center" style="margin-top: 10px; margin-bottom: 20px;">
+                                    <div class="col-lg-6"><a
+                                        href="/request/approve/<%=requests[i]._id%>"
+                                        class="btn btn-success" style="margin: 10px">Approve</a>
+                                    </div>
+                                    <div class="col-lg-6"><a
+                                        href="/request/reject/<%=requests[i]._id%>"
+                                        class="btn btn-danger" style="margin: 10px">Reject</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
   <% } %>
       <div class = "row text-center">
         <div class="container">
