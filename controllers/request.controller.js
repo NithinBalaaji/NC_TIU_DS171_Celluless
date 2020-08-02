@@ -1,3 +1,8 @@
+const ejs = require('ejs');
+const fs = require('fs');
+const path = require('path');
+const wkhtmltopdf = require('wkhtmltopdf');
+
 // Importing config/env variables
 
 // Importing models
@@ -7,6 +12,19 @@ const User = require("../models/user");
 
 //Importing utils
 const blockchainUtil = require("../utils/blockchaain");
+
+const exportHTML = async (html,pdfOptions) => {
+	return new Promise((resolve, reject) => {
+		wkhtmltopdf(html, pdfOptions, (error) => {
+			if (error) {
+                logger.error(error);
+				reject(error);
+			} else {
+				resolve();
+			}
+		});
+	});
+}
 
 const getNextApproverId = async (request) => {
     let lvl = 0;
@@ -184,13 +202,27 @@ exports.viewRequestCertificate = async (req, res) => {
             return res.json({success: false});
         }
 
-        let certificate = await blockchainUtil.getCertificate(request.blockchainId);
+        //let certificate = await blockchainUtil.getCertificate(request.blockchainId);
 
-        let ejsPath = path.resolve('../uploads/',request.workflowId.path);
+        let ejsPath = request.workflowId.path;
         let compiledEJS = await ejs.compile(fs.readFileSync(ejsPath, 'utf8'),{ async: true });
         let html = await compiledEJS(request.fields);
 
+        let outputPath = '/home/teslash21/CS/Github/drsiri/public/generated-pdfs/hello.pdf';
+
+        let pdfOptions = {
+            pageSize: 'A4',
+            output: outputPath,
+            "margin-top": '20mm',
+            "margin-bottom": '20mm',
+            "margin-left": '20mm',
+            "margin-right": '20mm',
+        };
+
+        await exportHTML(html, pdfOptions);
+
         console.log('View certificate request');
+        return res.sendFile(outputPath);
         return res.json({success: true, html: html});
     } catch(error){
         console.log(error);

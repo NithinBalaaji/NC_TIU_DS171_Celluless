@@ -11,7 +11,7 @@
   "dependencies": {
     "body-parser": "1.19.0",
     "dragula": "^3.7.2",
-    "ejs": "2.6.2",
+    "ejs": "^2.6.2",
     "express": "4.17.1",
     "express-session": "1.16.2",
     "http-status-codes": "^1.4.0",
@@ -21,10 +21,11 @@
     "passport": "0.4.0",
     "passport-local": "1.0.0",
     "passport-local-mongoose": "5.0.1",
-    "pnotify": "4.0.0",
     "path": "^0.12.7",
+    "pnotify": "4.0.0",
     "randomstring": "1.1.5",
     "util": "^0.12.1",
-    "web3": "^1.2.6"
+    "web3": "^1.2.6",
+    "wkhtmltopdf": "^0.3.4"
   }
 }

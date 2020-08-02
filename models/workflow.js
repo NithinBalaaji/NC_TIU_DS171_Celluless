@@ -8,7 +8,7 @@ var workflowSchema = new Schema({
         grp: {type:Schema.Types.ObjectId, ref: "Group"},
         level: Number
     }],
-    path:String,
+    path: String,
 })
 
 module.exports= mongoose.model("Workflow", workflowSchema);
