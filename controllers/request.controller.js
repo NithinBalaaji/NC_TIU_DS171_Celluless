@@ -2,6 +2,7 @@ const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
 const wkhtmltopdf = require('wkhtmltopdf');
+const QRCode = require('qrcode');
 
 // Importing config/env variables
 
@@ -17,7 +18,7 @@ const exportHTML = async (html,pdfOptions) => {
 	return new Promise((resolve, reject) => {
 		wkhtmltopdf(html, pdfOptions, (error) => {
 			if (error) {
-                logger.error(error);
+                console.error(error);
 				reject(error);
 			} else {
 				resolve();
@@ -192,11 +193,16 @@ exports.rejectRequest = async (req, res) => {
 
 exports.viewRequestCertificate = async (req, res) => {
     try{
-        if(!req.body.requestId){
+        if(!req.body.requestId && !req.query.requestId){
             return res.json({success: false})
         }
 
-        let requestId = req.body.requestId;
+        let requestId;
+        if(req.body.requestId){
+            requestId = req.body.requestId;
+        } else if(req.query.requestId){
+            requestId = req.query.requestId;
+        }
 
         let request = await Request.findById(requestId).populate('approvers.approverId').populate('approvedBy.approverId').populate('workflowId').exec();
 
@@ -204,11 +210,18 @@ exports.viewRequestCertificate = async (req, res) => {
             return res.json({success: false});
         }
 
+        let qrcode = await QRCode.toDataURL('http://localhost:8080/request/certificate/view?requestId='+requestId);
+
         //let certificate = await blockchainUtil.getCertificate(request.blockchainId);
 
         let ejsPath = request.workflowId.path;
         let compiledEJS = await ejs.compile(fs.readFileSync(ejsPath, 'utf8'),{ async: true });
-        let html = await compiledEJS(request.fields);
+        let html = await compiledEJS({
+            time: new Date().toLocaleString(),
+            qrcode: qrcode,
+            fields: request.fields
+        });
+        console.log(html);
 
         let outputPath = '/home/teslash21/CS/Github/drsiri/public/generated-pdfs/hello.pdf';
 
