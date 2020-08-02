@@ -1,4 +1,4 @@
-<%include partials/header%>
+<%include partials/studentHeader%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <div style="display: none;" id="workflowData">
     <%= JSON.stringify(workflow) %>
@@ -27,7 +27,6 @@
             <div class="card">
                 <div class="card-header">
                     <div id="form-title">
-                        <!-- <a%= data.name %> -->
                     </div>
                 </div>
                 <div class="card-body card-block">
@@ -61,9 +60,11 @@
         let fields = [];
 
         for (let i = 0; i < fieldSize; i++) {
-            let childElem = "<label for='" + data.fields[i].desc + "' class='form-control-label'>" + data.fields[i].desc + "</label><input type='text' id='" + data.fields[i].htmlId + "' name='" + data.fields[i].desc + "' placeholder='" + data.fields[i].desc + "' class='form-control'>";
+            let childElem = "<label for='" + data.fields[i] + "' class='form-control-label'>" + data.fields[i] + "</label><input type='text' id='" + data.fields[i] + "' name='" + data.fields[i] + "' placeholder='" + data.fields[i] + "' class='form-control'>";
             $(childElem).appendTo("#fieldContainer")
         }
+
+        console.log()
 
         let designatorsSize = data.approvers.length
         let idx = window.location.host.length + 15 + 2 + window.location.protocol.length
@@ -73,11 +74,11 @@
         for (let i = 0; i < designatorsSize; i++) {
             let istr = i.toString();
 
-            let chooseDesignatorElem = "<div style='display: flex; justify-content: space-around'><label for='" + data.approvers[i].grp.name + "' class='form-control-label'>" + data.approvers[i].grp.name + "</label><select id='" + data.approvers[i].grp.name + "'>";
+            let chooseDesignatorElem = "<div style='display: flex; justify-content: space-around'><label for='" + data.approvers[i].grp.name.replace(/\s+/, "")  + "' class='form-control-label'>" + data.approvers[i].grp.name.replace(/\s+/, "")  + "</label><select id='" + data.approvers[i].grp.name.replace(/\s+/, "")  + "'>";
 
             let members = data.approvers[i].grp.members.length;
             for (let j = 0; j < members; j++) {
-                let person = "<option class='" + data.approvers[i].grp.members[j]._id + "'value='" + data.approvers[i].grp.members[j].username + "' id='" + data.approvers[i].grp.members[j].username + "'>" + data.approvers[i].grp.members[j].username + "</option>";
+                let person = "<option class='" + data.approvers[i].grp.members[j]._id + "'value='" + data.approvers[i].grp.members[j].username.replace(/\s+/, "")  + "' id='" + data.approvers[i].grp.members[j].username.replace(/\s+/, "") + "'>" + data.approvers[i].grp.members[j].username.replace(/\s+/, "")  + "</option>";
                 chooseDesignatorElem += person;
             }
 
@@ -92,8 +93,8 @@
             let approvers;
 
             for (let i = 0; i < designatorsSize; i++) {
-                let myselect = "#" + data.approvers[i].grp.name + " option:selected";
-                approvedNames.push($(myselect).text())
+                let myselect = "#" + data.approvers[i].grp.name.replace(/\s+/, "") + " option:selected";
+                approvedNames.push($(myselect).text().replace(/\s+/, "") )
                 approverIds.push(document.getElementById(approvedNames[i]).className);
             }
 
@@ -118,7 +119,7 @@
             fields.push($("#nf-email")[0].value)
 
             for (let i = 0; i < fieldSize; i++) {
-                fields.push($("#" + data.fields[i].htmlId)[0].value)
+                fields.push($("#" + data.fields[i])[0].value)
             }
             console.log(workflowId)
             console.log(approvers)
