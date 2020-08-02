@@ -12,7 +12,86 @@
               </div>
         </div>
     </div>
-    <!-- Widgets  -->
+    <div class="row">
+               <div class="col-sm-6 col-lg-3">
+                       <div class="card text-white bg-flat-color-1">
+                           <div class="card-body">
+                               <div class="card-left pt-1 float-left">
+                                   <h3 class="mb-0 fw-r" style="color: white;">
+                                       <span class="count"><%=data.completedRequests.length%></span>
+                                   </h3>
+                                   <p class="text-light mt-1 m-0">Completed</p>
+                               </div><!-- /.card-left -->
+
+                               <div class="card-right float-right text-right" style="color: white;">
+                                   <i class="icon fade-5 icon-lg ti-check-box"></i>
+                               </div><!-- /.card-right -->
+
+                           </div>
+
+                       </div>
+                   </div>
+                   <!--/.col-->
+
+                   <div class="col-sm-6 col-lg-3">
+                       <div class="card text-white " style="background-color:#faf35e;">
+                           <div class="card-body">
+                             <div class="card-left pt-1 float-left">
+                                 <h3 class="mb-0 fw-r" style="color: white;">
+                                     <span class="count"><%=data.activeRequests.length%></span>
+                                 </h3>
+                                 <p class="text-light mt-1 m-0">Ongoing</p>
+                             </div><!-- /.card-left -->
+
+                             <div class="card-right float-right text-right" style="color: white;">
+                                 <i class="icon fade-5 icon-lg ti-bookmark-alt"></i>
+                             </div><!-- /.card-right -->
+                           </div>
+
+                       </div>
+                   </div>
+                   <!--/.col-->
+
+                   <div class="col-sm-6 col-lg-3">
+                       <div class="card text-white bg-flat-color-4">
+                           <div class="card-body">
+                               <div class="card-left pt-1 float-left">
+                                   <h3 class="mb-0 fw-r" style="color: white;">
+                                       <span class="count"><%=data.rejectedRequests.length%></span>
+                                   </h3>
+                                   <p class="text-light mt-1 m-0">Rejected</p>
+                               </div><!-- /.card-left -->
+
+                               <div class="card-right float-right text-right" style="color: white;">
+                                   <i class="icon fade-5 icon-lg ti-na"></i>
+                               </div><!-- /.card-right -->
+
+                           </div>
+
+                       </div>
+                   </div>
+                   <!--/.col-->
+
+                   <div class="col-sm-6 col-lg-3">
+                       <div class="card text-white bg-flat-color-3">
+                           <div class="card-body">
+                               <div class="card-left pt-1 float-left">
+                                   <h3 class="mb-0 fw-r" style="color: white;">
+                                       <span class="count"><%=data.completedRequests.length + data.activeRequests.length + data.rejectedRequests.length%></span>
+                                   </h3>
+                                   <p class="text-light mt-1 m-0">Total</p>
+                               </div><!-- /.card-left -->
+
+                               <div class="card-right float-right text-right" style="color: white;">
+                                   <i class="icon fade-5 icon-lg ti-list"></i>
+                               </div><!-- /.card-right -->
+
+                           </div>
+
+                       </div>
+                   </div>
+                 </div>
+               <!-- /Widgets -->
 <% if(data.activeRequests.length>0){ %>
     <br/>
     <h3 style="text-transform: uppercase;">Ongoing Requests</h3>
