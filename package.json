@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "7.2.2",
     "body-parser": "1.19.0",
     "dragula": "^3.7.2",
     "ejs": "^2.6.2",
