@@ -190,7 +190,7 @@ exports.seedDB = async (req,res) => {
 
         let workflow1 = new Workflow();
         workflow1.name="Bonafide";
-        workflow1.fields.push(...['Name', 'Fathers Name', 'Roll No', 'Degree', 'Department', 'Year', 'Semester']);
+        workflow1.fields.push(...["Date", "Name", "Letter number", "Letter date", "Specialisation", "Department", "Joining date"]);
         workflow1.approvers.push({
             grp: wardenGrp,
             level: 0
@@ -214,7 +214,7 @@ exports.seedDB = async (req,res) => {
 
         let workflow2 = new Workflow();
         workflow2.name="OD";
-        workflow2.fields.push(...["Name", "Roll Number", "From Date", "To date", "Reason"]);
+        workflow2.fields.push(...["Date", "Name", "Letter number", "Letter date", "Specialisation", "Department", "Joining date"]);
         workflow2.approvers.push({
                 grp: faGrp._id,
                 level: 0
