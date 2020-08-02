@@ -35,7 +35,9 @@ const getNextApproverId = async (request) => {
 
 exports.renderCreateRequest = async (req, res) => {
     try{
-        let workflow = await Workflow.findById(req.query.workflowId).populate({
+        console.log(req.params);
+        let workflowId = req.params.workflowId;
+        let workflow = await Workflow.findById(workflowId).populate({
             path: 'approvers.grp',
             populate: {
                 path: 'members'

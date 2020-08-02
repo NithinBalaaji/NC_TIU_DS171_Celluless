@@ -1,10 +1,17 @@
-<%include partials/studentHeader%>
+<%include partials/header%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<div style="display: none;" id="workflowData">
+    <%= JSON.stringify(workflow) %>
+</div>
+<script>
+    let data = document.getElementById("workflowData").innerHTML;
+    data = JSON.parse(data)
+    console.log(data)
+</script>
+
 <span style="display: none;" id="hidden-pieValueCompleted">></span>
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span>
 <div class="animated fadeIn">
-    <!-- /Widgets -->
-    <!--  Traffic  -->
-
     <div class="row text-center">
         <div class="col-lg-6">
             <iframe width="100%" srcdoc="
@@ -19,32 +26,119 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
-                Put title here
-            </div>
-            <div class="card-body card-block">
-                <div class="">
-                    <div class="form-group">
-                        <label class=" form-control-label">Date</label>
-                        <input type="date" name="date" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="nf-email" class=" form-control-label">Email</label>
-                        <input type="email" id="nf-email" name="nf-email" placeholder="Enter Email" class="form-control">
+                    <div id="form-title">
+                        <!-- <a%= data.name %> -->
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary btn-sm">
-                    <i class="fa fa-dot-circle-o"></i> Submit
-                </button>
-                <button type="reset" class="btn btn-danger btn-sm">
-                    <i class="fa fa-ban"></i> Reset
-                </button>
+                <div class="card-body card-block">
+                    <div class>
+                        <div class="form-group">
+                            <label class=" form-control-label">Date</label>
+                            <input type="date" name="date" class="form-control" id="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="nf-email" class=" form-control-label">Email</label>
+                            <input type="email" id="nf-email" name="nf-email" placeholder="Enter Email"
+                                class="form-control">
+                        </div>
+                        <div id="fieldContainer">
+                        </div>
+                        </br>
+                        <div id="designatorContainer">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="submitMe()">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script>
+    <script>
+        let fieldSize = data.fields.length;
+        let fields = [];
 
-</script>
-<%include partials/footer%>
+        for (let i = 0; i < fieldSize; i++) {
+            let childElem = "<label for='" + data.fields[i].desc + "' class='form-control-label'>" + data.fields[i].desc + "</label><input type='text' id='" + data.fields[i].htmlId + "' name='" + data.fields[i].desc + "' placeholder='" + data.fields[i].desc + "' class='form-control'>";
+            $(childElem).appendTo("#fieldContainer")
+        }
+
+        let designatorsSize = data.approvers.length
+        let idx = window.location.host.length + 15 + 2 + window.location.protocol.length
+        console.log("workflowId", window.location.href.slice(idx + 1, window.location.href.length))
+        let workflowId = window.location.href.slice(idx + 1, window.location.href.length);
+
+        for (let i = 0; i < designatorsSize; i++) {
+            let istr = i.toString();
+
+            let chooseDesignatorElem = "<div style='display: flex; justify-content: space-around'><label for='" + data.approvers[i].grp.name + "' class='form-control-label'>" + data.approvers[i].grp.name + "</label><select id='" + data.approvers[i].grp.name + "'>";
+
+            let members = data.approvers[i].grp.members.length;
+            for (let j = 0; j < members; j++) {
+                let person = "<option class='" + data.approvers[i].grp.members[j]._id + "'value='" + data.approvers[i].grp.members[j].username + "' id='" + data.approvers[i].grp.members[j].username + "'>" + data.approvers[i].grp.members[j].username + "</option>";
+                chooseDesignatorElem += person;
+            }
+
+            chooseDesignatorElem += "</select></div></br>";
+            $(chooseDesignatorElem).appendTo("#designatorContainer");
+        }
+
+        function submitMe() {
+
+            let approverIds = [];
+            let approvedNames = [];
+            let approvers;
+
+            for (let i = 0; i < designatorsSize; i++) {
+                let myselect = "#" + data.approvers[i].grp.name + " option:selected";
+                approvedNames.push($(myselect).text())
+                approverIds.push(document.getElementById(approvedNames[i]).className);
+            }
+
+            for (let i = 0; i < designatorsSize; i++) {
+                if (i === 0) {
+                    approvers = [
+                        {
+                            approverId: approverIds[i],
+                            level: i
+                        }
+                    ]
+                }
+                else {
+                    approvers.push({
+                        approverId: approverIds[i],
+                        level: i
+                    })
+                }
+            }
+
+            fields.push($("#date")[0].value)
+            fields.push($("#nf-email")[0].value)
+
+            for (let i = 0; i < fieldSize; i++) {
+                fields.push($("#" + data.fields[i].htmlId)[0].value)
+            }
+            console.log(workflowId)
+            console.log(approvers)
+            console.log(fields)
+
+            let url = (window.location.protocol + "//" + window.location.host + "/request/create");
+            $.post(url, {
+                workflowId: workflowId,
+                approvers: approvers,
+                fields: fields
+
+            }, function (data, status) {
+                console.log(data, status);
+                if (data.success) {
+                    let url = (window.location.protocol + "//" + window.location.host + "/users/home");
+                    window.location = url;
+                }
+                console.log(data, status);
+            });
+        }
+
+    </script>
+    <%include partials/footer%>

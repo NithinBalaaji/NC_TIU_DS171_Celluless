@@ -7,7 +7,7 @@ const requestController = require('../controllers/request.controller');
 const {isLoggedIn} = require('../middlewares/auth');
 
 // GET Routes
-router.get('/create', isLoggedIn, requestController.renderCreateRequest);
+router.get('/create/:workflowId', isLoggedIn, requestController.renderCreateRequest);
 
 // POST Routes
 router.post('/create', isLoggedIn, requestController.createRequest);
