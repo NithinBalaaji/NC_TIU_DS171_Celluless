@@ -1,103 +1,10 @@
 <%include partials/studentHeader%>
-<!-- <span style="display: none;" id="hidden-pieValueCompleted">></span>
-<span style="display: none;" id="hidden-pieValueNotCompleted"></span> -->
-<!-- <style>
-.row1 {
-  background-color: #e6e6e9;
-  font-family: 'Open Sans', sans-serif;
-}
+<!--<div> <%=JSON.stringify(data.activeRequests[0])%></div>-->
 
-.container1 {
-  position: absolute;
-  height: 300px;
-  width: 1200px;
-  top: 60px;
-  left: calc(80% - 900px);
-  display: flex;
-}
-
-.card {
-  display: flex;
-  height: 280px;
-  width: 350px;
-  background-color: #17141d;
-  border-radius: 10px;
-  box-shadow: -1rem 0 3rem #000;
-/*   margin-left: -50px; */
-  transition: 0.4s ease-out;
-  position: relative;
-  left: 0px;
-}
-
-.card:not(:first-child) {
-    margin-left: -400px;
-}
-
-.card:hover {
-  transform: translateY(-42px);
-  transition: 0.4s ease-out;
-}
-
-.card:hover ~ .card {
-  position: relative;
-  left: 50px;
-  transition: 0.4s ease-out;
-}
-
-.title {
-  color: white;
-  font-weight: 300;
-  position: absolute;
-  left: 20px;
-  top: 15px;
-}
-
-.bar {
-  position: absolute;
-  top: 100px;
-  left: 20px;
-  height: 5px;
-  width: 150px;
-}
-
-
-.filledbar {
-  position: absolute;
-  top: 0px;
-  z-index: 8;
-  width: 0px;
-  height: 100%;
-  background: rgb(0,154,217);
-  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
-  transition: 0.6s ease-out;
-}
-
-.card:hover .filledbar {
-  width: 120px;
-  transition: 0.4s ease-out;
-}
-
-
-.stroke {
-  stroke: white;
-  stroke-dasharray: 360;
-  stroke-dashoffset: 360;
-  transition: 0.6s ease-out;
-}
-
-svg {
-  fill: #17141d;
-  stroke-width: 2px;
-}
-
-.card:hover .stroke {
-  stroke-dashoffset: 100;
-  transition: 0.6s ease-out;
-}</style> -->
 
 <div class="animated fadeIn">
     <!-- Widgets  -->
-    <h3>Ongoing Transactions</h3> <br />
+    <h3>Ongoing Requests</h3> <br />
 </br>
 <br>
 <div class="row text-center">
@@ -105,7 +12,7 @@ svg {
             <div class="card ongoing-card">
                   <div class="card-body">
                     <div class="row text-center">
-                      <%for(int i=0;i<data.activeRequests.length;i++){%>
+                      <%for(let i=0;i<data.activeRequests.length;i++){%>
                         <div class="col-lg-4 ">
                             <div class="card">
                                 <div class="card-header">
@@ -123,10 +30,11 @@ svg {
                                              Approved by:
                                         </div>
                                         <div class="col-lg-3 approver">
-                                          <%=for(int j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
+                                          <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
                                             <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                               <%=data.activeRequests[i].approvedBy[j]%>
-                                            </span><%}>
+                                               <%=data.activeRequests[i].approvedBy[j].approverId.name%>
+                                            </span>
+                                            <%}%>
                                         </div>
                                     </div>
                                     <br />
@@ -156,81 +64,162 @@ svg {
                                       <div style="height: 12px"></div>
                             </div>
                         </div>
+                        <%}%>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-<br>
-<br>
-<h3>Completed Transactions</h3> <br />
-        </br>
-        <br>
-        <div class="row text-center">
-                <div class="col-lg-12 col-md-12">
-                    <div class="card ongoing-card">
-                          <div class="card-body">
-                            <div class="row text-center">
-                              <%for(int i=0;i<data.rejectedRequests.length;i++){%>
-                                <div class="col-lg-4 ">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <div style="display: flex; justify-content: space-between;">
-                                                <b class="top-pad">
-                                                    <h3><%=data.rejectedRequests[i].workflowId.name%></h3>
-                                                </b>
-                                                <!--<div class="circle">712</div>-->
+    <!-- Widgets  -->
+    <h3>Completed Requests</h3> <br />
+  </br>
+  <br>
+  <div class="row text-center">
+        <div class="col-lg-12 col-md-12">
+            <div class="card completed-card">
+                  <div class="card-body">
+                    <div class="row text-center">
+                      <%for(let i=0;i<data.completedRequests.length;i++){%>
+                        <div class="col-lg-4 ">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <b class="top-pad">
+                                            <h3><%=data.completedRequests[i].workflowId.name%></h3>
+                                        </b>
+                                        <!--<div class="circle">712</div>-->
 
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row text-center">
-                                                <div class="col-lg-8">
-                                                     Approved by:
-                                                </div>
-                                                <div class="col-lg-3 approver">
-                                                  <%=for(int j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
-                                                    <span class="badge badge-primary" style="background-color: #24bb2b;">
-                                                       <%=data.rejectedRequests[i].approvedBy[j]%>
-                                                    </span><%}>
-                                                </div>
-                                            </div>
-                                            <br />
-                                            <div class="row text-center">
-                                              <ul class="list-group list-group-flush">
-                                                  <li class="list-group-item">
-                                                      <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
-                                                  </li>
-                                                </ul>
-                                              </div>
-                                              <div class="row text-center">
-                                                <ul class="list-group list-group-flush">
-                                                  <li class="list-group-item">
-                                                      <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
-                                                  </li>
-                                              </ul>
-                                            </div>
-                                        </div>
-                                        <div class="row text-center">
-                                                <div class="col-lg-2"></div>
-                                                <div class="col-lg-4"><button class="btn remind btn-success" id="remind"
-                                                        onclick="remindClickHandler()">Remind</button></div>
-                                                <div class="col-lg-4"><button class="btn withdraw btn-secondary" id="withdraw"
-                                                        onclick="withdrawClickHandler()">Withdraw</button></div>
-                                                <div class="col-lg-2"></div>
-                                              </div>
-                                              <div style="height: 12px"></div>
                                     </div>
                                 </div>
+                                <div class="card-body">
+                                    <div class="row text-center">
+                                        <div class="col-lg-8">
+                                             Approved by:
+                                        </div>
+                                        <div class="col-lg-3 approver">
+                                          <%for(let j=0;j<data.completedRequests[i].approvedBy.length;j++){%>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                               <%=data.completedRequests[i].approvedBy[j].approverId.name%>
+                                            </span>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row text-center">
+                                      <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                      <div class="row text-center">
+                                        <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                      </ul>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-lg-6"><button class="btn" style="margin: 30px" onclick="downloadFormClickHandler()">Download form with details</button></div>
+                                </div>
+                                      <div style="height: 12px"></div>
                             </div>
                         </div>
+                        <%}%>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <!-- Widgets  -->
+    <h3>Rejected Requests</h3> <br />
+</br>
+<br>
+<div class="row text-center">
+        <div class="col-lg-12 col-md-12">
+            <div class="card rejected-card">
+                  <div class="card-body">
+                    <div class="row text-center">
+                      <%for(let i=0;i<data.rejectedRequests.length;i++){%>
+                        <div class="col-lg-4 ">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <b class="top-pad">
+                                            <h3><%=data.rejectedRequests[i].workflowId.name%></h3>
+                                        </b>
+                                        <!--<div class="circle">712</div>-->
 
-</div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row text-center">
+                                        <div class="col-lg-8">
+                                             Approved by:
+                                        </div>
+                                        <div class="col-lg-3 approver">
+                                          <%for(let j=0;j<data.activeRequests[i].approvedBy.length;j++){%>
+                                            <span class="badge badge-primary" style="background-color: #24bb2b;">
+                                               <%=data.rejectedRequests[i].approvedBy[j].approverId.name%>
+                                            </span>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row text-center">
+                                      <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Approved On :  <span class="badge badge-warning pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                      <div class="row text-center">
+                                        <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                              <a href="#"> <i class="fa fa-calendar"></i>  Applied On :  <span class="badge badge-info pull-center r-activity">24/02/2020</span></a>
+                                          </li>
+                                      </ul>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-lg-3"></div>
+                                    <div class="col-lg-6"><button type="button" class="btn btn-secondary"
+                                            data-toggle="modal" data-target="#myModal" onclick="viewRejectionClickHandler()">View rejection</button></div>
+                                    <div class="col-lg-3"></div>
+                                </div>
+                                <div id="myModal" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close"
+                                                    data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Reason for rejection</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Insiufficient attendance</p>
+                                                <br />
+                                                <p>- HOD</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                      <div style="height: 12px"></div>
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- /Widgets -->
 <!--  Traffic  -->
 
