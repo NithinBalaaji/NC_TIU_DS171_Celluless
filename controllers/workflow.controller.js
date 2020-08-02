@@ -12,6 +12,8 @@ const Uploader = require('../utils/upload');
 
 exports.listWorkflow = async (req, res) => {
     try {
+        if(req.user.isAdmin)
+            return res.redirect('/auth/user/login');
         let workflows = await Workflow.find().populate({
             path: 'approvers.grp',
             populate: {
