@@ -147,8 +147,9 @@ exports.viewRequest = async (req, res) => {
         let data = request.fields.join();
         let templateFilePath = path.resolve(__dirname, "../public/uploads/certifTemplates", request.workflowId.templatePath);
         let scriptFilepath = path.join(__dirname,'../scripts/form_script.py');
-        let command = `python ${scriptFilepath} --type=generate --filepath=${templateFilePath} --data=${data}`;
+        let command = `python ${scriptFilepath} --type=generate --filepath=${templateFilePath} --data="${data}"`;
 
+        console.log("exports.viewRequest -> command", command)
         const { stdout, stderr } = await exec(command);
         if(stderr){
             console.error(stderr);
@@ -339,7 +340,7 @@ exports.viewRequestCertificate = async (req, res) => {
 
         let templateFilePath = path.resolve(__dirname, "../public/uploads/certifTemplates", request.workflowId.templatePath);
         let scriptFilepath = path.join(__dirname,'../scripts/form_script.py');
-        let command = `python ${scriptFilepath} --type=generate --filepath=${templateFilePath} --data=${data} --qr=${qrFullPath}`;
+        let command = `python ${scriptFilepath} --type=generate --filepath=${templateFilePath} --data="${data}" --qr=${qrFullPath}`;
 
         const { stdout, stderr } = await exec(command);
         if(stderr){

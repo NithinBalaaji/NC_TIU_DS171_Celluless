@@ -15,21 +15,21 @@ log.setLevel("DEBUG")
 # GLOBALS
 TEXT_COLOR = (0,0,255)
 FONT_FACE = cv2.FONT_HERSHEY_SIMPLEX
-FONT_SCALE = 1/3.5
-TEXT_WEIGHT = 1
+FONT_SCALE = 2/3.5
+TEXT_WEIGHT = 3
 
 # Functions
 def write_text(image, text, x1, y1, x2, y2):
     text = str(text)
     total_width = math.hypot(x2 - x1, y2 - y1)
-    text_size = cv2.getTextSize(text, FONT_FACE, FONT_SCALE, TEXT_WEIGHT)
+    text_size = cv2.getTextSize(text, FONT_FACE, FONT_SCALE, 1)
     text_width = text_size[0][0]
 
     text_x = x1
     if total_width > text_width:
         text_x = x1 + int((total_width - text_width)/2)
     text_y = y1 - 5
-    image = cv2.putText(image, text, (text_x, text_y), FONT_FACE, FONT_SCALE, TEXT_COLOR, TEXT_WEIGHT, cv2.LINE_AA)
+    image = cv2.putText(image, text, (text_x, text_y), FONT_FACE, FONT_SCALE, TEXT_COLOR, 1, cv2.LINE_AA)
     return image
 
 def paste_seal(image):
@@ -47,7 +47,7 @@ def paste_seal(image):
 
 def paste_qr(image, qr_path):
     qr = cv2.imread(qr_path)
-    qr = cv2.resize(qr, (0,0), fx=0.35, fy=0.35)
+    qr = cv2.resize(qr, (0,0), fx=0.99, fy=0.99)
     qr_height, qr_width, _ = qr.shape
 
     image_height, image_width, _ = image.shape
@@ -168,6 +168,8 @@ def main():
 
     # Save generated certificate
     save_filename = filepath.split('/')[-1]
+    if t=='generate':
+        save_filename = "{0}.jpg".format(str(uuid.uuid4()))
     save_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "public/generated_files", save_filename)
     save_path = os.path.abspath(save_path)
 
