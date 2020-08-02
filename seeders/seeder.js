@@ -189,26 +189,28 @@ exports.seedDB = async (req,res) => {
         // Workflows
 
         let workflow1 = new Workflow();
-        workflow1.name="Workflow 1";
-        workflow1.fields.push(['a']);
-        workflow1.fields.push(['b']);
+        workflow1.name="Bonafide";
+        workflow1.fields.push(...['Name', 'Fathers Name', 'Roll No', 'Degree', 'Department', 'Year', 'Semester']);
         workflow1.approvers.push({
-                grp: faGrp._id,
+                grp: hodGrp,
                 level: 0
         })
         workflow1.approvers.push({
-            grp: hodGrp._id,
+            grp: wardenGrp,
+            level: 1
+        });
+        workflow1.approvers.push({
+            grp: deanGrp,
             level: 1
         });
 
         await workflow1.save();
 
         let workflow2 = new Workflow();
-        workflow2.name="Workflow 2";
-        workflow2.fields.push(['2a']);
-        workflow2.fields.push(['2b']);
+        workflow2.name="OD";
+        workflow2.fields.push(...["Name", "Roll Number", "From Date", "To date", "Reason"]);
         workflow2.approvers.push({
-                grp: hodGrp._id,
+                grp: faGrp._id,
                 level: 0
         })
         workflow2.approvers.push({
@@ -219,8 +221,8 @@ exports.seedDB = async (req,res) => {
         await workflow2.save();
         
         let student1 = await User.register(new User({
-            username: "student1",
-            name: "Student 1",
+            username: "106117007",
+            name: "Adwaith D",
             email: "abc@abc.com",
             mobile: "999999999",
             isAdmin: false,
@@ -228,8 +230,8 @@ exports.seedDB = async (req,res) => {
         }),"12345");
 
         let student2 = await User.register(new User({
-            username: "student2",
-            name: "Student 2",
+            username: "102117058",
+            name: "Subash Aravindan",
             email: "abc@abc.com",
             mobile: "999999999",
             isAdmin: false,
@@ -244,22 +246,26 @@ exports.seedDB = async (req,res) => {
         request1.workflowId=workflow1;
         request1.approvers=[];
         request1.approvers.push({
-            approverId: faDelta._id,
+            approverId: csehod,
             level: 0
         })
         request1.approvers.push({
-            approverId: csehod._id,
+            approverId: warden1,
             level: 1
         })
+        request1.approvers.push({
+            approverId: deanSW,
+            level: 2
+        })
+
         request1.approvedBy.push({
-            approverId: faDelta._id,
+            approverId: csehod,
             level: 0
         });
         request1.level=1;
         request1.verificationKey="dfjdsfgdg";
         request1.ownerId= student1;
-        request1.fields.push("a value");
-        request1.fields.push("b value");
+        request1.fields.push(...['Student Name', 'Fathers Name', '106117007', 'BTECH', 'CSE', '3', '6']);
         await request1.save();
 
 
@@ -269,19 +275,18 @@ exports.seedDB = async (req,res) => {
         request2.workflowId=workflow2;
         request2.approvers=[];
         request2.approvers.push({
-            approverId: cahod._id,
+            approverId: faDelta,
             level: 0
         })
         request2.approvers.push({
-            approverId: deanFW._id,
+            approverId: deanSW,
             level: 1
         })
         request2.approvedBy=[]
         request2.level=0;
         request2.verificationKey="dfjdfsfssfgdg";
-        request2.ownerId= student2._id;
-        request2.fields.push("2a value");
-        request2.fields.push("2b value");
+        request2.ownerId= student2;
+        request2.fields.push(...["Student Name", "106117007", "3/02/2020", "6/02/2020", "Hackathon"]);
         await request2.save();
 
 
