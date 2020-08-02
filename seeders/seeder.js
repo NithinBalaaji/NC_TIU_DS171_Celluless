@@ -145,6 +145,47 @@ exports.seedDB = async (req,res) => {
         await faGrp.save();
 
 
+        // Wardens
+        // Faculty advisor
+
+        let warden1 = await User.register(new User({
+            username: "wardenamber",
+            name: "Warden Amber",
+            email: "abc@abc.com",
+            mobile: "999999999",
+            isAdmin: true,
+            pubKey: "0xd6f26DAB93B724EbD822277B07b80F5576685c95",
+        }),"12345");
+
+        let warden2 = await User.register(new User({
+            username: "wardenaqumarine",
+            name: "Warden Aquamarine",
+            email: "abc@abc.com",
+            mobile: "999999999",
+            isAdmin: true,
+            pubKey: "insertpubhere"
+        }),"12345");
+
+        let warden3 = await User.register(new User({
+            username: "wardenzircon",
+            name: "Warden Zircon",
+            email: "abc@abc.com",
+            mobile: "999999999",
+            isAdmin: true,
+            pubKey: "insertpubhere"
+        }),"12345");
+
+        await warden1.save();
+        await warden2.save();
+        await warden3.save();
+
+        let wardenGrp = new Group();
+        wardenGrp.name="Hostel Wardens";
+        wardenGrp.members.push(warden1);
+        wardenGrp.members.push(warden2);
+        wardenGrp.members.push(warden3);
+
+        await wardenGrp.save();
         // Workflows
 
         let workflow1 = new Workflow();
@@ -242,6 +283,8 @@ exports.seedDB = async (req,res) => {
         request2.fields.push("2a value");
         request2.fields.push("2b value");
         await request2.save();
+
+
 
         res.json({sucess: true});
 
