@@ -215,7 +215,7 @@ exports.viewRequestCertificate = async (req, res) => {
 
         //let certificate = await blockchainUtil.getCertificate(request.blockchainId);
 
-        let ejsPath = request.workflowId.path;
+        let ejsPath = '../views/template.ejs';
         let compiledEJS = await ejs.compile(fs.readFileSync(ejsPath, 'utf8'),{ async: true });
         let html = await compiledEJS({
             time: new Date().toLocaleString(),

@@ -368,28 +368,17 @@
 
         let url = (window.location.protocol+"//"+window.location.host+"/workflow/create");
 
-        const templateFile = document.getElementById('template').files[0];
-
-        var data = new FormData();
-        data.append('template', templateFile);
-        data.append('name',certName);
-        data.append('approvers', approversArray);
-        data.append('fields', fields);
-
-        console.log(data);
-        $.ajax({
-            url: url,
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: data,
-            type: 'POST',
-            success: function(response) {
-                window.location.href='/workflow/list'
-            },
-            error: function(error) {
-                console.log(error);
+        $.post(url, {
+            name: certName,
+            approvers: approversArray,
+            fields: fields
+        }, function(data, status){
+            console.log(data,status);
+            if(data.success){
+                let url = (window.location.protocol+"//"+window.location.host+"/workflow/list");
+                window.location = url;
             }
+            console.log(data,status);
         });
     }
 
