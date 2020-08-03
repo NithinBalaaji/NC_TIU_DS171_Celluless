@@ -1,6 +1,44 @@
 <%include partials/adminHeader%>
 <!--<span id="hidden-pieValueCompleted"><%=JSON.stringify(requests)%></span>-->
-<style>
+    <style>
+        .text-white {
+            color: white;
+        }
+        #flotPie1  {
+            height: 100%;
+            min-height: 290px;
+            width: 95%;
+        }
+        #flotPie1 td {
+            padding: 5px;
+        }
+        #flotPie1 table {
+            top: 20px !important;
+            right: -10px !important;
+        }
+        .chart-container {
+            display: table;
+            min-width: 85%;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        #flotPie1 .legendLabel {
+            font-size: 18px !important;
+        }
+
+        #flotLine5  {
+             height: 105px;
+        }
+
+        #flotBarChart {
+            height: 150px;
+        }
+        #cellPaiChart{
+            height: 160px;
+        }
+
     .list-group-item {
         border: none;
     }
@@ -20,12 +58,35 @@
 <span style="display: none;" id="hidden-pieValueNotCompleted"></span>
 <div class="animated fadeIn">
   <br/>
-  <h3 style="text-transform: uppercase; text-align: center;">admin Dashboard</h3>
+  <h3 style="text-transform: uppercase; text-align: center;">Admin Dashboard</h3>
   <br/>
     <!-- Widgets  -->
 
     <!-- /Widgets -->
-
+    <div class="row" style="text-align: center;">
+        <div class="col-lg-3 col-xl-3"></div>
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Requests</h4>
+                    <div class="chart-container ov-h">
+                        <div id="flotPie1" class="float-chart"></div>
+                    </div>
+                </div>
+            </div><!-- /.card -->
+        </div>
+        <div class="col-lg-3 col-xl-3"></div>
+        <!-- <div class="col-lg-6 col-xl-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Transactions</h4>
+                    <div class="flot-container">
+                        <div id="flot-line" class="flot-line"></div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
 <% if(requests.length>0){ %>
     <br/>
     <h3 style="text-transform: uppercase;">Pending Requests</h3>
@@ -102,12 +163,108 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+<!--Chartist Chart-->
+<script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.time.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.stack.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.resize.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.crosshair.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flot.curvedlines@1.1.1/curvedLines.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.flot.tooltip@0.9.0/js/jquery.flot.tooltip.min.js"></script>
 <script>
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
             "use strict";
 
            //Traffic chart chart-js  End
             // Traffic Chart using chartist End
+
+// Pie chart flotPie1
+var piedata = [
+                { label: "Approved", data: [[1,10]], color: '#00c292'},
+                { label: "Rejected", data: [[1,5]], color: '#F44336'},
+                { label: "Pending", data: [[1,2]], color: '#8fc9fb'}
+            ];
+
+            $.plot('#flotPie1', piedata, {
+                series: {
+                    pie: {
+                        show: true,
+                        radius: 1,
+                        innerRadius: 0.55,
+                        label: {
+                            show: true,
+                            radius: 2/3,
+                            threshold: 1
+                        },
+                        stroke: {
+                            width: 0
+                        }
+                    }
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true
+                }
+            });
+
+        });
+        // line2Flot: function(){
+
+        //     // first chart
+        //     var chart1Options = {
+        //         series: {
+        //             lines: {
+        //                 show: true
+        //             },
+        //             points: {
+        //                 show: true
+        //             }
+        //         },
+        //         xaxis: {
+        //             mode: "time",
+        //             timeformat: "%m/%d",
+        //             minTickSize: [ 1, "day" ]
+        //         },
+        //         grid: {
+        //             hoverable: true
+        //         },
+        //         legend: {
+        //             show: false
+        //         },
+        //         grid: {
+        //             color: "#fff",
+        //             hoverable: true,
+        //             borderWidth: 0,
+        //             backgroundColor: 'transparent'
+        //         },
+        //         tooltip: {
+        //             show: true,
+        //             content: "y: %y"
+        //         }
+        //     };
+
+        //     var chart1Data = {
+        //         label: "chart1",
+        //         color: "#007BFF",
+        //         data: [
+        //         [ 1354521600000, 6322 ],
+        //         [ 1354840000000, 6340 ],
+        //         [ 1355223600000, 6368 ],
+        //         [ 1355306400000, 6374 ],
+        //         [ 1355487300000, 6388 ],
+        //         [ 1355571900000, 6400 ]
+        //     ]
+        // };
+        //$.plot( $( "#chart1" ), [ chart1Data ], chart1Options );
+
     function approveClickHandler() {
         console.log("remind Clicked!")
         // this formID should send a reminder to its next approver. Priority 1
